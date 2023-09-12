@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `connexion` (
   `couriel` varchar(75) NOT NULL,
   `motdepasse` varchar(50) NOT NULL,
-  `rôle` varchar(1) NOT NULL,
+  `role` varchar(1) NOT NULL,
   `status` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,7 +38,7 @@ CREATE TABLE `connexion` (
 -- Déchargement des données de la table `connexion`
 --
 
-INSERT INTO `connexion` (`couriel`, `motdepasse`, `rôle`, `status`) VALUES
+INSERT INTO `connexion` (`couriel`, `motdepasse`, `role`, `status`) VALUES
 ('admin@eliteautomobile.com', 'admin', 'A', 'A');
 
 -- --------------------------------------------------------
@@ -49,7 +49,7 @@ INSERT INTO `connexion` (`couriel`, `motdepasse`, `rôle`, `status`) VALUES
 
 CREATE TABLE `membre` (
   `nom` varchar(50) NOT NULL,
-  `prénom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
   `couriel` varchar(75) NOT NULL,
   `genre` varchar(2) NOT NULL,
   `daten` varchar(10) NOT NULL
@@ -59,7 +59,7 @@ CREATE TABLE `membre` (
 -- Déchargement des données de la table `membre`
 --
 
-INSERT INTO `membre` (`nom`, `prénom`, `couriel`, `genre`, `daten`) VALUES
+INSERT INTO `membre` (`nom`, `prenom`, `couriel`, `genre`, `daten`) VALUES
 ('Admin', 'Eliteautomobile', 'admin@eliteautomobile.com', 'nd', '1999-09-09');
 COMMIT;
 
