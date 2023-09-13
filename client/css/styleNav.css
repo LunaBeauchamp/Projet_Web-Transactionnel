@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    display: flex;
+    justify-content: center;
+    background-color: #161524;
+    margin: auto;
+  }
+  
+  footer{
+    background-color: #161524;
+  }
+  
+  nav {
+    background-color: #3c3c44;
+  }
+  
+  .dropdown-menu{
+    background-color: #3c3c44;
+    
+  }
+  
+  .dropdown-item{
+    color: #988265;
+  }
+  
+  .navbar-dark .navbar-brand {
+    color: #988265;
+    
+  }
+  
+  .navbar-dark .navbar-brand:focus,
+  .navbar-dark .navbar-brand:hover {
+    color: #988265;
+    
+  }
+  
+  .navbar-dark .navbar-nav .nav-link {
+    color: #988265;
+    
+  }
+  
+  .navbar-dark .navbar-nav .active>.nav-link,
+  .navbar-dark .navbar-nav .nav-link.active,
+  .navbar-dark .navbar-nav .nav-link.show,
+  .navbar-dark .navbar-nav .show>.nav-link {
+      color: #988265;
+      
+  }
+  
+
+.image-container {
+    justify-content: center;
+    display: flex;
+}
+
