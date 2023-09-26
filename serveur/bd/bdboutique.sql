@@ -78,7 +78,8 @@ INSERT INTO `inventaireVoiture` (`idVoiture`, `nomvoiture`, `description`, `coul
 -- Structure de la table `membre`
 --
 
-CREATE TABLE `membre` (
+CREATE TABLE `membres` (
+  `idm` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `couriel` varchar(75) NOT NULL,
@@ -90,8 +91,8 @@ CREATE TABLE `membre` (
 -- Déchargement des données de la table `membre`
 --
 
-INSERT INTO `membre` (`nom`, `prenom`, `couriel`, `genre`, `daten`) VALUES
-('Admin', 'Eliteautomobile', 'admin@eliteautomobile.com', 'nd', '1999-09-09');
+INSERT INTO `membres` (`idm`,`nom`, `prenom`, `couriel`, `genre`, `daten`) VALUES
+(0,'Admin', 'Eliteautomobile', 'admin@eliteautomobile.com', 'nd', '1999-09-09');
 
 --
 -- Index pour les tables déchargées
@@ -100,18 +101,51 @@ INSERT INTO `membre` (`nom`, `prenom`, `couriel`, `genre`, `daten`) VALUES
 --
 -- Index pour la table `inventaireVoiture`
 --
+ALTER TABLE `connexion`
+  ADD PRIMARY KEY (`couriel`);
+
+
+--
+-- Index pour la table `inventaireVoiture`
+--
 ALTER TABLE `inventaireVoiture`
   ADD PRIMARY KEY (`idVoiture`);
+
+--
+-- Index pour la table `membres`
+--
+ALTER TABLE `membres`
+  ADD PRIMARY KEY (`idm`);
+
+ALTER TABLE `membres`
+  ADD KEY  `membres_couriel_FK` (`couriel`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
+-- AUTO_INCREMENT pour la table `membres`
+--
+ALTER TABLE `membres`
+  MODIFY `idm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT pour la table `inventaireVoiture`
 --
 ALTER TABLE `inventaireVoiture`
   MODIFY `idVoiture` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `membres`
+--
+ALTER TABLE `membres`
+  ADD CONSTRAINT `membres_couriel_FK` FOREIGN KEY (`couriel`) REFERENCES `connexion` (`couriel`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
