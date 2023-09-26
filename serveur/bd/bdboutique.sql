@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `connexion` (
-  `couriel` varchar(75) NOT NULL,
+  `courriel` varchar(75) NOT NULL,
   `motdepasse` varchar(50) NOT NULL,
   `role` varchar(1) NOT NULL,
   `status` varchar(1) NOT NULL
@@ -38,7 +38,7 @@ CREATE TABLE `connexion` (
 -- Déchargement des données de la table `connexion`
 --
 
-INSERT INTO `connexion` (`couriel`, `motdepasse`, `role`, `status`) VALUES
+INSERT INTO `connexion` (`courriel`, `motdepasse`, `role`, `status`) VALUES
 ('admin@eliteautomobile.com', 'admin', 'A', 'A');
 
 -- --------------------------------------------------------
@@ -82,7 +82,7 @@ CREATE TABLE `membres` (
   `idm` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
-  `couriel` varchar(75) NOT NULL,
+  `courriel` varchar(75) NOT NULL,
   `genre` varchar(2) NOT NULL,
   `daten` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -91,7 +91,7 @@ CREATE TABLE `membres` (
 -- Déchargement des données de la table `membre`
 --
 
-INSERT INTO `membres` (`idm`,`nom`, `prenom`, `couriel`, `genre`, `daten`) VALUES
+INSERT INTO `membres` (`idm`,`nom`, `prenom`, `courriel`, `genre`, `daten`) VALUES
 (0,'Admin', 'Eliteautomobile', 'admin@eliteautomobile.com', 'nd', '1999-09-09');
 
 --
@@ -102,7 +102,7 @@ INSERT INTO `membres` (`idm`,`nom`, `prenom`, `couriel`, `genre`, `daten`) VALUE
 -- Index pour la table `inventaireVoiture`
 --
 ALTER TABLE `connexion`
-  ADD PRIMARY KEY (`couriel`);
+  ADD PRIMARY KEY (`courriel`);
 
 
 --
@@ -118,7 +118,7 @@ ALTER TABLE `membres`
   ADD PRIMARY KEY (`idm`);
 
 ALTER TABLE `membres`
-  ADD KEY  `membres_couriel_FK` (`couriel`);
+  ADD KEY  `membres_courriel_FK` (`courriel`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -145,7 +145,7 @@ COMMIT;
 -- Contraintes pour la table `membres`
 --
 ALTER TABLE `membres`
-  ADD CONSTRAINT `membres_couriel_FK` FOREIGN KEY (`couriel`) REFERENCES `connexion` (`couriel`);
+  ADD CONSTRAINT `membres_courriel_FK` FOREIGN KEY (`courriel`) REFERENCES `connexion` (`courriel`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
