@@ -44,10 +44,10 @@ INSERT INTO `connexion` (`couriel`, `motdepasse`, `role`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `inventairevoiture`
+-- Structure de la table `inventaireVoiture`
 --
 
-CREATE TABLE `inventairevoiture` (
+CREATE TABLE `inventaireVoiture` (
   `idVoiture` int(3) NOT NULL,
   `nomvoiture` varchar(50) NOT NULL,
   `description` varchar(500) NOT NULL,
@@ -58,10 +58,10 @@ CREATE TABLE `inventairevoiture` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `inventairevoiture`
+-- Déchargement des données de la table `inventaireVoiture`
 --
 
-INSERT INTO `inventairevoiture` (`idVoiture`, `nomvoiture`, `description`, `couleur`, `image`, `prix`, `quantite`) VALUES
+INSERT INTO `inventaireVoiture` (`idVoiture`, `nomvoiture`, `description`, `couleur`, `image`, `prix`, `quantite`) VALUES
 (1, 'Rolls-Royce Phantom', 'La berline de très grand luxe qui n’a plus aucune rivale directe ne se mesure qu’aux caprices de ses richissimes acheteurs. Elle leur offre une infinité ou presque d’options de personnalisation. Son V12 turbocompressé de 6,75 litres sous le capot fournit une puissance de 563 chevaux, mais il n’y a toujours pas de version Black Badge comme avec les Cullinan et Ghost. En revanche, il faut souligner que la Phantom profite de retouches esthétiques pour 2023.', 'bleu', 'https://hips.hearstapps.com/hmg-prod/images/2024-rolls-royce-phantom-102-64bad70ba7661.jpg ', 625000, 10),
 (2, 'Bentley Flying Spur', 'Véritable salon anglais sur quatre roues, la berline Flying Spur représente tout le savoir faire de Bentley. Trois motorisations sont disponibles : un V6 hybride rechargeable de 3 litres, un V8 de 4 litres ou un monstrueux W12 de 6 litres. Pour l’année-modèle 2023, la Flying Spur s’enrichit d’une version Azure, comme les Bentayga et Continental GT. Il est aussi possible d’opter pour la nouvelle variante S, qui se veut plus sportive.', 'orange', ' https://hips.hearstapps.com/hmg-prod/images/2024-bentley-flying-spur-644bddfb89ff4.jpg ', 381400, 20),
 (3, 'Bentley Continental GT', 'La Continental GT est, comme son nom l’indique, une voiture de grand tourisme. Sous son long capot, loge un V8 de 4 litres de 542 chevaux et 569 lb-pi, ou un W12 de 6 litres qui revendique 650 chevaux et 664 lb-pi. Contrairement au Bentayga, il n’y a pas de version hybride disponible. En 2023, à l’image du reste de la gamme Bentley, la Continental GT s’enrichit d’une nouvelle version Azure, encore plus luxueuse et raffinée.', 'turquoise', 'https://hips.hearstapps.com/hmg-prod/images/2024-bentley-continental-gt-convertible-101-644bd404dcb7e.jpg ', 450000, 17),
@@ -98,9 +98,9 @@ INSERT INTO `membre` (`nom`, `prenom`, `couriel`, `genre`, `daten`) VALUES
 --
 
 --
--- Index pour la table `inventairevoiture`
+-- Index pour la table `inventaireVoiture`
 --
-ALTER TABLE `inventairevoiture`
+ALTER TABLE `inventaireVoiture`
   ADD PRIMARY KEY (`idVoiture`);
 
 --
@@ -108,9 +108,9 @@ ALTER TABLE `inventairevoiture`
 --
 
 --
--- AUTO_INCREMENT pour la table `inventairevoiture`
+-- AUTO_INCREMENT pour la table `inventaireVoiture`
 --
-ALTER TABLE `inventairevoiture`
+ALTER TABLE `inventaireVoiture`
   MODIFY `idVoiture` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
