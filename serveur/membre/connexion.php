@@ -6,7 +6,7 @@
         try{
             $requete = "SELECT * FROM connexion WHERE courriel=? AND motdepasse=?";
             $stmt = $connexion->prepare($requete);
-            $stnt->bind_param("ss", $courriel, $mdp);
+            $stmt->bind_param("ss", $courriel, $mdp);
             $stmt ->execute();
             $reponse-> $stmt->get_result();
             if ($reponse->num_rows > 0) {
