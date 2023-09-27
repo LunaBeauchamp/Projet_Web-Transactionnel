@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once(__DIR__.'/../bd/connexion.inc.php');
 
     function Mdl_Connexion($courriel, $mdp){
@@ -26,5 +27,12 @@
             exit;
             }
         }
+    }
+
+    function Mdl_DeConnexion(){
+        unset($_SESSION);
+        session_destroy();
+        header('Location: ../../index.php');
+        exit();
     }
 ?>
