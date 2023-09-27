@@ -13,11 +13,11 @@
                 $ligne = $reponse->fetch_object();
                 if($ligne->role == 'M'){
                     $_SESSION['role'] = 'M';
-                    header('Location: ../membre/membre.php');//changer pour membre quand implémenter
+                    header('Location: membre.php');
                     exit();
                 } else {
                     $_SESSION['role'] = 'A';
-                    header('Location: ../admin/admin.php');//changer pour admin quand implémenter
+                    header('Location: ../admin/admin.php');
                     exit();
                 }
             }
