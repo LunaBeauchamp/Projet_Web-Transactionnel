@@ -37,7 +37,7 @@
 					</li>
 
                     <li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Connection</a>
+						<a class="nav-link active" aria-current="page" href="serveur/membre/page_connexion.php">Connection</a>
 					</li>
 
 					<li class="nav-item">
