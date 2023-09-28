@@ -83,7 +83,7 @@ CREATE TABLE `membres` (
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `courriel` varchar(75) NOT NULL,
-  `genre` varchar(2) NOT NULL,
+  `genre` varchar(50) NOT NULL,
   `daten` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -92,7 +92,7 @@ CREATE TABLE `membres` (
 --
 
 INSERT INTO `membres` (`idm`,`nom`, `prenom`, `courriel`, `genre`, `daten`) VALUES
-(0,'Admin', 'Eliteautomobile', 'admin@eliteautomobile.com', 'nd', '1999-09-09');
+(0,'Admin', 'Eliteautomobile', 'admin@eliteautomobile.com', 'nePasDire', '1999-09-09');
 
 --
 -- Index pour les tables déchargées

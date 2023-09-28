@@ -1,13 +1,17 @@
 <?php
+    session_start();
     require_once(__DIR__.'/../bd/connexion.inc.php');
 
-    function Mdl_Ajouter($membre,$mdp){
+    function Mdl_AjouterMembre(){
         global $connexion;
-        $nom = $membre->getNom(); 
-        $prenom = $membre->getPrenom();
-        $courriel = $membre->getCourriel();
-        $genre = $membre->getGenre();
-        $daten = $membre->getDaten();
+
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $courriel = $_POST['courriel'];
+        $genre = $_POST['genre'];
+        $daten = $_POST['date'];
+        $mdp = $_POST['mdp'];
+
         $msg = "";
         try{
             // Tester si le courriel existe déjà
@@ -21,15 +25,15 @@
                 $stmt = $connexion->prepare($requete);
                 $stmt->bind_param("ss",$courriel,$mdp);
                 $stmt->execute();
-                $msg="Membre ".$membre->getPrenom().", ".$membre->getNom()." bien enregistré.";
-                $photo = chargerPhoto($nom,$prenom);
-                $requete = "INSERT INTO membres VAlUES (0,?,?,?,?,?)";
+
+                $requete = "INSERT INTO membres (nom, prenom, courriel, genre, daten) VAlUES (?,?,?,?,?)";
                 $stmt = $connexion->prepare($requete);
                 $stmt->bind_param("sssss",$nom,$prenom,$courriel,$genre,$daten);
                 $stmt->execute();
-                $idm = $connexion->insert_id;
+
+                $msg = "Le membre à été bien enregistré !!!";
             } else { // Courriel existe déjà
-                $msg = "Ce courriel est déja utilisé !!!";
+                $msg = "Ce courriel est déjà utilisé !!!";
             }
         }catch(Exception $e) {
             $msg = 'Erreur : '.$e->getMessage();
@@ -38,4 +42,5 @@
             exit;
         }
     }
+    Mdl_AjouterMembre();
 ?>
