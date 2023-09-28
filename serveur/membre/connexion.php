@@ -2,8 +2,6 @@
     session_start();
     require_once(__DIR__.'/../bd/connexion.inc.php');
 
-    
-
     function Mdl_Connexion(){
         global $connexion;
         $courriel = $_POST['courriel'];
@@ -26,10 +24,6 @@
                     exit();
                 }
             }
-            // else{
-            //     header("Location: ../../index.php?msg=$msg");//changer pour connexion quand implémenter
-            // exit;
-            // }
         } catch(Exception $e) {
             $msg = 'Erreur : '.$e->getMessage();
         }finally{

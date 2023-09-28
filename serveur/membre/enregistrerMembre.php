@@ -14,13 +14,12 @@
 
         $msg = "";
         try{
-            // Tester si le courriel existe déjà
             $requete = "SELECT * FROM connexion WHERE courriel=?";
             $stmt = $connexion->prepare($requete);
             $stmt->bind_param("s",$courriel);
             $stmt->execute();
             $reponse =   $stmt->get_result();
-            if ($reponse->num_rows == 0) { // OK, courriel n'existe pas#
+            if ($reponse->num_rows == 0) { 
                 $requete = "INSERT INTO connexion VAlUES (?,?,'M','A')";
                 $stmt = $connexion->prepare($requete);
                 $stmt->bind_param("ss",$courriel,$mdp);
@@ -32,7 +31,7 @@
                 $stmt->execute();
 
                 $msg = "Le membre à été bien enregistré !!!";
-            } else { // Courriel existe déjà
+            } else {
                 $msg = "Ce courriel est déjà utilisé !!!";
             }
         }catch(Exception $e) {
