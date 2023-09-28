@@ -66,7 +66,7 @@
 				</div>
 				<div class="modal-body">
 					<span id="msgErrEnreg"></span>
-					<form class="row g-3" action="serveur/enregistrerMembre.php" method="POST"
+					<form class="row g-3" action="serveur/membre/enregistrerMembre.php" method="POST"
 						onSubmit="return validerFormEnreg();">
 						<div class="col-md-12">
 							<label for="nom" class="form-label">Nom</label>
@@ -82,28 +82,28 @@
 						</div>
 
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="genre" id="homme" value="option1"
+							<input class="form-check-input" type="radio" name="genre" id="homme" value="homme"
 								checked>
-							<label class="form-check-label" for="homme">
+							<label class="form-check-label" for="genre">
 								Homme
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="genre" id="femme" value="option2">
-							<label class="form-check-label" for="femme">
+							<input class="form-check-input" type="radio" name="genre" id="femme" value="femme">
+							<label class="form-check-label" for="genre">
 								Femme
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="genre" id="nonBinaire" value="option3">
-							<label class="form-check-label" for="nonBinaire">
+							<input class="form-check-input" type="radio" name="genre" id="nonBinaire" value="nonBinaire">
+							<label class="form-check-label" for="genre">
 								Non binaire
 							</label>
 						</div>
 
                         <div class="form-check">
-							<input class="form-check-input" type="radio" name="genre" id="nonBinaire" value="option3">
-							<label class="form-check-label" for="nonBinaire">
+							<input class="form-check-input" type="radio" name="genre" id="nePasDire" value="nePasDire">
+							<label class="form-check-label" for="genre">
 								Préfère ne pas dire
 							</label>
 						</div>

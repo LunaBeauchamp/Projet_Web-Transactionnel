@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `connexion` (
-  `couriel` varchar(75) NOT NULL,
+  `courriel` varchar(75) NOT NULL,
   `motdepasse` varchar(50) NOT NULL,
   `role` varchar(1) NOT NULL,
   `status` varchar(1) NOT NULL
@@ -38,7 +38,7 @@ CREATE TABLE `connexion` (
 -- Déchargement des données de la table `connexion`
 --
 
-INSERT INTO `connexion` (`couriel`, `motdepasse`, `role`, `status`) VALUES
+INSERT INTO `connexion` (`courriel`, `motdepasse`, `role`, `status`) VALUES
 ('admin@eliteautomobile.com', 'admin', 'A', 'A');
 
 -- --------------------------------------------------------
@@ -78,11 +78,12 @@ INSERT INTO `inventaireVoiture` (`idVoiture`, `nomvoiture`, `description`, `coul
 -- Structure de la table `membre`
 --
 
-CREATE TABLE `membre` (
+CREATE TABLE `membres` (
+  `idm` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
-  `couriel` varchar(75) NOT NULL,
-  `genre` varchar(2) NOT NULL,
+  `courriel` varchar(75) NOT NULL,
+  `genre` varchar(50) NOT NULL,
   `daten` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -90,8 +91,8 @@ CREATE TABLE `membre` (
 -- Déchargement des données de la table `membre`
 --
 
-INSERT INTO `membre` (`nom`, `prenom`, `couriel`, `genre`, `daten`) VALUES
-('Admin', 'Eliteautomobile', 'admin@eliteautomobile.com', 'nd', '1999-09-09');
+INSERT INTO `membres` (`idm`,`nom`, `prenom`, `courriel`, `genre`, `daten`) VALUES
+(0,'Admin', 'Eliteautomobile', 'admin@eliteautomobile.com', 'nePasDire', '1999-09-09');
 
 --
 -- Index pour les tables déchargées
@@ -100,18 +101,51 @@ INSERT INTO `membre` (`nom`, `prenom`, `couriel`, `genre`, `daten`) VALUES
 --
 -- Index pour la table `inventaireVoiture`
 --
+ALTER TABLE `connexion`
+  ADD PRIMARY KEY (`courriel`);
+
+
+--
+-- Index pour la table `inventaireVoiture`
+--
 ALTER TABLE `inventaireVoiture`
   ADD PRIMARY KEY (`idVoiture`);
+
+--
+-- Index pour la table `membres`
+--
+ALTER TABLE `membres`
+  ADD PRIMARY KEY (`idm`);
+
+ALTER TABLE `membres`
+  ADD KEY  `membres_courriel_FK` (`courriel`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
+-- AUTO_INCREMENT pour la table `membres`
+--
+ALTER TABLE `membres`
+  MODIFY `idm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT pour la table `inventaireVoiture`
 --
 ALTER TABLE `inventaireVoiture`
   MODIFY `idVoiture` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `membres`
+--
+ALTER TABLE `membres`
+  ADD CONSTRAINT `membres_courriel_FK` FOREIGN KEY (`courriel`) REFERENCES `connexion` (`courriel`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
