@@ -2,8 +2,12 @@
     session_start();
     require_once(__DIR__.'/../bd/connexion.inc.php');
 
-    function Mdl_Connexion($courriel, $mdp){
+    
+
+    function Mdl_Connexion(){
         global $connexion;
+        $courriel = $_POST['courriel'];
+        $mdp = $_POST['mdp'];
         try{
             $requete = "SELECT * FROM connexion WHERE courriel=? AND motdepasse=?";
             $stmt = $connexion->prepare($requete);
@@ -26,13 +30,19 @@
             //     header("Location: ../../index.php?msg=$msg");//changer pour connexion quand implémenter
             // exit;
             // }
+        } catch(Exception $e) {
+            $msg = 'Erreur : '.$e->getMessage();
+        }finally{
+            header("Location: ../../index.php?msg=$msg");
+            exit;
         }
     }
-
+    
     function Mdl_DeConnexion(){
         unset($_SESSION);
         session_destroy();
         header('Location: ../../index.php');
         exit();
     }
+    Mdl_Connexion()
 ?>
