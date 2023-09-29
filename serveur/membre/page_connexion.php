@@ -21,12 +21,12 @@
 
                     <div class="wrap-input100 validate-input" data-validate="Enter courriel">
                         <input class="input100" type="text" name="courriel" placeholder="Courriel">
-                        <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                        <span class="focus-input100"><img src="../../client/images/username.png"></img></span>
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter mdp">
                         <input class="input100" type="password" name="mdp" placeholder="Mot de passe">
-                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                        <span class="focus-input100" ></span>
                     </div>
 
                     <div class="container-login100-form-btn m-t-32">
