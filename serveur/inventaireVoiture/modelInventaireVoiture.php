@@ -1,7 +1,7 @@
 <?php
     require_once(__DIR__.'/../bd/connexion.inc.php');
 
-    function Mdl_Lister(){
+    function Mdl_GetAll(){
         global $connexion;
         try{
             $requete = "SELECT * FROM inventaireVoiture";
