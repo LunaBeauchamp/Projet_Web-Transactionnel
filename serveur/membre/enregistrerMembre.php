@@ -3,7 +3,7 @@
     require_once(__DIR__.'/../bd/connexion.inc.php');
 
     function Mdl_AjouterMembre(){
-        global $connexion;
+        $connexion =  Connexion::getConnexion();
 
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
@@ -16,19 +16,19 @@
         try{
             $requete = "SELECT * FROM connexion WHERE courriel=?";
             $stmt = $connexion->prepare($requete);
-            $stmt->bind_param("s",$courriel);
-            $stmt->execute();
+            $donnees = [$courriel];
+            $stmt->execute($donnees);
             $reponse =   $stmt->get_result();
             if ($reponse->num_rows == 0) { 
-                $requete = "INSERT INTO connexion VAlUES (?,?,'M','A')";
+                $requete = "INSERT INTO connexion VAlUES (?,?,?,?)";
                 $stmt = $connexion->prepare($requete);
-                $stmt->bind_param("ss",$courriel,$mdp);
-                $stmt->execute();
+                $donnees = [$courriel,$mdp,'M','A'];
+                $stmt->execute($donnees);
 
-                $requete = "INSERT INTO membres (nom, prenom, courriel, genre, daten) VAlUES (?,?,?,?,?)";
+                $requete = "INSERT INTO membres VAlUES (?,?,?,?,?)";
                 $stmt = $connexion->prepare($requete);
-                $stmt->bind_param("sssss",$nom,$prenom,$courriel,$genre,$daten);
-                $stmt->execute();
+                $donnees = [$nom,$prenom,$courriel,$genre,$daten];
+                $stmt->execute($donnees);
 
                 $msg = "Le membre à été bien enregistré !!!";
             } else {
