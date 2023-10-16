@@ -138,7 +138,7 @@
 	<!-- Footer -->
 	<div class="card-box">
 		<?php
-			require_once(__DIR__.'./serveur/inventaireVoiture/modelInventaireVoiture.php');
+			require_once('serveur/inventaireVoiture/modelInventaireVoiture.php');
 			function obtenirCard($ligne){
 				$card = <<<CARD
 					<div class="product-card">
