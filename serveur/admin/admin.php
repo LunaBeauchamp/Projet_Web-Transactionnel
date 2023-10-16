@@ -50,6 +50,18 @@
 						</ul>
 					</li>
 
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							Lister les membres
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">Tous les membres</a></li>
+							<li><a class="dropdown-item" href="#">Membres activés</a></li>
+							<li><a class="dropdown-item" href="#">Membres désactivés</a></li>
+						</ul>
+					</li>
+
 					<li class="nav-item">
 						<a class="nav-link" href="#">Modifier</a>
 					</li>
