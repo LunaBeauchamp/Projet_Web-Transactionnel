@@ -24,7 +24,19 @@
          $voiture = new Voiture(0,$_POST['nomVoiture'], (int)$_POST['description'],"Image", $_POST['prix'], $_POST['quantite']);
          return DaoVoiture::getDaoVoiture()->MdlV_Enregistrer($voiture); 
     }
+    function CtrV_Modifier(){
+        $voiture = new Voiture($_POST['idVoiture'],$_POST['nomVoiture'], (int)$_POST['description'],"Image", $_POST['prix'], $_POST['quantite']);
+        return DaoVoiture::getDaoVoiture()->MdlV_Modifier($newVoiture); 
+   }
 
+   function CtrV_Supprimer(){
+    $idV = $_POST['idVoiture'];
+    return DaoVoiture::getDaoVoiture()->MdlV_Supprimer($idV); 
+    }
+    function CtrV_getOne(){
+        $idV = $_POST['idVoiture'];
+        return DaoVoiture::getDaoVoiture()->MdlV_GetOne($idV); 
+    }
     function CtrV_getAll(){
          return DaoVoiture::getDaoVoiture()->MdlV_GetAll(); 
     }
@@ -34,20 +46,20 @@
         switch($action){
             case "enregistrer" :
                 return  $this->CtrV_Enregistrer();
-            case "fiche" :
-                //fiche(); 
-            break;
+                break;
             case "modifier" :
-                //return  $this->CtrV_Modifierr(); 
-            break;
+                return  $this->CtrV_Modifier(); 
+                break;
             case "enlever" :
-                //return  $this->CtrV_Suprimmer(); 
-            break;
+                return  $this->CtrV_Supprimer(); 
+                break;
             case "lister" :
                 return $this->CtrV_getAll(); 
+                break;
+            case "lister_Voiture" :
+                return $this->CtrV_getOne(); 
+                break;
         }
-        // Retour de la réponse au client
-       
     }
 }
 ?>
