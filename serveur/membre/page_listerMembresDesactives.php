@@ -56,9 +56,9 @@
 							Lister les membres
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="../membre/page_listerTousLesMembres.php">Tous les membres</a></li>
-							<li><a class="dropdown-item" href="../membre/page_listerMembresActif.php">Membres activés</a></li>
-							<li><a class="dropdown-item" href="../membre/page_listerMembresDesactives.php">Membres désactivés</a></li>
+							<li><a class="dropdown-item" href="./page_listerTousLesMembres.php">Tous les membres</a></li>
+							<li><a class="dropdown-item" href="./page_listerMembresActif.php">Membres activés</a></li>
+							<li><a class="dropdown-item" href="./page_listerMembresDesactives.php">Membres désactivés</a></li>
 						</ul>
 					</li>
 
@@ -69,7 +69,7 @@
 						<a class="nav-link" href="#">Supprimer</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Déconnection</a>
+						<a class="nav-link" href="/serveur/membre/page_connexion.php">Déconnection</a>
 					</li>
 
 				</ul>
@@ -150,11 +150,55 @@
 		</div>
 	</div>
 
-	<!-- Footer -->
-	<div class="content d-flex align-items-center bg-light">
-		<h2 class="w-100 text-center">Bienvenu dans la page admin.</h2>
-	</div>
+    <!-- Container -->
+	<div>
+    <?php 
+    require_once(__DIR__.'/listerMembresDesactives.php');
+    
+    function obtenirTableRow($ligne){
+        $row = <<<HTML
+        <tr>
+            <td>$ligne->idm</td>
+            <td>$ligne->nom</td>
+            <td>$ligne->prenom</td>
+            <td>$ligne->courriel</td>
+            <td>$ligne->genre</td>
+            <td>$ligne->daten</td>
+        </tr>
+        HTML;
+        return $row;
+    }
 
+    $reponse = Mdl_ListerMembresDesactives();
+
+    if ($reponse->num_rows > 0) {
+        echo '<table class="table table-striped table-bordered">';
+        echo '<thead class="thead-dark">';
+        echo '<tr>';
+        echo '<th>ID</th>';
+        echo '<th>Nom</th>';
+        echo '<th>Prénom</th>';
+        echo '<th>Courriel</th>';
+        echo '<th>Genre</th>';
+        echo '<th>Date de naissance</th>';
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
+
+        while($ligne = $reponse->fetch_object()){
+            echo obtenirTableRow($ligne);
+        }
+
+        echo '</tbody>';
+        echo '</table>';
+    } else {
+        echo 'Aucun membre désactivé trouvé.';
+    }
+    ?>
+</div>
+
+
+    <!-- Footer -->
 	<footer class="footer-16371">
 		<div class="container">
 			<div class="row justify-content-center">
