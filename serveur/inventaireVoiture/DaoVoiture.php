@@ -60,7 +60,28 @@
               return $xml->asXML(); // Comme json_encode, c'està dire convertir en string
             }
         }
-        
+        function MdlV_Modifier($newVoiture){
+
+        }
+        function MdlV_Supprimer($idV){
+
+        }
+        function MdlV_GetOne($idV){
+            global $connexion;
+            try{
+                $requete = "SELECT * FROM inventaireVoiture where idVoiture = ?";
+                $stmt = $connexion->prepare($requete);
+                $stmt->bind_param("i",$idV);
+                $stmt->execute();
+                $xml = $this->genererDonneesXML($stmt, '<voitures/>', 'voiture'); 
+            } catch(Exception $e) {
+                $xml = $this->genererMessageXML("Problème pour obtenir les données des voitures");
+            }finally{
+                Header('Content-type: text/xml');
+                return $xml->asXML();
+            }
+        }
+
         function MdlV_GetAll(){
             global $connexion;
             try{
@@ -73,19 +94,6 @@
             }finally{
                 Header('Content-type: text/xml');
                 return $xml->asXML();
-            }
-        }
-        function Mdl_GetAll(){
-            global $connexion;
-            try{
-                $requete = "SELECT * FROM inventaireVoiture";
-                $stmt = $connexion->prepare($requete);
-                $stmt->execute();
-                $reponse = $stmt->get_result();
-            } catch(Exception $e) {
-                return [];
-            }finally{
-                return $reponse;
             }
         }
     }
