@@ -41,6 +41,8 @@ let remplirTable = (uneVoiture)=> {
     rep +='<td class="descriptionVoiture">'+uneVoiture.description+'</td>'
     rep +='<td class="prixVoiture">'+uneVoiture.prix+'$</td>'
     rep +='<td class="quantiteVoiture">'+uneVoiture.quantite+'</td>'
+    rep +='<td ><button data-bs-toggle="modal" data-bs-target="#modalModifierVoiture">modifier</button></td>'
+    rep +='<td ><button>supprimer</button></td>'
     rep +='</tr>'        
         return rep;
 }
@@ -58,6 +60,8 @@ let listerVoituresTable = () => {
      contenu +=         '<th>Description</th>'
      contenu +=         '<th>Prix</th>'
      contenu +=         '<th>Quantité</th>'
+     contenu +=         '<th>Modifier</th>'
+     contenu +=         '<th>Supprimer</th>'
      contenu +=        '</tr>'
      contenu +=    '</thead>'
      contenu +=    '<tbody>'

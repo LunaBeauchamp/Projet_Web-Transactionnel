@@ -11,7 +11,6 @@ let makeListe =(xmlReponse) =>{
                 prix:uneVoiture.getElementsByTagName('prix')[0].firstChild.nodeValue,
                 quantite:uneVoiture.getElementsByTagName('quantite')[0].firstChild.nodeValue
             })
-            console.log (listeVoitures)
         }
     } 
 }
@@ -41,7 +40,7 @@ let chargerVoituresAJAX = (mode, chemin) => {
 let modifierVoituresAJAX = () => {
     $.ajax({
         type : "POST",
-        url  : "routes.php",
+        url  : "../../routes.php",
         data : {"action":"modifier"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
@@ -55,7 +54,7 @@ let modifierVoituresAJAX = () => {
 let supprimerVoituresAJAX = () => {
     $.ajax({
         type : "POST",
-        url  : "routes.php",
+        url  : "../../routes.php",
         data : {"action":"enlever"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
@@ -69,7 +68,7 @@ let supprimerVoituresAJAX = () => {
 let ajouterVoituresAJAX = () => {
     $.ajax({
         type : "POST",
-        url  : "routes.php",
+        url  : "../../routes.php",
         data : {"action":"enregistrer"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
@@ -83,7 +82,7 @@ let ajouterVoituresAJAX = () => {
 let listerOneVoituresAJAX = () => {
     $.ajax({
         type : "POST",
-        url  : "routes.php",
+        url  : "../../routes.php",
         data : {"action":"lister_Voiture"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
