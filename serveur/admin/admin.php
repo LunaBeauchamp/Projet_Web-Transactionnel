@@ -8,6 +8,8 @@
 	<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 	<link rel="stylesheet" href="../../client/css/styleFooter.css">
 	<link rel="stylesheet" href="../../client/css/styleNav.css">
+	<link rel="stylesheet" href="../../client/css/styleCard.css">
+
 
 	<title>EliteAutomobile</title>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -33,7 +35,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Accueil</a>
+						<a class="nav-link active" aria-current="page" href="/serveur/admin/admin.php">Accueil</a>
 					</li>
 
 					<li class="nav-item dropdown">
@@ -150,11 +152,42 @@
 		</div>
 	</div>
 
-	<!-- Footer -->
-	<div class="content d-flex align-items-center bg-light">
-		<h2 class="w-100 text-center">Bienvenu dans la page admin.</h2>
+	<!-- Cards -->
+	<div class="card-box">
+		<?php
+			require_once('../../serveur/inventaireVoiture/modelInventaireVoiture.php');
+			function obtenirCard($ligne){
+				$card = <<<CARD
+					<div class="product-card">
+						<div class="product-img">
+							<img src="$ligne->image" alt="RR-P">
+							<h1>$ligne->nomvoiture</h1>
+						</div>
+						<div class="product-description">
+							<p>$ligne->description</p>
+						</div>
+						<div class="product-price">
+							<p>Commence a <span>$ligne->prix $</span></p>
+						</div>
+						<div class="product-achat">
+							<a href="#" class="btn btn-primary">Acheter</a>
+						</div>
+					</div>
+				CARD;
+				return $card ;
+			}
+			$reponse = Mdl_GetAll(); 
+
+			$rep = "";
+
+			while ($ligne=$reponse->fetch_object()){
+				$rep.=obtenirCard($ligne);
+			}
+			echo $rep;
+		?>
 	</div>
 
+	<!-- Footer -->
 	<footer class="footer-16371">
 		<div class="container">
 			<div class="row justify-content-center">
