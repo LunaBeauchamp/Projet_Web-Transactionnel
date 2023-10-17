@@ -9,7 +9,7 @@ class Voiture {
     private $prix;
     private $quantite;
 
-    function __construct(int $idV, string $nomVoiture, string $description, string $image, double $prix, int $quantite) {
+    function __construct(int $idV, string $nomVoiture, string $description, string $image, float $prix, int $quantite) {
         $this->setIdv($idV);
         $this->setNomVoiture($nomVoiture);
         $this->setDescription($description);
@@ -30,7 +30,7 @@ class Voiture {
     function getImage():string {
         return $this->image;
     }
-    function getPrix():double {
+    function getPrix():float {
         return $this->prix;
     }
     function getQuantite():int {

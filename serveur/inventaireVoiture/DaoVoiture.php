@@ -2,7 +2,7 @@
     declare (strict_types=1);
 
     require_once(__DIR__.'/../bd/connexion.inc.php');
-    require_once('includes/Voiture.inc.php')
+    require_once('includes/Voiture.inc.php');
     
     class DaoVoiture {
         static private $modelVoiture = null;
@@ -24,7 +24,8 @@
     
         function genererDonneesXML($stmt, $root, $entite):SimpleXMLElement {
             $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?>'.$root); // Crée $xml -> <voitures>
-            while($ligne = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $reponse = $stmt->get_result();
+            while($ligne = $reponse->fetch_object()){
                 $voiture = $xml->addChild($entite); // <voitures> <voiture>
                 foreach ($ligne as $colonne => $valeur) {
                     $voiture->addChild($colonne, $valeur."");// Faut que $value soit string
@@ -62,20 +63,30 @@
         }
         
         function MdlV_GetAll(){
-            global $reponse;
-            $connexion = Connexion::getConnexion();
+            global $connexion;
             try{
                 $requete = "SELECT * FROM inventaireVoiture";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
                 $xml = $this->genererDonneesXML($stmt, '<voitures/>', 'voiture'); 
-                $reponse = $stmt->get_result();
             } catch(Exception $e) {
                 $xml = $this->genererMessageXML("Problème pour obtenir les données des voitures");
             }finally{
-                unset($connexion);
                 Header('Content-type: text/xml');
                 return $xml->asXML();
+            }
+        }
+        function Mdl_GetAll(){
+            global $connexion;
+            try{
+                $requete = "SELECT * FROM inventaireVoiture";
+                $stmt = $connexion->prepare($requete);
+                $stmt->execute();
+                $reponse = $stmt->get_result();
+            } catch(Exception $e) {
+                return [];
+            }finally{
+                return $reponse;
             }
         }
     }
