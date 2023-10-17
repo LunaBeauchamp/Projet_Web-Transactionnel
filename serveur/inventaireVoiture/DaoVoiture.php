@@ -44,7 +44,6 @@
         }
         
         function MdlV_Enregistrer(Voiture $voiture):string {
-           
             global $connexion;
             $requette="INSERT INTO inventaireVoiture VALUES(0,?,?,?,?,?)";
             try{
@@ -61,10 +60,36 @@
             }
         }
         function MdlV_Modifier($newVoiture){
-
+            global $connexion;
+            try{
+                $requete = "UPDATE `inventaireVoiture` set nomVoiture=?, description=?, image=?, prix=?, quantite=? WHERE idVoiture = ?";
+                $stmt = $connexion->prepare($requete);
+                $stmt->bind_param("sssiii",$nom,$description, $image, $prix, $quantite, $idV);
+                $stmt->execute();
+                $reponse = $stmt->get_result();
+                $xml = $this->genererMessageXML("Voiture modifier.");
+            } catch(Exception $e) {
+                $xml = $this->genererMessageXML("Problème pour modifier la voiture.");
+            }finally{
+                Header('Content-type: text/xml');
+                return $xml->asXML();
+            }
         }
         function MdlV_Supprimer($idV){
-
+            global $connexion;
+            try{
+                $requete = "DELETE FROM `inventaireVoiture` WHERE idVoiture = ?";
+                $stmt = $connexion->prepare($requete);
+                $stmt->bind_param("i",$idV);
+                $stmt->execute();
+                $reponse = $stmt->get_result();
+                $xml = $this->genererMessageXML("Voiture supprimmer.");
+            } catch(Exception $e) {
+                $xml = $this->genererMessageXML("Problème pour suprimer la voiture.");
+            }finally{
+                Header('Content-type: text/xml');
+                return $xml->asXML();
+            }
         }
         function MdlV_GetOne($idV){
             global $connexion;
@@ -75,7 +100,7 @@
                 $stmt->execute();
                 $xml = $this->genererDonneesXML($stmt, '<voitures/>', 'voiture'); 
             } catch(Exception $e) {
-                $xml = $this->genererMessageXML("Problème pour obtenir les données des voitures");
+                $xml = $this->genererMessageXML("Problème pour obtenir les données de la voiture");
             }finally{
                 Header('Content-type: text/xml');
                 return $xml->asXML();
