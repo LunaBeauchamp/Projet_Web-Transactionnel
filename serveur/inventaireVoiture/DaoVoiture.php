@@ -45,12 +45,11 @@
         
         function MdlV_Enregistrer(Voiture $voiture):string {
            
-            $connexion =  Connexion::getConnexion();
-            
+            global $connexion;
             $requette="INSERT INTO inventaireVoiture VALUES(0,?,?,?,?,?)";
             try{
-                $donnees = [$voiture->getNomVoiture(),$voiture->getDescription(),$voiture->getImage(),$voiture->getPrix(),$voiture->getQuantité()];
                 $stmt = $connexion->prepare($requette);
+                $stmt->bind_param("sssii",$voiture->getNomVoiture(),$voiture->getDescription(),$voiture->getImage(),$voiture->getPrix(),$voiture->getQuantité());
                 $stmt->execute($donnees);
                 $xml = $this->genererMessageXML("Voiture bien enregistré");
             }catch (Exception $e){
