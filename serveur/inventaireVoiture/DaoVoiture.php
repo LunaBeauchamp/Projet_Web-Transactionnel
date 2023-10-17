@@ -45,24 +45,36 @@
         
         function MdlV_Enregistrer(Voiture $voiture):string {
             global $connexion;
-            $requette="INSERT INTO inventaireVoiture VALUES(0,?,?,?,?,?)";
+            $msg = "";
+            $nom =$voiture->getNomVoiture();
+            $description=$voiture->getDescription();
+            $image=$voiture->getImage();
+            $prix=$voiture->getPrix();
+            $quantite=$voiture->getQuantite();
+            $msg = $msg."attribut   ";
             try{
+                $requette="INSERT INTO inventaireVoiture VALUES(0,?,?,?,?,?)";
                 $stmt = $connexion->prepare($requette);
-                $stmt->bind_param("sssii",$voiture->getNomVoiture(),$voiture->getDescription(),$voiture->getImage(),$voiture->getPrix(),$voiture->getQuantité());
-                $stmt->execute($donnees);
-                $xml = $this->genererMessageXML("Voiture bien enregistré");
+                $stmt->bind_param("sssii",$nom,$description, $image, $prix, $quantite);
+                $stmt->execute();
+                $xml = $this->genererMessageXML("Voiture enregistrer");
             }catch (Exception $e){
                 $xml = $this->genererMessageXML("Probléme pour enregistrer le voiture");
             }finally {
-              unset($connexion);
-              Header('Content-type: text/xml');
-              return $xml->asXML(); // Comme json_encode, c'està dire convertir en string
+                Header('Content-type: text/xml');
+                return $xml->asXML();
             }
         }
-        function MdlV_Modifier($newVoiture){
+        function MdlV_Modifier(Voiture $newVoiture){
             global $connexion;
+            $nom =$newVoiture->getNomVoiture();
+            $description=$newVoiture->getDescription();
+            $image=$newVoiture->getImage();
+            $prix=$newVoiture->getPrix();
+            $quantite=$newVoiture->getQuantite();
+            $idV=$newVoiture->getIdV();
             try{
-                $requete = "UPDATE `inventaireVoiture` set nomVoiture=?, description=?, image=?, prix=?, quantite=? WHERE idVoiture = ?";
+                $requete = "UPDATE inventaireVoiture set nomVoiture=?, description=?, image=?, prix=?, quantite=? WHERE idVoiture = ?";
                 $stmt = $connexion->prepare($requete);
                 $stmt->bind_param("sssiii",$nom,$description, $image, $prix, $quantite, $idV);
                 $stmt->execute();

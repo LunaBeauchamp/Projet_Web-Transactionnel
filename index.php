@@ -139,6 +139,8 @@
 	</div>
 
 	<!-- Footer -->
+	<div class="msg" id="msg">
+	</div>
 	<div class="card-box" id="cardVoiture">
 	</div>
 		

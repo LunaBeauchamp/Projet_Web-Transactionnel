@@ -36,6 +36,13 @@ let listerVoitures = (xmlReponse) => {
     document.getElementById('cardVoiture').innerHTML = contenu;
 }
 
+let afficherMessage = (msg) => {
+    document.getElementById('msg').innerHTML = msg;
+    setTimeout(() => {
+        document.getElementById('msg').innerHTML = "";
+    }, 5000);
+}
+
 let montrerVue = (action, xmlReponse) => {
 
     switch(action){

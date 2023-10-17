@@ -24,7 +24,7 @@ class Voiture {
     function getNomVoiture():string {
         return $this->nomVoiture;
     }
-    function getDescription():int {
+    function getDescription():string {
         return $this->description;
     }
     function getImage():string {
