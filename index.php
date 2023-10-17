@@ -138,12 +138,15 @@
 		</div>
 	</div>
 
+
 	<!-- Footer -->
 	<div class="msg" id="msg">
 	</div>
 	<div class="card-box" id="cardVoiture">
+
 	</div>
-		
+	
+	<!-- Footer -->
 	<footer class="footer-16371">
 		<div class="container">
 			<div class="row justify-content-center">
