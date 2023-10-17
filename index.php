@@ -135,7 +135,7 @@
 		</div>
 	</div>
 
-	<!-- Footer -->
+	<!-- Cards -->
 	<div class="card-box">
 		<?php
 			require_once('serveur/inventaireVoiture/modelInventaireVoiture.php');
@@ -169,7 +169,8 @@
 			echo $rep;
 		?>
 	</div>
-		
+	
+	<!-- Footer -->
 	<footer class="footer-16371">
 		<div class="container">
 			<div class="row justify-content-center">
