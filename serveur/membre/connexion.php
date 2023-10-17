@@ -3,28 +3,29 @@
     require_once(__DIR__.'/../bd/connexion.inc.php');
 
     function Mdl_Connexion(){
-        $connexion =  Connexion::getConnexion();
+        global $connexion;
         $courriel = $_POST['courriel'];
         $mdp = $_POST['mdp'];
         try{
             $requete = "SELECT * FROM connexion WHERE courriel=? AND motdepasse=?";
             $stmt = $connexion->prepare($requete);
-            $donnees = [$courriel,$mdp];
-            $stmt->execute($donnees);
-
-            $ligne = $stmt->fetch(PDO::FETCH_ASSOC);
-            if($ligne->role == 'M'){
-                $_SESSION['role'] = 'M';
-                header('Location: membre.php');
-                exit();
-            } else {
-                $_SESSION['role'] = 'A';
-                header('Location: ../admin/admin.php');
-                exit();
+            $stmt->bind_param("ss", $courriel, $mdp);
+            $stmt ->execute();
+            $reponse = $stmt->get_result();
+            if ($reponse->num_rows > 0) {
+                $ligne = $reponse->fetch_object();
+                if($ligne->role == 'M'){
+                    $_SESSION['role'] = 'M';
+                    header('Location: membre.php');
+                    exit();
+                } else {
+                    $_SESSION['role'] = 'A';
+                    header('Location: ../admin/admin.php');
+                    exit();
+                }
             }
-            
         } catch(Exception $e) {
-            echo( 'Erreur : '.$e->getMessage());
+            $msg = 'Erreur : '.$e->getMessage();
         }finally{
             header("Location: ../../index.php?msg=$msg");
             exit;
