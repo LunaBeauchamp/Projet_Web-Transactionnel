@@ -37,11 +37,12 @@ let chargerVoituresAJAX = (mode, chemin) => {
         }
     })
 }
-let modifierVoituresAJAX = () => {
+let modifierVoituresAJAX = (id) => {
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data : {"action":"modifier"},
+        data : {"action":"modifier",
+            "idVoiture":id},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
             montrerVue('enlever',xmlVoiture)
@@ -79,14 +80,28 @@ let ajouterVoituresAJAX = () => {
         }
     })
 }
-let listerOneVoituresAJAX = () => {
+function listerOneVoituresAJAX (id) {
+    
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data : {"action":"lister_Voiture"},
+        data : {"action":"lister_Voiture",
+                "idVoiture":id},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
-            montrerVue("lister", xmlVoiture);
+            liste = xmlVoiture.getElementsByTagName('voiture');
+        for (let uneVoiture of liste){
+                voiture ={
+                idVoiture :uneVoiture.getElementsByTagName('idVoiture')[0].firstChild.nodeValue,
+                nomVoiture :uneVoiture.getElementsByTagName('nomvoiture')[0].firstChild.nodeValue,
+                description: uneVoiture.getElementsByTagName('description')[0].firstChild.nodeValue,
+                image:uneVoiture.getElementsByTagName('image')[0].firstChild.nodeValue,
+                prix:uneVoiture.getElementsByTagName('prix')[0].firstChild.nodeValue,
+                quantite:uneVoiture.getElementsByTagName('quantite')[0].firstChild.nodeValue
+                }
+            montrerFormModif(voiture)
+        } 
+        return voiture
         },
         fail : (err) => {
            console.log("Erreur : "+err)

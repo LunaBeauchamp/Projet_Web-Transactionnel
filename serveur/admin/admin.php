@@ -158,53 +158,11 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="modalModifierVoiture" tabindex="-1" aria-labelledby="exampleModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Modifier une Voiture</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<span id="msgErrEnreg"></span>
-					<form class="row g-3" action="javascript:modifierVoituresAJAX();" method="POST">
-						<div class="col-md-12">
-							<label for="nomVoiture" class="form-label">Nom</label>
-							<input type="text" class="form-control is-valid" id="nomVoiture" name="nomVoiture" required>
-						</div>
-						<div class="col-md-12">
-							<label for="description" class="form-label">description</label>
-							<input type="text" class="form-control is-valid" id="description" name="description" required>
-						</div>
-						<div class="col-md-12">
-							<label for="image" class="form-label">image</label>
-							<input type="text" class="form-control is-valid" id="image" name="image" required>
-						</div>
 
-						<div class="col-md-12">
-							<label for="Prix" class="form-label">Prix</label>
-							<input type="number" class="form-control is-valid" id="Prix" name="Prix" required>
-						</div>
-						<div class="col-md-12">
-							<label for="Quantité" class="form-label">Quantité</label>
-							<input type="number" class="form-control is-valid" id="Quantité" name="Quantité" required>
-						</div>
-
-						<br />
-						<div class="col-md-6">
-							<button class="btn btn-primary" type="submit">Enregistrer</button>
-						</div>
-						<div class="col-md-6">
-							<button class="btn btn-danger" type="reset">Vider</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- Cards -->
 	<div class="msg" id="msg">
+	</div>
+	<div class="formulaire" id="formulaire">
 	</div>
 	<div  id="contenu">
 	</div>
