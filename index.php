@@ -17,7 +17,7 @@
 	<script src="client/voiture/vueVoiture.js"></script>
 </head>
 
-<body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX();">
+<body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX('cards','routes.php');">
 
 	<!-- Header -->
 	<header>
@@ -142,7 +142,7 @@
 	<!-- Footer -->
 	<div class="msg" id="msg">
 	</div>
-	<div class="card-box" id="cardVoiture">
+	<div class="card-box" id="contenu">
 
 	</div>
 	
