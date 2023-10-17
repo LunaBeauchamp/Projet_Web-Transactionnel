@@ -11,14 +11,10 @@
 	<link rel="stylesheet" href="./client/css/styleCard.css">
 
 	<title>EliteAutomobile</title>
-	<script src="client/utilitaires/jquery-3.6.3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="client/voiture/requetesVoiture.js"></script>
-	<script src="client/voiture/vueVoiture.js"></script>
-	
 </head>
 
- <body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX();">
+<body class="p-0 m-0 border-0 bd-example m-0 border-0">
 
 	<!-- Header -->
 	<header>
@@ -140,7 +136,38 @@
 	</div>
 
 	<!-- Footer -->
-	<div class="card-box" id="cardVoiture">
+	<div class="card-box">
+		<?php
+			require_once('serveur/inventaireVoiture/modelInventaireVoiture.php');
+			function obtenirCard($ligne){
+				$card = <<<CARD
+					<div class="product-card">
+						<div class="product-img">
+							<img src="$ligne->image" alt="RR-P">
+							<h1>$ligne->nomvoiture</h1>
+						</div>
+						<div class="product-description">
+							<p>$ligne->description</p>
+						</div>
+						<div class="product-price">
+							<p>Commence a <span>$ligne->prix $</span></p>
+						</div>
+						<div class="product-achat">
+							<a href="#" class="btn btn-primary">Acheter</a>
+						</div>
+					</div>
+				CARD;
+				return $card ;
+			}
+			$reponse = Mdl_GetAll(); 
+
+			$rep = "";
+
+			while ($ligne=$reponse->fetch_object()){
+				$rep.=obtenirCard($ligne);
+			}
+			echo $rep;
+		?>
 	</div>
 		
 	<footer class="footer-16371">

@@ -2,7 +2,7 @@
     declare (strict_types=1);
 
     require_once(__DIR__.'/../bd/connexion.inc.php');
-    require_once('includes/Voiture.inc.php');
+    require_once('includes/Voiture.inc.php')
     
     class DaoVoiture {
         static private $modelVoiture = null;
