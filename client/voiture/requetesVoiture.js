@@ -11,6 +11,7 @@ let makeListe =(xmlReponse) =>{
                 prix:uneVoiture.getElementsByTagName('prix')[0].firstChild.nodeValue,
                 quantite:uneVoiture.getElementsByTagName('quantite')[0].firstChild.nodeValue
             })
+            
         }
     } 
 }
@@ -68,7 +69,9 @@ let supprimerVoituresAJAX = (id) => {
                 "idVoiture":id},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
+            location.reload()
             montrerVue('enlever',xmlVoiture)
+
             // chargerVoituresAJAX('table','../../routes.php');
         },
         fail : (err) => {
