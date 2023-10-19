@@ -38,13 +38,20 @@ let chargerVoituresAJAX = (mode, chemin) => {
     })
 }
 let modifierVoituresAJAX = (id) => {
+    id= parseInt(id)
+    let formFilm = new FormData(document.getElementById('formModif'));
+	formFilm.append('action','modifier');
+    formFilm.append('idVoiture','id');
+    console.log(formFilm);
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data : {"action":"modifier",
-            "idVoiture":id},
+        data : formFilm,
+        contentType : false,
+		processData : false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
+            console.log(xmlVoiture);
             montrerVue('enlever',xmlVoiture)
         },
         fail : (err) => {
@@ -52,14 +59,17 @@ let modifierVoituresAJAX = (id) => {
         }
     })
 }
-let supprimerVoituresAJAX = () => {
+let supprimerVoituresAJAX = (id) => {
+    id= parseInt(id)
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data : {"action":"enlever"},
+        data : {"action":"enlever",
+                "idVoiture":id},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
             montrerVue('enlever',xmlVoiture)
+            // chargerVoituresAJAX('table','../../routes.php');
         },
         fail : (err) => {
            console.log("Erreur : "+err)
@@ -67,12 +77,15 @@ let supprimerVoituresAJAX = () => {
     })
 }
 let ajouterVoituresAJAX = () => {
+    let formFilm = new FormData(document.getElementById('formModif'));
+	formFilm.append('action','enregistrer');
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data : {"action":"enregistrer"},
+        data : formFilm,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
+            chargerVoituresAJAX('table','../../routes.php');
             montrerVue('enlever',xmlVoiture)
         },
         fail : (err) => {

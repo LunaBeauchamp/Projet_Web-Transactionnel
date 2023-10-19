@@ -46,7 +46,6 @@ function montrerFormEnreg(){
 }
 
 function montrerFormModif(voiture) {
-    console.log(voiture)
     let form = `<!-- Modal pour modifier voiture -->
     <div class="modal fade" id="modalModifierVoiture" tabindex="-1" aria-labelledby="exampleModalLabel"
 		aria-hidden="true">
@@ -58,7 +57,7 @@ function montrerFormModif(voiture) {
 				</div>
 				<div class="modal-body">
 					<span id="msgErrEnreg"></span>
-					<form class="row g-3" onSubmit="javascript:modifierVoituresAJAX(${voiture.idVoiture});" method="POST">
+					<form class="row g-3" id="formModif" method="POST">
 						<div class="col-md-12">
 							<label for="nomVoiture" class="form-label">Nom</label>
 							<input type="text" class="form-control is-valid" id="nomVoiture" name="nomVoiture" value="${voiture.nomVoiture}" required>
@@ -81,7 +80,7 @@ function montrerFormModif(voiture) {
 						</div>
 						<br />
 						<div class="col-md-6">
-							<button class="btn btn-primary" type="submit">Enregistrer</button>
+							<button class="btn btn-primary" onClick="modifierVoituresAJAX(${voiture.idVoiture})>Enregistrer</button>
 						</div>
 						<div class="col-md-6">
 							<button class="btn btn-danger" type="reset">Vider</button>
@@ -140,7 +139,7 @@ let remplirTable = (uneVoiture)=> {
     rep +='<td class="prixVoiture">'+uneVoiture.prix+'$</td>'
     rep +='<td class="quantiteVoiture">'+uneVoiture.quantite+'</td>'
     rep +='<td ><button onclick="listerOneVoituresAJAX('+uneVoiture.idVoiture+')">modifier</button></td>'
-    rep +='<td ><button>supprimer</button></td>'
+    rep +='<td ><button onclick="supprimerVoituresAJAX('+uneVoiture.idVoiture+')">supprimer</button></td>'
     rep +='</tr>'        
         return rep;
 }
