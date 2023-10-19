@@ -131,14 +131,12 @@ let chercherVoituresAJAX = () => {
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data:{"action":"chercher_Voiture",
+        data : {"action":"chercher_Voiture",
                 "mot":mot},
-        contentType : false,
-		processData : false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {
-            chargerVoituresAJAX('table','../../routes.php');
-            montrerVue('enlever',xmlVoiture)
+            makeListe(xmlVoiture);
+            montrerVue("lister_table", xmlVoiture);
         },
         fail : (err) => {
            console.log("Erreur : "+err)

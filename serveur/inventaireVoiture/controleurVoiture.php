@@ -40,6 +40,10 @@
     function CtrV_getAll(){
          return DaoVoiture::getDaoVoiture()->MdlV_GetAll(); 
     }
+    function CtrV_chercher(){
+        $selection = $_POST['mot'];
+        return DaoVoiture::getDaoVoiture()->MdlV_Chercher($selection); 
+   }
 
     function CtrV_Actions(){
         $action=$_POST['action'];
@@ -55,6 +59,9 @@
                 break;
             case "lister" :
                 return $this->CtrV_getAll(); 
+                break;
+            case "chercher_Voiture":
+                return $this->CtrV_chercher();
                 break;
             case "lister_Voiture" :
                 return $this->CtrV_getOne(); 
