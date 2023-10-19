@@ -5,7 +5,7 @@
         global $connexion;
         
         try{
-            $requete = "SELECT * FROM membres";
+            $requete = "SELECT membres.*, connexion.status FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel";
             $stmt = $connexion->prepare($requete);
             $stmt->execute();
             $reponse = $stmt->get_result();
