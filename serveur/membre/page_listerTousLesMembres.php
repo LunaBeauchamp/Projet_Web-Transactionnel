@@ -151,22 +151,44 @@
 	</div>
 
     <!-- Container -->
-	<div>
+<div>
     <?php 
     require_once(__DIR__.'/listerTousLesMembres.php');
     
     function obtenirTableRow($ligne){
-        $row = <<<HTML
-        <tr>
-            <td>$ligne->idm</td>
-            <td>$ligne->nom</td>
-            <td>$ligne->prenom</td>
-            <td>$ligne->courriel</td>
-            <td>$ligne->genre</td>
-            <td>$ligne->daten</td>
-        </tr>
-        HTML;
-        return $row;
+
+		
+
+		if($ligne->status == "A"){
+			$row = <<<HTML
+			<tr>
+				<td>$ligne->idm</td>
+				<td>$ligne->nom</td>
+				<td>$ligne->prenom</td>
+				<td>$ligne->courriel</td>
+				<td>$ligne->genre</td>
+				<td>$ligne->daten</td>
+				<td><a href="/serveur/membre/modifierStatusMembre.php?status=D&courriel=$ligne->courriel" class="btn btn-danger">Désactiver</a></td>
+			</tr>
+			HTML;
+			return $row;
+		} else {
+			$row = <<<HTML
+			<tr>
+				<td>$ligne->idm</td>
+				<td>$ligne->nom</td>
+				<td>$ligne->prenom</td>
+				<td>$ligne->courriel</td>
+				<td>$ligne->genre</td>
+				<td>$ligne->daten</td>
+				<td><a href="/serveur/membre/modifierStatusMembre.php?status=A&courriel=$ligne->courriel" class="btn btn-success">Activer</a></td>
+
+			</tr>
+			HTML;
+			return $row;
+		}
+		
+
     }
 
     $reponse = Mdl_ListerMembres();
@@ -181,6 +203,7 @@
         echo '<th>Courriel</th>';
         echo '<th>Genre</th>';
         echo '<th>Date de naissance</th>';
+		echo '<th>Action</th>';
         echo '</tr>';
         echo '</thead>';
         echo '<tbody>';
@@ -235,6 +258,7 @@
 			</div>
 		</div>
 	</footer>
+	
 </body>
 
 </html>
