@@ -46,7 +46,7 @@ function montrerFormEnreg(){
 </div>
          <!-- Fin du modal pour enregistrer film -->
      `;
-    contenu = document.getElementById("contenu")
+    contenu = document.getElementById("formulaire")
     contenu.innerHTML = form;
     $('#enregModal').modal('show');
 }
@@ -152,7 +152,7 @@ let remplirTable = (uneVoiture)=> {
 
 
 let listerVoituresTable = () => {
-    document.getElementById('contenu').innerHTM = ""
+    
     let contenu = '<div class="table-responsive">'
      contenu += '<table class="table-striped table-sm align-middle">'
      contenu += '<thead>'
