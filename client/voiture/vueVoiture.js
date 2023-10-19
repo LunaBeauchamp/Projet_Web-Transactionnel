@@ -1,43 +1,49 @@
 function montrerFormEnreg(){
 
      let form=`
-     <!-- Modal pour enregistrer film -->
+     <!-- Modal pour enregistrer voiture -->
          <div class="modal fade" id="enregModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-             <div class="modal-dialog">
-                 <div class="modal-content">
-                     <div class="modal-header">
-                         <h5 class="modal-title" id="exampleModalLabel">Enregistrer film</h5>
-                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                     </div>
-                     <div class="modal-body">
-                     <form id="formEnreg">
-                         <div class="col-md-6">
-                             <label for="titre" class="form-label">Titre</label>
-                             <input type="text" class="form-control is-valid" id="titre" name="titre" required>
-                         </div>
-                         <div class="col-md-6">
-                             <label for="duree" class="form-label">Durée</label>
-                             <input type="numeric" class="form-control is-valid" id="duree" name="duree" required>
-                         </div>
-                         <div class="col-md-12">
-                             <label for="res" class="form-label">Réalisateur</label>
-                             <input type="text" class="form-control is-valid" id="res" name="res" required>
-                         </div>
-                         <!-- <div class="col-md-6">
-                             <label for="pochette" class="form-label">Pochette</label>
-                             <input type="file"  class="form-control is-valid" id="pochette" name="pochette">
-                         </div> -->
-                         <br/>
-                         <div class="col-12">
-                             <button class="btn btn-primary" type="button" onClick="requeteEnregistrer();">Enregistrer</button>
-                         </div>
-                     </form>
-                     </div>
-                     <div class="modal-footer">
-                     </div>
-                 </div>
+         <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter une Voiture</h1>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
              </div>
+             <div class="modal-body">
+                 <span id="msgErrEnreg"></span>
+                     <form class="row g-3" id="formEnreg" onSubmit="ajouterVoituresAJAX();" method="POST">
+                     <div class="col-md-12">
+                     <label for="nomVoiture" class="form-label">Nom</label>
+                     <input type="text" class="form-control is-valid" id="nomVoiture" name="nomVoiture" required>
+                 </div>
+                 <div class="col-md-12">
+                     <label for="description" class="form-label">Description</label>
+                     <input type="text" class="form-control is-valid" id="description" name="description" required>
+                 </div>
+                 <div class="col-md-12">
+                     <label for="image" class="form-label">Image</label>
+                     <input type="text" class="form-control is-valid" id="image" name="image" required>
+                 </div>
+                 <div class="col-md-12">
+                     <label for="prix" class="form-label">Prix</label>
+                     <input type="number" class="form-control is-valid" id="prix" name="prix" required>
+                 </div>
+                 <div class="col-md-12">
+                     <label for="quantite" class="form-label">Quantité</label>
+                     <input type="number" class="form-control is-valid" id="quantite" name="quantite" required>
+                 </div>
+                 <br />
+                 <div class="col-md-6">
+                     <button class="btn btn-primary" type="submit">Enregistrer</button>
+                 </div>
+                 <div class="col-md-6">
+                     <button class="btn btn-danger" type="reset">Vider</button>
+                 </div>
+             </form>
          </div>
+     </div>
+ </div>
+</div>
          <!-- Fin du modal pour enregistrer film -->
      `;
     contenu = document.getElementById("contenu")
@@ -80,7 +86,7 @@ function montrerFormModif(voiture) {
 						</div>
 						<br />
 						<div class="col-md-6">
-							<button class="btn btn-primary" type="submit">Enregistrer</button>
+							<button class="btn btn-primary" type="submit">Modifier</button>
 						</div>
 						<div class="col-md-6">
 							<button class="btn btn-danger" type="reset">Vider</button>

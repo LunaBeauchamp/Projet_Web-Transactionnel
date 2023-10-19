@@ -38,7 +38,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="/serveur/admin/admin.php">Accueil</a>
+						<a class="nav-link active" aria-current="page" href="#">Accueil</a>
 					</li>
 
 					<li class="nav-item dropdown">
@@ -70,7 +70,7 @@
 						<a class="nav-link" href="#">Modifier</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-bs-toggle="modal" data-bs-target="#modalAjouterVoiture" href="#">Ajouter une voiture</a>
+						<a class="nav-link"  href="javascript:montrerFormEnreg();">Ajouter une voiture</a>
 					</li>
 					
 					<li class="nav-item">

@@ -49,10 +49,10 @@ let modifierVoituresAJAX = (id) => {
         data : formFilm,
         contentType : false,
 		processData : false,
-        dataType : "text", //text pour voir si bien formé même chose pour xml
-        success : (xmlVoiture) => {alert(xmlVoiture);
+        dataType : "xml", //text pour voir si bien formé même chose pour xml
+        success : (xmlVoiture) => {//alert(xmlVoiture);
             // console.log(xmlVoiture);
-            // montrerVue('enlever',xmlVoiture)
+            montrerVue('enlever',xmlVoiture)
         },
         fail : (err) => {
            console.log("Erreur : "+err)
@@ -77,14 +77,16 @@ let supprimerVoituresAJAX = (id) => {
     })
 }
 let ajouterVoituresAJAX = () => {
-    let formFilm = new FormData(document.getElementById('formModif'));
-	formFilm.append('action','enregistrer');
+    let formVoiture = new FormData(document.getElementById('formEnreg'));
+	formVoiture.append('action','enregistrer');
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data : formFilm,
+        data : formVoiture,
+        contentType : false,
+		processData : false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlVoiture) => {//alert(xmlFilms);
+        success : (xmlVoiture) => {
             chargerVoituresAJAX('table','../../routes.php');
             montrerVue('enlever',xmlVoiture)
         },
