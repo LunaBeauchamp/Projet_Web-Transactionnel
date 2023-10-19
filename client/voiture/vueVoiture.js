@@ -57,7 +57,7 @@ function montrerFormModif(voiture) {
 				</div>
 				<div class="modal-body">
 					<span id="msgErrEnreg"></span>
-					<form class="row g-3" id="formModif" method="POST">
+					<form class="row g-3" id="formModif" action="javascript:modifierVoituresAJAX(${voiture.idVoiture});" method="POST">
 						<div class="col-md-12">
 							<label for="nomVoiture" class="form-label">Nom</label>
 							<input type="text" class="form-control is-valid" id="nomVoiture" name="nomVoiture" value="${voiture.nomVoiture}" required>
@@ -80,7 +80,7 @@ function montrerFormModif(voiture) {
 						</div>
 						<br />
 						<div class="col-md-6">
-							<button class="btn btn-primary" onClick="modifierVoituresAJAX(${voiture.idVoiture})>Enregistrer</button>
+							<button class="btn btn-primary" type="submit">Enregistrer</button>
 						</div>
 						<div class="col-md-6">
 							<button class="btn btn-danger" type="reset">Vider</button>
