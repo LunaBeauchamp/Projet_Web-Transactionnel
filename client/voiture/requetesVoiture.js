@@ -39,20 +39,20 @@ let chargerVoituresAJAX = (mode, chemin) => {
 }
 let modifierVoituresAJAX = (id) => {
     id= parseInt(id)
+
     let formFilm = new FormData(document.getElementById('formModif'));
 	formFilm.append('action','modifier');
-    formFilm.append('idVoiture','id');
-    console.log(formFilm);
+    formFilm.append('idVoiture',id);
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
         data : formFilm,
         contentType : false,
 		processData : false,
-        dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlVoiture) => {//alert(xmlFilms);
-            console.log(xmlVoiture);
-            montrerVue('enlever',xmlVoiture)
+        dataType : "text", //text pour voir si bien formé même chose pour xml
+        success : (xmlVoiture) => {alert(xmlVoiture);
+            // console.log(xmlVoiture);
+            // montrerVue('enlever',xmlVoiture)
         },
         fail : (err) => {
            console.log("Erreur : "+err)
