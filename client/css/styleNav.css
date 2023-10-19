@@ -23,7 +23,12 @@ body {
     background-color: #3c3c44;
     
   }
+  .search {
+    color: #988265;
+    border-color: #988265;
+    background-color: #3c3c44;
   
+  }
   .dropdown-item{
     color: #988265;
   }
@@ -44,6 +49,7 @@ body {
     
   }
   
+  
   .navbar-dark .navbar-nav .active>.nav-link,
   .navbar-dark .navbar-nav .nav-link.active,
   .navbar-dark .navbar-nav .nav-link.show,
@@ -57,4 +63,5 @@ body {
     justify-content: center;
     display: flex;
 }
+
 

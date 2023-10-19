@@ -126,3 +126,22 @@ function listerOneVoituresAJAX (id) {
         }
     })
 }
+let chercherVoituresAJAX = () => {
+    let mot = document.getElementById("chercher").value
+    $.ajax({
+        type : "POST",
+        url  : "../../routes.php",
+        data:{"action":"chercher_Voiture",
+                "mot":mot},
+        contentType : false,
+		processData : false,
+        dataType : "xml", //text pour voir si bien formé même chose pour xml
+        success : (xmlVoiture) => {
+            chargerVoituresAJAX('table','../../routes.php');
+            montrerVue('enlever',xmlVoiture)
+        },
+        fail : (err) => {
+           console.log("Erreur : "+err)
+        }
+    })
+}
