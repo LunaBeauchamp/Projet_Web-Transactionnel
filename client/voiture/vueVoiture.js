@@ -57,7 +57,7 @@ function montrerFormModif(voiture) {
 				</div>
 				<div class="modal-body">
 					<span id="msgErrEnreg"></span>
-					<form class="row g-3" id="formModif" action="javascript:modifierVoituresAJAX(${voiture.idVoiture});" method="POST">
+					<form class="row g-3" id="formModif" onSubmit="modifierVoituresAJAX(${voiture.idVoiture});" method="POST">
 						<div class="col-md-12">
 							<label for="nomVoiture" class="form-label">Nom</label>
 							<input type="text" class="form-control is-valid" id="nomVoiture" name="nomVoiture" value="${voiture.nomVoiture}" required>
