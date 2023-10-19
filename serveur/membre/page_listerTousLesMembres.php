@@ -168,7 +168,6 @@
 				<td>$ligne->courriel</td>
 				<td>$ligne->genre</td>
 				<td>$ligne->daten</td>
-				<!-- <td><button type="button" class="btn btn-danger" onclick="Mdl_ModifierStatusMembre('D', '$ligne->courriel')">Désactiver</button></td> -->
 				<td><a href="/serveur/membre/modifierStatusMembre.php?status=D&courriel=$ligne->courriel" class="btn btn-danger">Désactiver</a></td>
 			</tr>
 			HTML;
@@ -182,7 +181,6 @@
 				<td>$ligne->courriel</td>
 				<td>$ligne->genre</td>
 				<td>$ligne->daten</td>
-				<!-- <td><button type="button" class="btn btn-success" onclick="Mdl_ModifierStatusMembre('A', '$ligne->courriel')">Activer</button></td> -->
 				<td><a href="/serveur/membre/modifierStatusMembre.php?status=A&courriel=$ligne->courriel" class="btn btn-success">Activer</a></td>
 
 			</tr>
