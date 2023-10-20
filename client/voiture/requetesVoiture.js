@@ -1,5 +1,6 @@
-let listeVoitures=[];
+let listeVoitures;
 let makeListe =(xmlReponse) =>{
+    listeVoitures=[];
     liste = xmlReponse.getElementsByTagName('voiture');
     for (let uneVoiture of liste){
         if (uneVoiture.nodeName != "<voitures>"){
@@ -52,8 +53,8 @@ let modifierVoituresAJAX = (id) => {
 		processData : false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlVoiture);
-            // console.log(xmlVoiture);
             montrerVue('enlever',xmlVoiture)
+            chargerVoituresAJAX('table','../../routes.php');
         },
         fail : (err) => {
            console.log("Erreur : "+err)
@@ -69,10 +70,8 @@ let supprimerVoituresAJAX = (id) => {
                 "idVoiture":id},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
-            location.reload()
             montrerVue('enlever',xmlVoiture)
-
-            // chargerVoituresAJAX('table','../../routes.php');
+            chargerVoituresAJAX('table','../../routes.php');
         },
         fail : (err) => {
            console.log("Erreur : "+err)
@@ -120,6 +119,23 @@ function listerOneVoituresAJAX (id) {
             montrerFormModif(voiture)
         } 
         return voiture
+        },
+        fail : (err) => {
+           console.log("Erreur : "+err)
+        }
+    })
+}
+let chercherVoituresAJAX = () => {
+    let mot = document.getElementById("chercher").value
+    $.ajax({
+        type : "POST",
+        url  : "../../routes.php",
+        data : {"action":"chercher_Voiture",
+                "mot":mot},
+        dataType : "xml", //text pour voir si bien formé même chose pour xml
+        success : (xmlVoiture) => {
+            makeListe(xmlVoiture);
+            montrerVue("lister_table", xmlVoiture);
         },
         fail : (err) => {
            console.log("Erreur : "+err)

@@ -80,6 +80,12 @@
 						<a class="nav-link" href="#">Déconnection</a>
 					</li>
 
+					<li>
+						<div class="input-group">
+							<input type="search" id="chercher" class="form-control rounded search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+							<button type="button"  class="btn btn-outline-primary search" onclick="chercherVoituresAJAX()">Chercher</button>
+						</div>
+					</li>
 				</ul>
 
 			</div>

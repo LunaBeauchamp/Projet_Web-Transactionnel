@@ -133,5 +133,25 @@
                 return $xml->asXML();
             }
         }
+        function MdlV_Chercher($selection){
+            global $connexion;
+            $msg = "allo";
+            try{
+                $requete = "SELECT * FROM inventaireVoiture WHERE nomVoiture LIKE '%".$selection."%'";
+                $msg = "création requête";
+                $stmt = $connexion->prepare($requete);
+                $msg = "préparation ";
+                $stmt->execute();
+                $msg = "éxecution";
+                $xml = $this->genererDonneesXML($stmt, '<voitures/>', 'voiture'); 
+                $msg = "génération";
+            } catch(Exception $e) {
+                $xml = $this->genererMessageXML($msg);
+                // $xml = $this->genererMessageXML("Problème pour obtenir les données des voitures");
+            }finally{
+                Header('Content-type: text/xml');
+                return $xml->asXML();
+            }
+        }
     }
 ?>
