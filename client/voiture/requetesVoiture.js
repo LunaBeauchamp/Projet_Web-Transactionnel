@@ -1,5 +1,6 @@
-let listeVoitures=[];
+let listeVoitures;
 let makeListe =(xmlReponse) =>{
+    listeVoitures=[];
     liste = xmlReponse.getElementsByTagName('voiture');
     for (let uneVoiture of liste){
         if (uneVoiture.nodeName != "<voitures>"){
@@ -52,8 +53,8 @@ let modifierVoituresAJAX = (id) => {
 		processData : false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlVoiture);
-            // console.log(xmlVoiture);
             montrerVue('enlever',xmlVoiture)
+            chargerVoituresAJAX('table','../../routes.php');
         },
         fail : (err) => {
            console.log("Erreur : "+err)
@@ -69,10 +70,8 @@ let supprimerVoituresAJAX = (id) => {
                 "idVoiture":id},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {//alert(xmlFilms);
-            location.reload()
             montrerVue('enlever',xmlVoiture)
-
-            // chargerVoituresAJAX('table','../../routes.php');
+            chargerVoituresAJAX('table','../../routes.php');
         },
         fail : (err) => {
            console.log("Erreur : "+err)
