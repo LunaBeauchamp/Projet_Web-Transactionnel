@@ -51,7 +51,7 @@ CREATE TABLE `inventaireVoiture` (
   `idVoiture` int(3) NOT NULL,
   `nomvoiture` varchar(50) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `image` varchar(200) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `prix` int(10) NOT NULL,
   `quantite` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
