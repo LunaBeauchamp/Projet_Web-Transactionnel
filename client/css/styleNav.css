@@ -25,12 +25,14 @@ body {
   }
   .search {
   
-  color: #988265;
-  background-color: #3c3c44;
-  border-color: #988265;
-    --bs-body-bg: #988265;
+    color: #988265;
+    background-color: #3c3c44;
+    border-color: #988265;
+    --bs-body-bg: #3c3c44;
+    --bs-body-color: #988265;
     --bs-nav-link-hover-color: #3c3c44;
     --bs-btn-hover-bg: #988265;
+    --bs-btn-hover-color: #3c3c44;
     --bs-btn-hover-border-color: #3c3c44;
     --bs-btn-focus-shadow-rgb: 13,110,253;
     --bs-btn-active-color: #3c3c44;
@@ -41,6 +43,8 @@ body {
     --bs-btn-disabled-bg: #3c3c44;
     --bs-btn-disabled-border-color: #988265;
     --bs-gradient: none;
+    --bs-border-color: #3c3c44;
+    --bs-nav-link-color: #3c3c44;
 }
   .dropdown-item{
     color: #988265;
