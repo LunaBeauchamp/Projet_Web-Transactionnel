@@ -21,12 +21,12 @@
 	}
 
 	function CtrV_Enregistrer(){
-         $voiture = new Voiture(0,$_POST['nomVoiture'], (int)$_POST['description'],"Image", $_POST['prix'], $_POST['quantite']);
+        $voiture = new Voiture(0,$_POST['nomVoiture'], $_POST['description'],$_POST['image'], (int)$_POST['prix'], (int)$_POST['quantite']);
          return DaoVoiture::getDaoVoiture()->MdlV_Enregistrer($voiture); 
     }
     function CtrV_Modifier(){
-        $voiture = new Voiture($_POST['idVoiture'],$_POST['nomVoiture'], (int)$_POST['description'],"Image", $_POST['prix'], $_POST['quantite']);
-        return DaoVoiture::getDaoVoiture()->MdlV_Modifier($newVoiture); 
+        $voiture = new Voiture((int)$_POST['idVoiture'],$_POST['nomVoiture'], $_POST['description'],$_POST['image'], (int)$_POST['prix'], (int)$_POST['quantite']);
+        return DaoVoiture::getDaoVoiture()->MdlV_Modifier($voiture); 
    }
 
    function CtrV_Supprimer(){
@@ -59,6 +59,8 @@
             case "lister_Voiture" :
                 return $this->CtrV_getOne(); 
                 break;
+            default:
+            return DaoVoiture::getDaoVoiture()->genererMessageXML("erreur default");
         }
     }
 }

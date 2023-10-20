@@ -8,14 +8,17 @@
 	<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 	<link rel="stylesheet" href="../../client/css/styleFooter.css">
 	<link rel="stylesheet" href="../../client/css/styleNav.css">
-	<link rel="stylesheet" href="../../client/css/styleCard.css">
+	<link rel="stylesheet" href="../../client/css/styleTable.css">
 
 
 	<title>EliteAutomobile</title>
+	<script src="../../client/utilitaires/jquery-3.6.3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="../../client/voiture/requetesVoiture.js"></script>
+	<script src="../../client/voiture/vueVoiture.js"></script>
 </head>
 
-<body class="p-0 m-0 border-0 bd-example m-0 border-0">
+<body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX('table','../../routes.php');">
 
 	<!-- Header -->
 	<header>
@@ -35,7 +38,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="/serveur/admin/admin.php">Accueil</a>
+						<a class="nav-link active" aria-current="page" href="#">Accueil</a>
 					</li>
 
 					<li class="nav-item dropdown">
@@ -44,11 +47,10 @@
 							Lister par catégorie
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">ID</a></li>
-							<li><a class="dropdown-item" href="#">Année</a></li>
-							<li><a class="dropdown-item" href="#">Modèle</a></li>
-							<li><a class="dropdown-item" href="#">Couleur</a></li>
-
+							<li><a class="dropdown-item" href="javascript:listerPar('id')">ID</a></li>
+							<li><a class="dropdown-item" href="javascript:listerPar('nom')">Nom</a></li>
+							<li><a class="dropdown-item" href="javascript:listerPar('prix')">Prix</a></li>
+							<li><a class="dropdown-item" href="javascript:listerPar('quantite')">Quantité</a></li>
 						</ul>
 					</li>
 
@@ -67,6 +69,10 @@
 					<li class="nav-item">
 						<a class="nav-link" href="#">Modifier</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link"  href="javascript:montrerFormEnreg();">Ajouter une voiture</a>
+					</li>
+					
 					<li class="nav-item">
 						<a class="nav-link" href="#">Supprimer</a>
 					</li>
@@ -152,39 +158,13 @@
 		</div>
 	</div>
 
+
 	<!-- Cards -->
-	<div class="card-box">
-		<?php
-			require_once('../../serveur/inventaireVoiture/modelInventaireVoiture.php');
-			function obtenirCard($ligne){
-				$card = <<<CARD
-					<div class="product-card">
-						<div class="product-img">
-							<img src="$ligne->image" alt="RR-P">
-							<h1>$ligne->nomvoiture</h1>
-						</div>
-						<div class="product-description">
-							<p>$ligne->description</p>
-						</div>
-						<div class="product-price">
-							<p>Commence a <span>$ligne->prix $</span></p>
-						</div>
-						<div class="product-achat">
-							<a href="#" class="btn btn-primary">Acheter</a>
-						</div>
-					</div>
-				CARD;
-				return $card ;
-			}
-			$reponse = Mdl_GetAll(); 
-
-			$rep = "";
-
-			while ($ligne=$reponse->fetch_object()){
-				$rep.=obtenirCard($ligne);
-			}
-			echo $rep;
-		?>
+	<div class="msg" id="msg">
+	</div>
+	<div class="formulaire" id="formulaire">
+	</div>
+	<div  id="contenu">
 	</div>
 
 	<!-- Footer -->
