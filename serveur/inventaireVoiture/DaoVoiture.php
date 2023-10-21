@@ -172,15 +172,15 @@
                 $tmp = $_FILES["image"]['tmp_name'];
                 $fichier= $_FILES["image"]['name'];
                 $extension=strrchr($fichier,'.');
-                $réussit = move_uploaded_file($tmp, $cheminDossier.$nomPochette.$extension);
-                $réussit=$nomPochette.$extension;
+                move_uploaded_file($tmp, $cheminDossier.$nomPochette.$extension);
+                $pochette=$nomPochette.$extension;
             }
             return $pochette;
         }
         function enleverFichier($dossier,$pochette){
             if($pochette!=="voiture.jpg"){ // Voir fichier env.inc.php
-                $rmPoc="../$dossier/".$pochette;
-                $tabFichiers = glob("../$dossier/*");
+                $rmPoc=__DIR__."/../pochettes/".$pochette;
+                $tabFichiers = glob(__DIR__."/../pochettes/*");
                 // Parcourir les fichier
                 foreach($tabFichiers as $fichier){
                 if(is_file($fichier) && $fichier==trim($rmPoc)) {
