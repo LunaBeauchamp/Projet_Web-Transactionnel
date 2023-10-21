@@ -105,7 +105,7 @@ function montrerFormModif(voiture) {
 let remplirCard = (uneVoiture)=> {
     let rep =    ' <div class="product-card">';
     rep +='<div class="product-img">';
-                 rep +=' <img src="client/pochettes/'+uneVoiture.image+'" alt="RR-P">';
+                 rep +=' <img src="serveur/pochettes/'+uneVoiture.image+'" alt="RR-P">';
                  rep +=' <h1>'+uneVoiture.nomVoiture+'</h1>';
                  rep +=' </div>';
                  rep +=' <div class="product-description">';
