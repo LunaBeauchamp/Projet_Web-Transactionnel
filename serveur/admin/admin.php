@@ -38,7 +38,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Accueil</a>
+						<a class="nav-link active" aria-current="page" href="javascript:listerPar('id')">Accueil</a>
 					</li>
 
 					<li class="nav-item dropdown">
@@ -67,17 +67,11 @@
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link" href="#">Modifier</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link"  href="javascript:montrerFormEnreg();">Ajouter une voiture</a>
 					</li>
-					
+				
 					<li class="nav-item">
-						<a class="nav-link" href="#">Supprimer</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Déconnection</a>
+						<a class="nav-link" href="/serveur/membre/page_connexion.php">Déconnection</a>
 					</li>
 
 					<li>

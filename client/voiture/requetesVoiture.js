@@ -32,6 +32,9 @@ let chargerVoituresAJAX = (mode, chemin) => {
                 case "table":
                     montrerVue("lister_table", xmlVoiture);
                     break;
+                case "silence":
+                    // seulement loader la liste
+                    break;
             }
         },
         fail : (err) => {
