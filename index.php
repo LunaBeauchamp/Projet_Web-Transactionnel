@@ -153,7 +153,7 @@
 	<!-- Toast  -->
 	<div class="toast posToast" role="status" aria-live="polite" aria-atomic="true" data-delay="5000">
             <div class="toast-header">
-                <img src="/client/images/message2.png" class="rounded mr-2">
+                <img src="client/images/message2.png" class="rounded mr-2">
                 <strong class="mr-auto">Message</strong>
 				
             </div>

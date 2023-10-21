@@ -67,45 +67,45 @@ let modifierVoituresAJAX = (id,image) => {
 }
 let supprimerVoituresAJAX = (id) => {
 
-const toast = document.querySelector('.toast');
-const yesButton = document.getElementById('yesButton');
-const cancelButton = document.getElementById('cancelButton');
+    const toast = document.querySelector('.toast');
+    const yesButton = document.getElementById('yesButton');
+    const cancelButton = document.getElementById('cancelButton');
 
-let aSupprimer = false;
+    let aSupprimer = false;
 
-function showToast() {
-    $(toast).toast('show');
-}
+    function showToast() {
+        $(toast).toast('show');
+    }
 
-function hideToast() {
-    $(toast).toast('hide');
-}
+    function hideToast() {
+        $(toast).toast('hide');
+    }
 
-yesButton.addEventListener('click', () => {
-    id= parseInt(id)
-    $.ajax({
-        type : "POST",
-        url  : "../../routes.php",
-        data : {"action":"enlever",
-                "idVoiture":id},
-        dataType : "xml",
-        success : (xmlVoiture) => {
-            montrerVue('enlever',xmlVoiture)
-            chargerVoituresAJAX('table','../../routes.php');
-        },
-        fail : (err) => {
-        console.log("Erreur : "+err)
-        }
-    })
-    hideToast();
-});
+    yesButton.addEventListener('click', () => {
+        id= parseInt(id)
+        $.ajax({
+            type : "POST",
+            url  : "../../routes.php",
+            data : {"action":"enlever",
+                    "idVoiture":id},
+            dataType : "xml",
+            success : (xmlVoiture) => {
+                montrerVue('enlever',xmlVoiture)
+                chargerVoituresAJAX('table','../../routes.php');
+            },
+            fail : (err) => {
+            console.log("Erreur : "+err)
+            }
+        })
+        hideToast();
+    });
 
-cancelButton.addEventListener('click', () => {
-    aSupprimer = false
-    hideToast();
-});
+    cancelButton.addEventListener('click', () => {
+        aSupprimer = false
+        hideToast();
+    });
 
-showToast();
+    showToast();
 
 
 }

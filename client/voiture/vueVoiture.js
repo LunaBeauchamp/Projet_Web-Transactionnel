@@ -20,7 +20,7 @@ function montrerFormEnreg(){
                      <input type="text" class="form-control is-valid" id="description" name="description" required>
                  </div>
                  <div class="col-md-12">
-                     <label for="image" class="form-label">Image</label>
+                 <label for="image" class="form-label">Image URL format jpg</label>
                      <input type="file" class="form-control is-valid" id="image" name="image" required>
                  </div>
                  <div class="col-md-12">
