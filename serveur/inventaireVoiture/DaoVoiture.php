@@ -46,16 +46,22 @@
             $msg = "";
             $nom =$voiture->getNomVoiture();
             $description=$voiture->getDescription();
-            $image=$voiture->getImage();
+            $pochette=$this->verserFichier("pochettes", "image", "voiture.jpg",$nom);
+            $msg = "fonctionne";
             $prix=$voiture->getPrix();
             $quantite=$voiture->getQuantite();
             $msg = $msg."attribut   ";
             try{
                 $requette="INSERT INTO inventaireVoiture VALUES(0,?,?,?,?,?)";
                 $stmt = $connexion->prepare($requette);
-                $stmt->bind_param("sssii",$nom,$description, $image, $prix, $quantite);
+                $msg = "préparer";
+                $stmt->bind_param("sssii",$nom,$description, $pochette, $prix, $quantite);
+                $msg = "bind";
                 $stmt->execute();
+                $msg = "execute";
                 $xml = $this->genererMessageXML("Voiture enregistrer");
+
+                
             }catch (Exception $e){
                 $xml = $this->genererMessageXML("Probléme pour enregistrer le voiture");
             }finally {
@@ -67,7 +73,7 @@
             global $connexion;
             $nom =$newVoiture->getNomVoiture();
             $description=$newVoiture->getDescription();
-            $image=$newVoiture->getImage();
+            $image=$this->verserFichier("pochettes", "image", $newVoiture->getImage(),$nom);
             $prix=$newVoiture->getPrix();
             $quantite=$newVoiture->getQuantite();
             $idV=$newVoiture->getIdV();
@@ -149,6 +155,38 @@
             }finally{
                 Header('Content-type: text/xml');
                 return $xml->asXML();
+            }
+        }
+
+        function verserFichier($dossier, $inputNom, $fichierDefaut, $chaine){
+            $cheminDossier=__DIR__."/../pochettes/";
+            $pochette=$fichierDefaut;
+            if($_FILES["image"]['tmp_name']!==""){
+                $nomPochette=sha1($chaine.time());
+                if($pochette !== "voiture.jpg"){
+                    $this->enleverFichier($dossier,$pochette);// Cas enlever et modifier
+                }
+                //Upload de la photo
+                $tmp = $_FILES["image"]['tmp_name'];
+                $fichier= $_FILES["image"]['name'];
+                $extension=strrchr($fichier,'.');
+                move_uploaded_file($tmp, $cheminDossier.$nomPochette.$extension);
+                $pochette=$nomPochette.$extension;
+            }
+            return $pochette;
+        }
+        function enleverFichier($dossier,$pochette){
+            if($pochette!=="voiture.jpg"){ // Voir fichier env.inc.php
+                $rmPoc=__DIR__."/../pochettes/".$pochette;
+                $tabFichiers = glob(__DIR__."/../pochettes/*");
+                // Parcourir les fichier
+                foreach($tabFichiers as $fichier){
+                if(is_file($fichier) && $fichier==trim($rmPoc)) {
+                    // Enlever le fichier
+                    unlink($fichier);
+                    break;
+                }
+                }
             }
         }
     }
