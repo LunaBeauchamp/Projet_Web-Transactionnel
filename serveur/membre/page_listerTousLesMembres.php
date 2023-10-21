@@ -256,7 +256,7 @@
 					</div>
 
 					<div class="copyright">
-						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservé.</small></p>
+						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservés.</small></p>
 					</div>
 
 

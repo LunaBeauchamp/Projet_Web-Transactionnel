@@ -1,3 +1,20 @@
 .imageVoiture{
     height: 100px;
+    width: 150px;
+}
+
+.cellule-td {
+    text-align: center;
+}
+
+.btn-modifier{
+    background-color: #3c3c44;
+    color: #988265;
+    border-radius: 8px;
+}
+
+.btn-supprimer{
+    background-color: #3c3c44;
+    color: #988265;
+    border-radius: 8px;
 }

@@ -64,13 +64,7 @@
 							<li><a class="dropdown-item" href="./page_listerMembresDesactives.php">Membres désactivés</a></li>
 						</ul>
 					</li>
-
-					<li class="nav-item">
-						<a class="nav-link" href="#">Modifier</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Supprimer</a>
-					</li>
+					
 					<li class="nav-item">
 						<a class="nav-link" href="/serveur/membre/page_connexion.php">Déconnection</a>
 					</li>
@@ -239,7 +233,7 @@
 					</div>
 
 					<div class="copyright">
-						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservé.</small></p>
+						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservés.</small></p>
 					</div>
 
 
