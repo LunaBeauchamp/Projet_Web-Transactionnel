@@ -18,3 +18,31 @@
     color: #988265;
     border-radius: 8px;
 }
+.table-responsive {
+    padding: 2%;
+}
+    
+thead{
+    color: #988265;
+    background-color: #3c3c44;
+}
+tr{
+    border-bottom: 1px solid #3c3c44;
+}
+td{
+    min-width: 50px;
+}
+.descriptionVoiture{
+    /* text-overflow: ellipsis; */
+    overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 4; /* number of lines to show */
+           line-clamp: 4; 
+   -webkit-box-orient: vertical;
+}
+
+td > button{
+    color: #988265;
+    background-color: #3c3c44;
+    border: #3c3c44;
+}

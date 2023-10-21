@@ -91,3 +91,6 @@ body {
 .btn.btn-outline-primary.search {
   border-left: none;
 }
+.toast{
+  margin: auto;
+}

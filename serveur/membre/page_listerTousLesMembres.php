@@ -37,7 +37,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="/serveur/admin/admin.php">Accueil</a>
+						<a class="nav-link active" aria-current="page" href="../admin/admin.php">Accueil</a>
 					</li>
 
 					<li class="nav-item dropdown">
@@ -66,7 +66,7 @@
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link" href="/serveur/membre/page_connexion.php">Déconnection</a>
+						<a class="nav-link" href="page_connexion.php">Déconnection</a>
 					</li>
 
 				</ul>
@@ -146,7 +146,20 @@
 			</div>
 		</div>
 	</div>
-
+	<!-- Toast  -->
+	<div class="toast posToast" role="status" aria-live="polite" aria-atomic="true" data-delay="5000">
+		<div class="toast-header">
+			<img src="../../client/images/message2.png" class="rounded mr-2">
+			<strong class="mr-auto">Message</strong>
+		</div>
+		<div id="textToast" class="toast-body">
+			Êtes-vous sûr de vouloir supprimer cet article ?
+			<div class="toast-buttons">
+				<button id="yesButton" class="btn btn-success">Oui</button>
+				<button id="cancelButton" class="btn btn-danger">Annuler</button>
+			</div>
+		</div>
+	</div>
     <!-- Container -->
 <div>
     <?php 
