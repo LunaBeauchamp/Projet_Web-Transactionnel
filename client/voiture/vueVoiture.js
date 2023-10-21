@@ -11,7 +11,7 @@ function montrerFormEnreg(){
              </div>
              <div class="modal-body">
                  <span id="msgErrEnreg"></span>
-                     <form class="row g-3" id="formEnreg" action="javascript:ajouterVoituresAJAX();" method="POST">
+                     <form class="row g-3" id="formEnreg" onSubmit="ajouterVoituresAJAX();" method="POST">
                      <div class="col-md-12">
                      <label for="nomVoiture" class="form-label">Nom</label>
                      <input type="text" class="form-control is-valid" id="nomVoiture" name="nomVoiture" required>
@@ -63,7 +63,7 @@ function montrerFormModif(voiture) {
 				</div>
 				<div class="modal-body">
 					<span id="msgErrEnreg"></span>
-					<form class="row g-3" id="formModif" onSubmit="modifierVoituresAJAX(${voiture.idVoiture});" method="POST">
+					<form class="row g-3" id="formModif" onSubmit="modifierVoituresAJAX(${voiture.idVoiture},'${voiture.image}');" method="POST">
 						<div class="col-md-12">
 							<label for="nomVoiture" class="form-label">Nom</label>
 							<input type="text" class="form-control is-valid" id="nomVoiture" name="nomVoiture" value="${voiture.nomVoiture}" required>
@@ -74,7 +74,7 @@ function montrerFormModif(voiture) {
 						</div>
 						<div class="col-md-12">
 							<label for="image" class="form-label">Image</label>
-							<input type="file" class="form-control is-valid" id="image" name="image" value="${voiture.image}" required>
+							<input type="file" class="form-control is-valid" id="image" name="image">
 						</div>
 						<div class="col-md-12">
 							<label for="prix" class="form-label">Prix</label>

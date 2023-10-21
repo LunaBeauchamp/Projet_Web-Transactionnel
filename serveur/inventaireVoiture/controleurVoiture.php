@@ -26,7 +26,7 @@
         // return $_FILES["image"]['name'];
     }
     function CtrV_Modifier(){
-        $voiture = new Voiture((int)$_POST['idVoiture'],$_POST['nomVoiture'], $_POST['description'],$_POST['image'], (int)$_POST['prix'], (int)$_POST['quantite']);
+        $voiture = new Voiture((int)$_POST['idVoiture'],$_POST['nomVoiture'], $_POST['description'],$_POST['vieilleImage'], (int)$_POST['prix'], (int)$_POST['quantite']);
         return DaoVoiture::getDaoVoiture()->MdlV_Modifier($voiture); 
    }
 

@@ -54,23 +54,18 @@
             $quantite=$voiture->getQuantite();
             $msg = $msg."attribut   ";
             try{
-                if ($pochette == true){
-                    $xml = $this->genererMessageXML("wouhou");
-                // $requette="INSERT INTO inventaireVoiture VALUES(0,?,?,?,?,?)";
-                // $stmt = $connexion->prepare($requette);
-                // $msg = "préparer";
-                // $stmt->bind_param("sssii",$nom,$description, $pochette, $prix, $quantite);
-                // $msg = "bind";
-                // $stmt->execute();
-                // $msg = "execute";
-                // $xml = $this->genererMessageXML("Voiture enregistrer");
-                }else{
-                    $xml = $this->genererMessageXML("merde");
-                }
+                $requette="INSERT INTO inventaireVoiture VALUES(0,?,?,?,?,?)";
+                $stmt = $connexion->prepare($requette);
+                $msg = "préparer";
+                $stmt->bind_param("sssii",$nom,$description, $pochette, $prix, $quantite);
+                $msg = "bind";
+                $stmt->execute();
+                $msg = "execute";
+                $xml = $this->genererMessageXML("Voiture enregistrer");
+
                 
             }catch (Exception $e){
-                // $xml = $this->genererMessageXML("Probléme pour enregistrer le voiture");
-                $xml = $this->genererMessageXML($pochette.$e);
+                $xml = $this->genererMessageXML("Probléme pour enregistrer le voiture");
             }finally {
                 Header('Content-type: text/xml');
                 return $xml->asXML();
@@ -80,7 +75,7 @@
             global $connexion;
             $nom =$newVoiture->getNomVoiture();
             $description=$newVoiture->getDescription();
-            $image=$newVoiture->getImage();
+            $image=$this->verserFichier("pochettes", "image", $newVoiture->getImage(),$nom);
             $prix=$newVoiture->getPrix();
             $quantite=$newVoiture->getQuantite();
             $idV=$newVoiture->getIdV();
@@ -165,25 +160,6 @@
             }
         }
 
-        function uploadPhoto() {
-            $targetRepertoire = "../serveur/pochettes/";
-            $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
-    
-            $nomFichier = $_FILES['image']['name'];
-            $fileType = strtolower(pathinfo($nomFichier, PATHINFO_EXTENSION));
-    
-            if (!in_array($fileType, $allowedTypes)) {
-                return "Erreur 1";
-            }
-    
-            $nomFichierUnique = uniqid() .'.'. $fileType;
-    
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetRepertoire . $nomFichierUnique)) {
-                return $nomFichierUnique;
-            } else {
-                return "Erreur 2";
-            }
-        }
         function verserFichier($dossier, $inputNom, $fichierDefaut, $chaine){
             $cheminDossier=__DIR__."/../pochettes/";
             $pochette=$fichierDefaut;

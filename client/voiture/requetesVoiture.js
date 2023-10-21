@@ -39,12 +39,12 @@ let chargerVoituresAJAX = (mode, chemin) => {
         }
     })
 }
-let modifierVoituresAJAX = (id) => {
-    id= parseInt(id)
-
+let modifierVoituresAJAX = (id,image) => {
+    id= parseInt(id);
     let formFilm = new FormData(document.getElementById('formModif'));
 	formFilm.append('action','modifier');
     formFilm.append('idVoiture',id);
+    formFilm.append('vieilleImage',image);
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
