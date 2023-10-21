@@ -39,12 +39,12 @@ let chargerVoituresAJAX = (mode, chemin) => {
         }
     })
 }
-let modifierVoituresAJAX = (id) => {
-    id= parseInt(id)
-
+let modifierVoituresAJAX = (id,image) => {
+    id= parseInt(id);
     let formFilm = new FormData(document.getElementById('formModif'));
 	formFilm.append('action','modifier');
     formFilm.append('idVoiture',id);
+    formFilm.append('vieilleImage',image);
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
@@ -81,16 +81,25 @@ let supprimerVoituresAJAX = (id) => {
 let ajouterVoituresAJAX = () => {
     let formVoiture = new FormData(document.getElementById('formEnreg'));
 	formVoiture.append('action','enregistrer');
+    for (let element of formVoiture.values()){
+        console.log(element)
+    }
+    for (let element of formVoiture.keys()){
+        console.log(element)
+    }
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
         data : formVoiture,
-        contentType : false,
+        async : false,
+		cache : false,
+		contentType : false,
 		processData : false,
-        dataType : "xml", //text pour voir si bien formé même chose pour xml
+        dataType : "text", //text pour voir si bien formé même chose pour xml
         success : (xmlVoiture) => {
-            chargerVoituresAJAX('table','../../routes.php');
-            montrerVue('enlever',xmlVoiture)
+            alert(xmlVoiture)
+            // chargerVoituresAJAX('table','../../routes.php');
+            // montrerVue('enlever',xmlVoiture)
         },
         fail : (err) => {
            console.log("Erreur : "+err)

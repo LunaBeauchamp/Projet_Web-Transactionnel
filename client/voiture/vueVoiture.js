@@ -22,7 +22,7 @@ function montrerFormEnreg(){
                  </div>
                  <div class="col-md-12">
                      <label for="image" class="form-label">Image</label>
-                     <input type="text" class="form-control is-valid" id="image" name="image" required>
+                     <input type="file" class="form-control is-valid" id="image" name="image" required>
                  </div>
                  <div class="col-md-12">
                      <label for="prix" class="form-label">Prix</label>
@@ -63,7 +63,7 @@ function montrerFormModif(voiture) {
 				</div>
 				<div class="modal-body">
 					<span id="msgErrEnreg"></span>
-					<form class="row g-3" id="formModif" onSubmit="modifierVoituresAJAX(${voiture.idVoiture});" method="POST">
+					<form class="row g-3" id="formModif" onSubmit="modifierVoituresAJAX(${voiture.idVoiture},'${voiture.image}');" method="POST">
 						<div class="col-md-12">
 							<label for="nomVoiture" class="form-label">Nom</label>
 							<input type="text" class="form-control is-valid" id="nomVoiture" name="nomVoiture" value="${voiture.nomVoiture}" required>
@@ -74,7 +74,7 @@ function montrerFormModif(voiture) {
 						</div>
 						<div class="col-md-12">
 							<label for="image" class="form-label">Image</label>
-							<input type="text" class="form-control is-valid" id="image" name="image" value="${voiture.image}" required>
+							<input type="file" class="form-control is-valid" id="image" name="image">
 						</div>
 						<div class="col-md-12">
 							<label for="prix" class="form-label">Prix</label>
@@ -105,7 +105,7 @@ function montrerFormModif(voiture) {
 let remplirCard = (uneVoiture)=> {
     let rep =    ' <div class="product-card">';
     rep +='<div class="product-img">';
-                 rep +=' <img src="'+uneVoiture.image+'" alt="RR-P">';
+                 rep +=' <img src="serveur/pochettes/'+uneVoiture.image+'" alt="RR-P">';
                  rep +=' <h1>'+uneVoiture.nomVoiture+'</h1>';
                  rep +=' </div>';
                  rep +=' <div class="product-description">';
@@ -138,7 +138,7 @@ let listerVoituresCards = () => {
 let remplirTable = (uneVoiture)=> {
 
     let rep =    '<tr>'
-    rep +='<td ><img src="'+uneVoiture.image+'"class="imageVoiture"></td>'
+    rep +='<td ><img src="../pochettes/'+uneVoiture.image+'"class="imageVoiture"></td>'
     rep +='<td class="idVoiture">'+uneVoiture.idVoiture+'</td>'
     rep +='<td class="nomVoiture">'+uneVoiture.nomVoiture+'</td>'
     rep +='<td class="descriptionVoiture">'+uneVoiture.description+'</td>'
