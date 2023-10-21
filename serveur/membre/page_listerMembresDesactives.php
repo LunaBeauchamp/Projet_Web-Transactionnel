@@ -8,12 +8,16 @@
 	<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 	<link rel="stylesheet" href="../../client/css/styleFooter.css">
 	<link rel="stylesheet" href="../../client/css/styleNav.css">
+	<link rel="stylesheet" href="../../client/css/styleTable.css">
 
 	<title>EliteAutomobile</title>
+	<script src="../../client/utilitaires/jquery-3.6.3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="../../client/voiture/requetesVoiture.js"></script>
+	<script src="../../client/voiture/vueVoiture.js"></script>
 </head>
 
-<body class="p-0 m-0 border-0 bd-example m-0 border-0">
+<body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX('silence','../../routes.php');">
 
 	<!-- Header -->
 	<header>
@@ -42,11 +46,10 @@
 							Lister par catégorie
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">ID</a></li>
-							<li><a class="dropdown-item" href="#">Année</a></li>
-							<li><a class="dropdown-item" href="#">Modèle</a></li>
-							<li><a class="dropdown-item" href="#">Couleur</a></li>
-
+						<li><a class="dropdown-item" onclick="listerPar('id')">ID</a></li>
+							<li><a class="dropdown-item" onclick="listerPar('nom')">Nom</a></li>
+							<li><a class="dropdown-item" onclick="listerPar('prix')">Prix</a></li>
+							<li><a class="dropdown-item" onclick="listerPar('quantite')">Quantité</a></li>
 						</ul>
 					</li>
 
@@ -62,12 +65,6 @@
 						</ul>
 					</li>
 
-					<li class="nav-item">
-						<a class="nav-link" href="#">Modifier</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Supprimer</a>
-					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/serveur/membre/page_connexion.php">Déconnection</a>
 					</li>
@@ -172,6 +169,7 @@
     $reponse = Mdl_ListerMembresDesactives();
 
     if ($reponse->num_rows > 0) {
+		echo '<div id="contenu">';
         echo '<table class="table table-striped table-bordered">';
         echo '<thead class="thead-dark">';
         echo '<tr>';
@@ -191,12 +189,19 @@
 
         echo '</tbody>';
         echo '</table>';
+		echo '</div>';
     } else {
+		echo '<div id="contenu">';
         echo 'Aucun membre désactivé trouvé.';
+		echo '</div>';
     }
     ?>
 </div>
 
+<div class="msg" id="msg">
+</div>
+<div class="formulaire" id="formulaire">
+</div>
 
     <!-- Footer -->
 	<footer class="footer-16371">
@@ -227,7 +232,7 @@
 					</div>
 
 					<div class="copyright">
-						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservé.</small></p>
+						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservés.</small></p>
 					</div>
 
 

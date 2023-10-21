@@ -1,44 +1,48 @@
 let listeVoitures;
 let makeListe =(xmlReponse) =>{
-    listeVoitures=[];
-    liste = xmlReponse.getElementsByTagName('voiture');
-    for (let uneVoiture of liste){
-        if (uneVoiture.nodeName != "<voitures>"){
-            listeVoitures.push({
-                idVoiture :uneVoiture.getElementsByTagName('idVoiture')[0].firstChild.nodeValue,
-                nomVoiture :uneVoiture.getElementsByTagName('nomvoiture')[0].firstChild.nodeValue,
-                description: uneVoiture.getElementsByTagName('description')[0].firstChild.nodeValue,
-                image:uneVoiture.getElementsByTagName('image')[0].firstChild.nodeValue,
-                prix:uneVoiture.getElementsByTagName('prix')[0].firstChild.nodeValue,
-                quantite:uneVoiture.getElementsByTagName('quantite')[0].firstChild.nodeValue
-            })
-            
-        }
-    } 
+listeVoitures=[];
+liste = xmlReponse.getElementsByTagName('voiture');
+for (let uneVoiture of liste){
+    if (uneVoiture.nodeName != "<voitures>"){
+        listeVoitures.push({
+            idVoiture :uneVoiture.getElementsByTagName('idVoiture')[0].firstChild.nodeValue,
+            nomVoiture :uneVoiture.getElementsByTagName('nomvoiture')[0].firstChild.nodeValue,
+            description: uneVoiture.getElementsByTagName('description')[0].firstChild.nodeValue,
+            image:uneVoiture.getElementsByTagName('image')[0].firstChild.nodeValue,
+            prix:uneVoiture.getElementsByTagName('prix')[0].firstChild.nodeValue,
+            quantite:uneVoiture.getElementsByTagName('quantite')[0].firstChild.nodeValue
+        })
+        
+    }
+} 
 }
 
 let chargerVoituresAJAX = (mode, chemin) => {
-    $.ajax({
-        type : "POST",
-        url  : chemin,
-        data : {"action":"lister"},
-        dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlVoiture) => {//alert(xmlFilms);
-            makeListe(xmlVoiture);
-            switch(mode){
-                case "cards":
-                    montrerVue("lister_cards", xmlVoiture);
-                    break;
-                case "table":
-                    montrerVue("lister_table", xmlVoiture);
-                    break;
-            }
-        },
-        fail : (err) => {
-           console.log("Erreur : "+err)
+$.ajax({
+    type : "POST",
+    url  : chemin,
+    data : {"action":"lister"},
+    dataType : "xml", //text pour voir si bien formé même chose pour xml
+    success : (xmlVoiture) => {//alert(xmlFilms);
+        makeListe(xmlVoiture);
+        switch(mode){
+            case "cards":
+                montrerVue("lister_cards", xmlVoiture);
+                break;
+            case "table":
+                montrerVue("lister_table", xmlVoiture);
+                break;
+            case "silence":
+                // seulement loader la liste
+                break;
         }
-    })
+    },
+    fail : (err) => {
+        console.log("Erreur : "+err)
+    }
+})
 }
+
 let modifierVoituresAJAX = (id,image) => {
     id= parseInt(id);
     let formFilm = new FormData(document.getElementById('formModif'));
@@ -62,92 +66,113 @@ let modifierVoituresAJAX = (id,image) => {
     })
 }
 let supprimerVoituresAJAX = (id) => {
-    id= parseInt(id)
-    $.ajax({
-        type : "POST",
-        url  : "../../routes.php",
-        data : {"action":"enlever",
-                "idVoiture":id},
-        dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlVoiture) => {//alert(xmlFilms);
-            montrerVue('enlever',xmlVoiture)
-            chargerVoituresAJAX('table','../../routes.php');
-        },
-        fail : (err) => {
-           console.log("Erreur : "+err)
-        }
-    })
+
+    const toast = document.querySelector('.toast');
+    const yesButton = document.getElementById('yesButton');
+    const cancelButton = document.getElementById('cancelButton');
+
+    let aSupprimer = false;
+
+    function showToast() {
+        $(toast).toast('show');
+    }
+
+    function hideToast() {
+        $(toast).toast('hide');
+    }
+
+    yesButton.addEventListener('click', () => {
+        id= parseInt(id)
+        $.ajax({
+            type : "POST",
+            url  : "../../routes.php",
+            data : {"action":"enlever",
+                    "idVoiture":id},
+            dataType : "xml",
+            success : (xmlVoiture) => {
+                montrerVue('enlever',xmlVoiture)
+                chargerVoituresAJAX('table','../../routes.php');
+            },
+            fail : (err) => {
+            console.log("Erreur : "+err)
+            }
+        })
+        hideToast();
+    });
+
+    cancelButton.addEventListener('click', () => {
+        aSupprimer = false
+        hideToast();
+    });
+
+    showToast();
+
+
 }
 let ajouterVoituresAJAX = () => {
     let formVoiture = new FormData(document.getElementById('formEnreg'));
-	formVoiture.append('action','enregistrer');
-    for (let element of formVoiture.values()){
-        console.log(element)
-    }
-    for (let element of formVoiture.keys()){
-        console.log(element)
-    }
+    formVoiture.append('action','enregistrer');
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
         data : formVoiture,
         async : false,
-		cache : false,
-		contentType : false,
-		processData : false,
-        dataType : "text", //text pour voir si bien formé même chose pour xml
+        cache : false,
+        contentType : false,
+        processData : false,
+        dataType : "xml",
         success : (xmlVoiture) => {
-            alert(xmlVoiture)
-            // chargerVoituresAJAX('table','../../routes.php');
-            // montrerVue('enlever',xmlVoiture)
+            chargerVoituresAJAX('table','../../routes.php');
+            montrerVue('enlever',xmlVoiture)
         },
         fail : (err) => {
-           console.log("Erreur : "+err)
+            console.log("Erreur : "+err)
         }
     })
+
 }
 function listerOneVoituresAJAX (id) {
-    
-    $.ajax({
-        type : "POST",
-        url  : "../../routes.php",
-        data : {"action":"lister_Voiture",
-                "idVoiture":id},
-        dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlVoiture) => {//alert(xmlFilms);
-            liste = xmlVoiture.getElementsByTagName('voiture');
-        for (let uneVoiture of liste){
-                voiture ={
-                idVoiture :uneVoiture.getElementsByTagName('idVoiture')[0].firstChild.nodeValue,
-                nomVoiture :uneVoiture.getElementsByTagName('nomvoiture')[0].firstChild.nodeValue,
-                description: uneVoiture.getElementsByTagName('description')[0].firstChild.nodeValue,
-                image:uneVoiture.getElementsByTagName('image')[0].firstChild.nodeValue,
-                prix:uneVoiture.getElementsByTagName('prix')[0].firstChild.nodeValue,
-                quantite:uneVoiture.getElementsByTagName('quantite')[0].firstChild.nodeValue
-                }
-            montrerFormModif(voiture)
-        } 
-        return voiture
-        },
-        fail : (err) => {
-           console.log("Erreur : "+err)
-        }
-    })
+
+$.ajax({
+    type : "POST",
+    url  : "../../routes.php",
+    data : {"action":"lister_Voiture",
+            "idVoiture":id},
+    dataType : "xml", //text pour voir si bien formé même chose pour xml
+    success : (xmlVoiture) => {//alert(xmlFilms);
+        liste = xmlVoiture.getElementsByTagName('voiture');
+    for (let uneVoiture of liste){
+            voiture ={
+            idVoiture :uneVoiture.getElementsByTagName('idVoiture')[0].firstChild.nodeValue,
+            nomVoiture :uneVoiture.getElementsByTagName('nomvoiture')[0].firstChild.nodeValue,
+            description: uneVoiture.getElementsByTagName('description')[0].firstChild.nodeValue,
+            image:uneVoiture.getElementsByTagName('image')[0].firstChild.nodeValue,
+            prix:uneVoiture.getElementsByTagName('prix')[0].firstChild.nodeValue,
+            quantite:uneVoiture.getElementsByTagName('quantite')[0].firstChild.nodeValue
+            }
+        montrerFormModif(voiture)
+    } 
+    return voiture
+    },
+    fail : (err) => {
+        console.log("Erreur : "+err)
+    }
+})
 }
 let chercherVoituresAJAX = () => {
-    let mot = document.getElementById("chercher").value
-    $.ajax({
-        type : "POST",
-        url  : "../../routes.php",
-        data : {"action":"chercher_Voiture",
-                "mot":mot},
-        dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlVoiture) => {
-            makeListe(xmlVoiture);
-            montrerVue("lister_table", xmlVoiture);
-        },
-        fail : (err) => {
-           console.log("Erreur : "+err)
-        }
-    })
+let mot = document.getElementById("chercher").value
+$.ajax({
+    type : "POST",
+    url  : "../../routes.php",
+    data : {"action":"chercher_Voiture",
+            "mot":mot},
+    dataType : "xml", //text pour voir si bien formé même chose pour xml
+    success : (xmlVoiture) => {
+        makeListe(xmlVoiture);
+        montrerVue("lister_table", xmlVoiture);
+    },
+    fail : (err) => {
+        console.log("Erreur : "+err)
+    }
+})
 }

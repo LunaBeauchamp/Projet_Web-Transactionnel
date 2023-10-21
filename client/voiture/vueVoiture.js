@@ -1,5 +1,4 @@
 function montrerFormEnreg(){
-
      let form=`
      <!-- Modal pour enregistrer voiture -->
          <div class="modal fade" id="enregModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -21,7 +20,7 @@ function montrerFormEnreg(){
                      <input type="text" class="form-control is-valid" id="description" name="description" required>
                  </div>
                  <div class="col-md-12">
-                     <label for="image" class="form-label">Image</label>
+                 <label for="image" class="form-label">Image URL format jpg</label>
                      <input type="file" class="form-control is-valid" id="image" name="image" required>
                  </div>
                  <div class="col-md-12">
@@ -44,11 +43,12 @@ function montrerFormEnreg(){
      </div>
  </div>
 </div>
-         <!-- Fin du modal pour enregistrer film -->
-     `;
-    contenu = document.getElementById("formulaire")
-    contenu.innerHTML = form;
-    $('#enregModal').modal('show');
+</div>
+        <!-- Fin du modal pour enregistrer film -->
+    `;
+contenu = document.getElementById("formulaire")
+contenu.innerHTML = form;
+$('#enregModal').modal('show');
 }
 
 function montrerFormModif(voiture) {
@@ -98,8 +98,8 @@ function montrerFormModif(voiture) {
 	</div>
     <!-- Fin du modal modifier voiture -->`
 
-    document.getElementById('formulaire').innerHTML = form;
-    $('#modalModifierVoiture').modal('show');
+document.getElementById('formulaire').innerHTML = form;
+$('#modalModifierVoiture').modal('show');
 }
 
 let remplirCard = (uneVoiture)=> {
@@ -125,18 +125,17 @@ let remplirCard = (uneVoiture)=> {
 let listerVoituresCards = () => {
 
 
-    let contenu = "";
-    for (let uneVoiture of listeVoitures){
-        if (uneVoiture.nodeName != "<voitures>"){
-            contenu+=remplirCard(uneVoiture);
-        }
-        
-    } 
-    document.getElementById('contenu').innerHTML = contenu;
+let contenu = "";
+for (let uneVoiture of listeVoitures){
+    if (uneVoiture.nodeName != "<voitures>"){
+        contenu+=remplirCard(uneVoiture);
+    }
+    
+} 
+document.getElementById('contenu').innerHTML = contenu;
 }
 
 let remplirTable = (uneVoiture)=> {
-
     let rep =    '<tr>'
     rep +='<td ><img src="../pochettes/'+uneVoiture.image+'"class="imageVoiture"></td>'
     rep +='<td class="idVoiture">'+uneVoiture.idVoiture+'</td>'
@@ -152,92 +151,92 @@ let remplirTable = (uneVoiture)=> {
 
 
 let listerVoituresTable = () => {
-    
-    let contenu = '<div class="table-responsive">'
-     contenu += '<table class="table-striped table-sm align-middle">'
-     contenu += '<thead>'
-     contenu +=        '<tr>'
-     contenu +=         '<th>Image</th>'
-     contenu +=         '<th>ID</th>'
-     contenu +=         '<th>Nom</th>'
-     contenu +=         '<th>Description</th>'
-     contenu +=         '<th>Prix</th>'
-     contenu +=         '<th>Quantité</th>'
-     contenu +=         '<th>Modifier</th>'
-     contenu +=         '<th>Supprimer</th>'
-     contenu +=        '</tr>'
-     contenu +=    '</thead>'
-     contenu +=    '<tbody>'
 
-    for (let uneVoiture of listeVoitures){
-        if (uneVoiture.nodeName != "<voitures>"){
-            contenu+=remplirTable(uneVoiture);
-        }
-        
-    } 
-    contenu +=    '</tbody>'
-    contenu +=    '</table>'
-    contenu +=    '</div>'
-    document.getElementById('contenu').innerHTML = contenu;
+let contenu = '<div class="table-responsive">'
+    contenu += '<table class="table-striped table-sm align-middle">'
+    contenu += '<thead>'
+    contenu +=        '<tr>'
+    contenu +=         '<th>Image</th>'
+    contenu +=         '<th>ID</th>'
+    contenu +=         '<th>Nom</th>'
+    contenu +=         '<th>Description</th>'
+    contenu +=         '<th>Prix</th>'
+    contenu +=         '<th>Quantité</th>'
+    contenu +=         '<th>Modifier</th>'
+    contenu +=         '<th>Supprimer</th>'
+    contenu +=        '</tr>'
+    contenu +=    '</thead>'
+    contenu +=    '<tbody>'
+
+for (let uneVoiture of listeVoitures){
+    if (uneVoiture.nodeName != "<voitures>"){
+        contenu+=remplirTable(uneVoiture);
+    }
+    
+} 
+contenu +=    '</tbody>'
+contenu +=    '</table>'
+contenu +=    '</div>'
+document.getElementById('contenu').innerHTML = contenu;
 }
 
 let afficherMessage = (msg) => {
-    document.getElementById('msg').innerHTML = msg;
-    setTimeout(() => {
-        document.getElementById('msg').innerHTML = "";
-    }, 5000);
+document.getElementById('msg').innerHTML = msg;
+setTimeout(() => {
+    document.getElementById('msg').innerHTML = "";
+}, 5000);
 }
 
 let listerPar = (par="id", type="table") => {
-    switch(par){
-        case"nom":
-            listeVoitures.sort(function(a, b){
-                let x = a.nomVoiture.toLowerCase();
-                let y = b.nomVoiture.toLowerCase();
-                if (x < y) {return -1;}
-                if (x > y) {return 1;}
-                return 0;
-              });
-            break;
-        case"prix":
-            listeVoitures.sort(function(a, b){return a.prix - b.prix});
-            break;
-        case"quantite":
-            listeVoitures.sort(function(a, b){return a.quantite - b.quantite});
-            break;
-        case"id":
-        default:
-            listeVoitures.sort(function(a, b){return a.idVoiture - b.idVoiture});
-            break;
-    }
-    switch(type){
-        case"card":listerVoituresCards();
+switch(par){
+    case"nom":
+        listeVoitures.sort(function(a, b){
+            let x = a.nomVoiture.toLowerCase();
+            let y = b.nomVoiture.toLowerCase();
+            if (x < y) {return -1;}
+            if (x > y) {return 1;}
+            return 0;
+            });
         break;
-        case"table":listerVoituresTable();
-    }
+    case"prix":
+        listeVoitures.sort(function(a, b){return a.prix - b.prix});
+        break;
+    case"quantite":
+        listeVoitures.sort(function(a, b){return a.quantite - b.quantite});
+        break;
+    case"id":
+    default:
+        listeVoitures.sort(function(a, b){return a.idVoiture - b.idVoiture});
+        break;
+}
+switch(type){
+    case"card":listerVoituresCards();
+    break;
+    case"table":listerVoituresTable();
+}
 }
 
 let montrerVue = (action, xmlReponse) => {
 
-    switch(action){
-        case "enregistrer"  :
-        case "modifier"     :
-        case "enlever"      :
+switch(action){
+    case "enregistrer"  :
+    case "modifier"     :
+    case "enlever"      :
+        afficherMessage(xmlReponse.getElementsByTagName('msg')[0].firstChild.nodeValue);
+    break;
+    case "lister_cards"       :
+        if(xmlReponse.firstChild.nodeName == 'message'){
             afficherMessage(xmlReponse.getElementsByTagName('msg')[0].firstChild.nodeValue);
+        } else {
+            listerPar(null,"card");
+        }
+    break;
+    case "lister_table"       :
+        if(xmlReponse.firstChild.nodeName == 'message'){
+            afficherMessage(xmlReponse.getElementsByTagName('msg')[0].firstChild.nodeValue);
+        } else {
+            listerPar();
+        }
         break;
-        case "lister_cards"       :
-            if(xmlReponse.firstChild.nodeName == 'message'){
-                afficherMessage(xmlReponse.getElementsByTagName('msg')[0].firstChild.nodeValue);
-            } else {
-                listerPar(null,"card");
-            }
-        break;
-        case "lister_table"       :
-            if(xmlReponse.firstChild.nodeName == 'message'){
-                afficherMessage(xmlReponse.getElementsByTagName('msg')[0].firstChild.nodeValue);
-            } else {
-                listerPar();
-            }
-            break;
-    }
+}
 }

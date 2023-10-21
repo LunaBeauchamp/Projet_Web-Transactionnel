@@ -3,3 +3,12 @@
     margin-left: 25px;
     margin-top: 35px;
 }
+
+.posToast {
+    position: absolute;
+    top: 5%;
+    left: 40%;
+    color: red;
+}
+
+

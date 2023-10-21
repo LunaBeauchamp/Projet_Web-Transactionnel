@@ -1,3 +1,14 @@
+<?php
+    if(isset($_COOKIE["PHPSESSID"])){
+        unset($_COOKIE["PHPSESSID"]);
+    }
+    session_start();
+    $msg="";
+    if(isset($_GET['msg'])){
+        $msg = $_GET['msg'];
+    }
+?>
+
 <!doctype html>
 <html lang="fr">
 
@@ -15,9 +26,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./client/voiture/requetesVoiture.js"></script>
 	<script src="client/voiture/vueVoiture.js"></script>
+	<script src="/client/js/global.js"></script>
 </head>
 
-<body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX('cards','routes.php');">
+<body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="montrerToast('<?php echo $msg; ?>');chargerVoituresAJAX('cards','routes.php');">
 
 	<!-- Header -->
 	<header>
@@ -40,10 +52,6 @@
 						<a class="nav-link active" aria-current="page" href="#">Accueil</a>
 					</li>
 
-                    <li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="serveur/membre/page_connexion.php">Connection</a>
-					</li>
-
 					<li class="nav-item">
 						<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalDevenirMembre">Devenir membre</a>
 						<!-- <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalDevenirMembre">Enregistrer(C)</a> -->
@@ -51,6 +59,10 @@
 
 					<li class="nav-item">
 						<a class="nav-link" href="#">Contactez-nous</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="serveur/membre/page_connexion.php">Connection</a>
 					</li>
 
 				</ul>
@@ -138,14 +150,22 @@
 		</div>
 	</div>
 
+	<!-- Toast  -->
+	<div class="toast posToast" role="status" aria-live="polite" aria-atomic="true" data-delay="5000">
+            <div class="toast-header">
+                <img src="client/images/message2.png" class="rounded mr-2">
+                <strong class="mr-auto">Message</strong>
+				
+            </div>
+            <div id="textToast" class="toast-body">
+            </div>
+        </div>
 
-	<!-- Footer -->
-	<div class="msg" id="msg">
-	</div>
-	<div class="card-box" id="contenu">
 
-	</div>
-	
+<!-- Contenu -->
+<div class="msg" id="msg"></div>
+<div class="card-box" id="contenu"></div>
+
 	<!-- Footer -->
 	<footer class="footer-16371">
 		<div class="container">
@@ -175,7 +195,7 @@
 					</div>
 
 					<div class="copyright">
-						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservé.</small></p>
+						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservés.</small></p>
 					</div>
 
 

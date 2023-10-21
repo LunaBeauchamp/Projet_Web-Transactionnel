@@ -29,8 +29,6 @@
                 $voiture = $xml->addChild($entite); // <voitures> <voiture>
                 foreach ($ligne as $colonne => $valeur) {
                     $voiture->addChild($colonne, $valeur."");// Faut que $value soit string
-                                                        //     <voitures><voiture><idf>123</idf>
-                                                        //     <voitures><voiture><idf>123</idf><titre>James Cameron</titre>      
                 }
             } 
             echo $xml;
@@ -101,7 +99,7 @@
                 $stmt->bind_param("i",$idV);
                 $stmt->execute();
                 $reponse = $stmt->get_result();
-                $xml = $this->genererMessageXML("Voiture supprimmer.");
+                $xml = $this->genererMessageXML("Voiture supprimer.");
             } catch(Exception $e) {
                 $xml = $this->genererMessageXML("Problème pour suprimer la voiture.");
             }finally{

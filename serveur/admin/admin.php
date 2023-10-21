@@ -38,7 +38,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Accueil</a>
+						<a class="nav-link active" aria-current="page" href="javascript:listerPar('id')">Accueil</a>
 					</li>
 
 					<li class="nav-item dropdown">
@@ -67,23 +67,17 @@
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link" href="#">Modifier</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link"  href="javascript:montrerFormEnreg();">Ajouter une voiture</a>
 					</li>
-					
+				
 					<li class="nav-item">
-						<a class="nav-link" href="#">Supprimer</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Déconnection</a>
+						<a class="nav-link" href="../../index.php">Déconnection</a>
 					</li>
 
 					<li>
-						<div class="input-group">
-							<input type="search" id="chercher" class="form-control rounded search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-							<button type="button"  class="btn btn-outline-primary search" onclick="chercherVoituresAJAX()">Chercher</button>
+						<div class="input-group search-bar">
+							<input type="search" id="chercher" class="form-control rounded search" placeholder="Rechercher..." aria-label="Search" aria-describedby="search-addon" />
+							<button type="button"  class="btn btn-outline-primary search" onclick="chercherVoituresAJAX()">Rechercher</button>
 						</div>
 					</li>
 				</ul>
@@ -164,6 +158,22 @@
 		</div>
 	</div>
 
+	<!-- Toast  -->
+	<div class="toast posToast" role="status" aria-live="polite" aria-atomic="true" data-delay="5000">
+		<div class="toast-header">
+			<img src="/client/images/message2.png" class="rounded mr-2">
+			<strong class="mr-auto">Message</strong>
+		</div>
+		<div id="textToast" class="toast-body">
+			Êtes-vous sûr de vouloir supprimer cet article ?
+			<div class="toast-buttons">
+				<button id="yesButton" class="btn btn-success">Oui</button>
+				<button id="cancelButton" class="btn btn-danger">Annuler</button>
+			</div>
+		</div>
+	</div>
+
+
 
 	<!-- Cards -->
 	<div class="msg" id="msg">
@@ -202,10 +212,8 @@
 					</div>
 
 					<div class="copyright">
-						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservé.</small></p>
+						<p class="mb-0"><small>&copy; EliteAutomobile. Tous droits réservés.</small></p>
 					</div>
-
-
 				</div>
 			</div>
 		</div>
