@@ -165,8 +165,27 @@
             }
         }
 
+        function uploadPhoto() {
+            $targetRepertoire = "../serveur/pochettes/";
+            $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
+    
+            $nomFichier = $_FILES['image']['name'];
+            $fileType = strtolower(pathinfo($nomFichier, PATHINFO_EXTENSION));
+    
+            if (!in_array($fileType, $allowedTypes)) {
+                return "Erreur 1";
+            }
+    
+            $nomFichierUnique = uniqid() .'.'. $fileType;
+    
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetRepertoire . $nomFichierUnique)) {
+                return $nomFichierUnique;
+            } else {
+                return "Erreur 2";
+            }
+        }
         function verserFichier($dossier, $inputNom, $fichierDefaut, $chaine){
-            $cheminDossier="../../serveur/pochettes/";
+            $cheminDossier=__DIR__."/../pochettes/";
             $pochette=$fichierDefaut;
             if($_FILES["image"]['tmp_name']!==""){
                 $nomPochette=sha1($chaine.time());
