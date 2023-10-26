@@ -22,7 +22,7 @@
             return self::$modelMembre;
         }
 
-        function Mdl_AjouterMembre(){
+        function Mdl_AjouterMembre(Membre $membre, Connection $connection, String $confirmer_mdp){
             global $connexion;
         
             $nom = $_POST['nom'];

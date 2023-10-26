@@ -23,7 +23,7 @@
 	function CtrV_Enregistrer(){
         $voiture = new Voiture(0,$_POST['nomVoiture'], $_POST['description'],"pochette", (int)$_POST['prix'], (int)$_POST['quantite']);
         return DaoVoiture::getDaoVoiture()->MdlV_Enregistrer($voiture); 
-        // return $_FILES["image"]['name'];
+
     }
     function CtrV_Modifier(){
         $voiture = new Voiture((int)$_POST['idVoiture'],$_POST['nomVoiture'], $_POST['description'],$_POST['vieilleImage'], (int)$_POST['prix'], (int)$_POST['quantite']);
