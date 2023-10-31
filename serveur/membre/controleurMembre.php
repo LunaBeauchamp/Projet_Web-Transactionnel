@@ -50,7 +50,7 @@
         }
     }
 
-    function CtrM_Actions(){
+    function Ctr_Actions(){
         $action=$_POST['action'];
         switch($action){
             case "enregistrer" :

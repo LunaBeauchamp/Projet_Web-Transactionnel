@@ -22,6 +22,19 @@
             return self::$modelMembre;
         }
 
+        function genererDonneesXML($stmt, $root, $entite):SimpleXMLElement {
+            $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?>'.$root); // Crée $xml -> <membres>
+            $reponse = $stmt->get_result();
+            while($ligne = $reponse->fetch_object()){
+                $voiture = $xml->addChild($entite); // <membres> <membre>
+                foreach ($ligne as $colonne => $valeur) {
+                    $voiture->addChild($colonne, $valeur."");// Faut que $value soit string
+                }
+            } 
+            echo $xml;
+            return $xml;
+        }
+
         function Mdl_AjouterMembre(Membre $membre, Connection $connection, String $confirmer_mdp){
             global $connexion;
         
@@ -75,11 +88,11 @@
                 $requete = "SELECT * FROM membres WHERE courriel IN (SELECT courriel FROM connexion WHERE status='A')";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
-                $reponse = $stmt->get_result();
+                $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
             } catch(Exception $e) {
                 return [];
             }finally{
-                return $reponse;
+                return $xml;
             }
         }
 
@@ -90,11 +103,11 @@
                 $requete = "SELECT * FROM membres WHERE courriel IN (SELECT courriel FROM connexion WHERE status='D')";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
-                $reponse = $stmt->get_result();
+                $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
             } catch(Exception $e) {
                 return [];
             }finally{
-                return $reponse;
+                return $xml;
             }
         }
 
@@ -105,11 +118,11 @@
                 $requete = "SELECT membres.*, connexion.status FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
-                $reponse = $stmt->get_result();
+                $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
             } catch(Exception $e) {
                 return [];
             }finally{
-                return $reponse;
+                return $xml;
             }
         }
 

@@ -3,7 +3,17 @@
     declare (strict_types=1);
 
     require_once(__DIR__."/serveur/inventaireVoiture/ControleurVoiture.php");
+    require_once(__DIR__."/serveur/membre/controleurMembre.php");
    
-    $instanceCtr = ControleurVoiture::getControleurVoiture();
-    echo $instanceCtr->CtrV_Actions();
+    $type=$_POST['type'];
+        switch($type){
+            case "membre":
+                $instanceCtr = ControleurMembre::getControleurMembre();
+                break;
+            case "voiture":
+                $instanceCtr = ControleurVoiture::getControleurVoiture();
+                break;
+        }
+    
+    echo $instanceCtr->Ctr_Actions();
 ?>

@@ -46,7 +46,7 @@
         return DaoVoiture::getDaoVoiture()->MdlV_Chercher($selection); 
    }
 
-    function CtrV_Actions(){
+    function Ctr_Actions(){
         $action=$_POST['action'];
         switch($action){
             case "enregistrer" :

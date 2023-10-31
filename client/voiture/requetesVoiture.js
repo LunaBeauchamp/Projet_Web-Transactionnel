@@ -21,7 +21,7 @@ let chargerVoituresAJAX = (mode, chemin) => {
 $.ajax({
     type : "POST",
     url  : chemin,
-    data : {"action":"lister"},
+    data : {"type":"voiture","action":"lister"},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
     success : (xmlVoiture) => {//alert(xmlFilms);
         makeListe(xmlVoiture);
@@ -49,6 +49,7 @@ let modifierVoituresAJAX = (id,image) => {
 	formFilm.append('action','modifier');
     formFilm.append('idVoiture',id);
     formFilm.append('vieilleImage',image);
+    formVoiture.append('type','voiture');
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
@@ -86,7 +87,7 @@ let supprimerVoituresAJAX = (id) => {
         $.ajax({
             type : "POST",
             url  : "../../routes.php",
-            data : {"action":"enlever",
+            data : {"type":"voiture","action":"enlever",
                     "idVoiture":id},
             dataType : "xml",
             success : (xmlVoiture) => {
@@ -112,6 +113,7 @@ let supprimerVoituresAJAX = (id) => {
 let ajouterVoituresAJAX = () => {
     let formVoiture = new FormData(document.getElementById('formEnreg'));
     formVoiture.append('action','enregistrer');
+    formVoiture.append('type','voiture');
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
@@ -136,7 +138,7 @@ function listerOneVoituresAJAX (id) {
 $.ajax({
     type : "POST",
     url  : "../../routes.php",
-    data : {"action":"lister_Voiture",
+    data : {"type":"voiture","action":"lister_Voiture",
             "idVoiture":id},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
     success : (xmlVoiture) => {//alert(xmlFilms);
@@ -164,7 +166,7 @@ let mot = document.getElementById("chercher").value
 $.ajax({
     type : "POST",
     url  : "../../routes.php",
-    data : {"action":"chercher_Voiture",
+    data : {"type":"voiture","action":"chercher_Voiture",
             "mot":mot},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
     success : (xmlVoiture) => {
