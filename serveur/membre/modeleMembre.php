@@ -38,13 +38,12 @@
         function Mdl_AjouterMembre(Membre $membre, Connection $connection, String $confirmer_mdp){
             global $connexion;
         
-            $nom = $_POST['nom'];
-            $prenom = $_POST['prenom'];
-            $courriel = $_POST['courriel'];
-            $genre = $_POST['genre'];
-            $daten = $_POST['date'];
-            $mdp = $_POST['mdp'];
-            $confirmer_mdp = $_POST['mdpConfirmer'];
+            $nom = $membre->getNom();
+            $prenom = $membre->getPrenom();
+            $courriel = $membre->getCourriel();
+            $genre = $membre->getGenre();
+            $daten = $membre->getDaten();
+            $mdp = $connection->getMotdepasse();
         
             $msg = "";
         

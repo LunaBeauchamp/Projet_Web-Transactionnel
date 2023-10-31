@@ -12,7 +12,6 @@ for (let uneVoiture of liste){
             prix:uneVoiture.getElementsByTagName('prix')[0].firstChild.nodeValue,
             quantite:uneVoiture.getElementsByTagName('quantite')[0].firstChild.nodeValue
         })
-        
     }
 } 
 }
@@ -23,7 +22,7 @@ $.ajax({
     url  : chemin,
     data : {"type":"voiture","action":"lister"},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
-    success : (xmlVoiture) => {//alert(xmlFilms);
+    success : (xmlVoiture) => {//alert(xmlVoiture);
         makeListe(xmlVoiture);
         switch(mode){
             case "cards":

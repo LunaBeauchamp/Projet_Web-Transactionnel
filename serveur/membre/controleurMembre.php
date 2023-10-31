@@ -1,6 +1,6 @@
 <?php
     require_once("includes/Membre.inc.php");
-    require_once("modelMembre.php");
+    require_once("modeleMembre.php");
 
     class ControleurMembre { 
     static private $instanceCtr = null;
@@ -26,7 +26,7 @@
         $confirmer_mdp = $_POST['mdpConfirmer'];
 
         $membre = new Membre($nom,$prenom,$courriel,$genre,$daten);
-        $connection = new Connection($courriel,$mdp,"M","A")
+        $connection = new Connection($courriel,$mdp,"M","A");
         return DaoMembre::getDaoMembre()->Mdl_AjouterMembre($membre, $connection,$confirmer_mdp); 
     }
 

@@ -1,5 +1,5 @@
 
-let makeListe =(xmlReponse) =>{
+let makeListeMembre =(xmlReponse) =>{
 listeMembres=[];
 liste = xmlReponse.getElementsByTagName('membre');
 for (let unMembre of liste){
@@ -18,14 +18,14 @@ for (let unMembre of liste){
 return listeMembres;
 }
 
-let chargerMembreVoituresAJAX = () => {
+let chargerMembresAJAX = () => {
 $.ajax({
     type : "POST",
     url  : "../../routes.php",
     data : {"type":"membre","action":"lister"},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
     success : (xmlMembre) => {//alert(xmlFilms);
-        liste = makeListe(xmlMembre);
+        liste = makeListeMembre(xmlMembre);
         listerBouton(liste);
     },
     fail : (err) => {
@@ -34,7 +34,7 @@ $.ajax({
 })
 }
 
-let chargerMembreActifVoituresAJAX = () => {
+let chargerMembreActifsAJAX = () => {
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
@@ -42,7 +42,7 @@ let chargerMembreActifVoituresAJAX = () => {
                 "action":"lister_Actif"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlMembre) => {//alert(xmlFilms);
-            liste = makeListe(xmlMembre);
+            liste = makeListeMembre(xmlMembre);
             lister(liste);
         },
         fail : (err) => {
@@ -51,14 +51,14 @@ let chargerMembreActifVoituresAJAX = () => {
     })
     }
 
-let chargerMembreDesactiverVoituresAJAX = () => {
+let chargerMembreDesactiversAJAX = () => {
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
         data : {"type":"membre","action":"lister_desactiver"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlMembre) => {//alert(xmlFilms);
-            liste = makeListe(xmlMembre);
+            liste = makeListeMembre(xmlMembre);
             lister(liste);
         },
         fail : (err) => {
@@ -78,8 +78,8 @@ let modifierStatusMembreAJAX = (couriel, status) => {
         contentType : false,
 		processData : false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (reponse) => {//alert(xmlVoiture);
-            chargerMembreVoituresAJAX();
+        success : (reponse) => {//alert(xml);
+            chargerMembresAJAX();
         },
         fail : (err) => {
            console.log("Erreur : "+err)

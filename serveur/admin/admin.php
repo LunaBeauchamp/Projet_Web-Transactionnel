@@ -16,6 +16,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="../../client/voiture/requetesVoiture.js"></script>
 	<script src="../../client/voiture/vueVoiture.js"></script>
+	<script src="../../client/membre/vueMembre.js"></script>
+	<script src="../../client/membre/requetesMembre.js"></script>
 </head>
 
 <body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX('table','../../routes.php');">
@@ -60,9 +62,9 @@
 							Lister les membres
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="../membre/page_listerTousLesMembres.php">Tous les membres</a></li>
-							<li><a class="dropdown-item" href="../membre/page_listerMembresActif.php">Membres activés</a></li>
-							<li><a class="dropdown-item" href="../membre/page_listerMembresDesactives.php">Membres désactivés</a></li>
+							<li><a class="dropdown-item" href="javascript:chargerMembresAJAX()">Tous les membres</a></li>
+							<li><a class="dropdown-item" href="javascript:chargerMembreActifsAJAX()">Membres activés</a></li>
+							<li><a class="dropdown-item" href="javascript:chargerMembreDesactiversAJAX()">Membres désactivés</a></li>
 						</ul>
 					</li>
 
