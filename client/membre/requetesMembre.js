@@ -77,12 +77,11 @@ let modifierStatusMembreAJAX = (couriel, status) => {
         url  : "../../routes.php",
         data : {"type":"membre",
                 "action":"modifier_status",
-                "couriel" : couriel,
+                "courriel" : couriel,
                 "status" : status},
-        contentType : false,
-		processData : false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlMembre) => {//alert(xmlMembre);
+            afficherMessage(makeListeMembre(xmlMembre));
             chargerMembresAJAX();
         },
         fail : (err) => {

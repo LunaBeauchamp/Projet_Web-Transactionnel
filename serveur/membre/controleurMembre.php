@@ -43,11 +43,9 @@
     }
 
     function CtrM_Modifier_Status(){
-        if (isset($_GET['courriel']) && isset($_GET['status'])) {
-            $courriel = $_GET['courriel'];
-            $nouveauStatus = $_GET['status'];
+            $courriel = $_POST['courriel'];
+            $nouveauStatus = $_POST['status'];
             return DaoMembre::getDaoMembre()->Mdl_ModifierStatusMembre($nouveauStatus, $courriel);
-        }
     }
 
     function Ctr_Actions(){

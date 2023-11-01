@@ -156,12 +156,13 @@
                 if ($stmt) {
                     $stmt->bind_param("ss", $nouveauStatus, $courriel);
                     $stmt->execute();
+                    $xml = $this->genererMessageXML("Modifier avec succès.");
                 }
             } catch (Exception $e) {
                 $xml = $this->genererMessageXML("Probléme pour modifier le membre");
             }finally{
-                header("Location: page_listerTousLesMembres.php");
-                    exit;
+                Header('Content-type: text/xml');
+                return $xml->asXML();
             }
         }
     }

@@ -83,10 +83,10 @@ function remplirLigneBouton(membre){
     rep +='<td class="genre">'+membre.genre+'</td>'
     rep +='<td class="daten">'+membre.daten+'</td>'
     if (membre.status == "A"){
-        rep += `<td><a href="javascript:modifierStatusMembreAJAX(${courriel},'D')" class="btn btn-danger">Désactiver</a></td>`
+        rep += `<td><a href="javascript:modifierStatusMembreAJAX('${membre.courriel}','D')" class="btn btn-danger">Désactiver</a></td>`
     }
     else {
-        rep +=`<td><a href="javascript:modifierStatusMembreAJAX(${courriel},'A')" class="btn btn-success">Activer</a></td>`
+        rep +=`<td><a href="javascript:modifierStatusMembreAJAX('${membre.courriel}','A')" class="btn btn-success">Activer</a></td>`
     }
     rep +='</tr>'        
     return rep;
