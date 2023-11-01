@@ -6,6 +6,7 @@
     require_once(__DIR__."/serveur/membre/controleurMembre.php");
    
     $type=$_POST['type'];
+    $instanceCtr=null;
         switch($type){
             case "membre":
                 $instanceCtr = ControleurMembre::getControleurMembre();
@@ -14,6 +15,5 @@
                 $instanceCtr = ControleurVoiture::getControleurVoiture();
                 break;
         }
-    
     echo $instanceCtr->Ctr_Actions();
 ?>

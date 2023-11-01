@@ -22,7 +22,8 @@ $.ajax({
     url  : chemin,
     data : {"type":"voiture","action":"lister"},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
-    success : (xmlVoiture) => {//alert(xmlVoiture);
+    success : (xmlVoiture) => {
+        //alert(xmlVoiture);
         makeListe(xmlVoiture);
         switch(mode){
             case "cards":

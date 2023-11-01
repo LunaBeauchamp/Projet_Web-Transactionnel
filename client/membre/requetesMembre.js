@@ -1,20 +1,24 @@
 
 let makeListeMembre =(xmlReponse) =>{
 listeMembres=[];
-liste = xmlReponse.getElementsByTagName('membre');
-for (let unMembre of liste){
-    if (unMembre.nodeName != "<membres>"){
-        listeMembres.push({
-            idm :unMembre.getElementsByTagName('idm')[0].firstChild.nodeValue,
-            nom :unMembre.getElementsByTagName('nom')[0].firstChild.nodeValue,
-            prenom: unMembre.getElementsByTagName('prenom')[0].firstChild.nodeValue,
-            courriel:unMembre.getElementsByTagName('courriel')[0].firstChild.nodeValue,
-            genre:unMembre.getElementsByTagName('genre')[0].firstChild.nodeValue,
-            daten:unMembre.getElementsByTagName('daten')[0].firstChild.nodeValue
-        })
-        
-    }
-} 
+msg = xmlReponse.getElementsByTagName('msg');
+if (msg[0] != undefined){
+    return xmlReponse.getElementsByTagName('msg')[0].firstChild.nodeValue
+}
+else {
+    liste = xmlReponse.getElementsByTagName('membre');
+    for (let unMembre of liste){
+            listeMembres.push({
+                idm :unMembre.getElementsByTagName('idm')[0].firstChild.nodeValue,
+                nom :unMembre.getElementsByTagName('nom')[0].firstChild.nodeValue,
+                prenom: unMembre.getElementsByTagName('prenom')[0].firstChild.nodeValue,
+                courriel:unMembre.getElementsByTagName('courriel')[0].firstChild.nodeValue,
+                genre:unMembre.getElementsByTagName('genre')[0].firstChild.nodeValue,
+                daten:unMembre.getElementsByTagName('daten')[0].firstChild.nodeValue,
+                status:unMembre.getElementsByTagName('status')[0].firstChild.nodeValue
+            })
+    } 
+}
 return listeMembres;
 }
 
@@ -24,7 +28,8 @@ $.ajax({
     url  : "../../routes.php",
     data : {"type":"membre","action":"lister"},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
-    success : (xmlMembre) => {//alert(xmlFilms);
+    success : (xmlMembre) => {
+        //(xmlMembre);
         liste = makeListeMembre(xmlMembre);
         listerBouton(liste);
     },
@@ -38,10 +43,9 @@ let chargerMembreActifsAJAX = () => {
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data : {"type":"membre",
-                "action":"lister_Actif"},
+        data : {"type":"membre","action":"lister_Actif"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlMembre) => {//alert(xmlFilms);
+        success : (xmlMembre) => {//alert(xmlMembre);
             liste = makeListeMembre(xmlMembre);
             lister(liste);
         },
@@ -57,7 +61,7 @@ let chargerMembreDesactiversAJAX = () => {
         url  : "../../routes.php",
         data : {"type":"membre","action":"lister_desactiver"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlMembre) => {//alert(xmlFilms);
+        success : (xmlMembre) => {//alert(xmlMembre);
             liste = makeListeMembre(xmlMembre);
             lister(liste);
         },
@@ -78,7 +82,7 @@ let modifierStatusMembreAJAX = (couriel, status) => {
         contentType : false,
 		processData : false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (reponse) => {//alert(xml);
+        success : (xmlMembre) => {//alert(xmlMembre);
             chargerMembresAJAX();
         },
         fail : (err) => {

@@ -23,15 +23,22 @@
         }
 
         function genererDonneesXML($stmt, $root, $entite):SimpleXMLElement {
-            $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?>'.$root); // Crée $xml -> <membres>
+            $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?>'.$root); // Crée $xml -> <voitures>
             $reponse = $stmt->get_result();
-            while($ligne = $reponse->fetch_object()){
-                $voiture = $xml->addChild($entite); // <membres> <membre>
-                foreach ($ligne as $colonne => $valeur) {
-                    $voiture->addChild($colonne, $valeur."");// Faut que $value soit string
-                }
-            } 
+                while($ligne = $reponse->fetch_object()){
+                    $voiture = $xml->addChild($entite); // <voitures> <voiture>
+                    foreach ($ligne as $colonne => $valeur) {
+                        $voiture->addChild($colonne, $valeur."");// Faut que $value soit string
+                    }
+                } 
             echo $xml;
+            return $xml;
+            
+        }
+
+        function genererMessageXML($msg){
+            $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><message/>'); //<message>
+            $xml->addChild('msg',$msg);//<message><msg>voiture bien enregistré
             return $xml;
         }
 
@@ -87,11 +94,17 @@
                 $requete = "SELECT * FROM membres WHERE courriel IN (SELECT courriel FROM connexion WHERE status='A')";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
-                $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
+                if($stmt->num_rows == 0){
+                    $xml = $this->genererMessageXML("Aucun membre trouvé.");
+                }
+                else{
+                    $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
+                }
             } catch(Exception $e) {
-                return [];
+                $xml = $this->genererMessageXML("Probléme pour obtenir les membres");
             }finally{
-                return $xml;
+                Header('Content-type: text/xml');
+                return $xml->asXML();
             }
         }
 
@@ -102,26 +115,32 @@
                 $requete = "SELECT * FROM membres WHERE courriel IN (SELECT courriel FROM connexion WHERE status='D')";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
-                $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
+                if($stmt->num_rows == 0){
+                    $xml = $this->genererMessageXML("Aucun membre trouvé.");
+                }
+                else{
+                    $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
+                }
             } catch(Exception $e) {
-                return [];
+                $xml = $this->genererMessageXML("Probléme pour obtenir les membres");
             }finally{
-                return $xml;
+                Header('Content-type: text/xml');
+                return $xml->asXML();
             }
         }
 
         function Mdl_ListerMembres(){
             global $connexion;
-            
             try{
                 $requete = "SELECT membres.*, connexion.status FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
                 $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
             } catch(Exception $e) {
-                return [];
+                $xml = $this->genererMessageXML("Probléme pour obtenir les membres");
             }finally{
-                return $xml;
+                Header('Content-type: text/xml');
+                return $xml->asXML();
             }
         }
 
@@ -139,7 +158,7 @@
                     $stmt->execute();
                 }
             } catch (Exception $e) {
-                $msg = 'Erreur : ' . $e->getMessage();
+                $xml = $this->genererMessageXML("Probléme pour modifier le membre");
             }finally{
                 header("Location: page_listerTousLesMembres.php");
                     exit;
