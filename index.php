@@ -26,7 +26,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="./client/voiture/requetesVoiture.js"></script>
 	<script src="client/voiture/vueVoiture.js"></script>
-	<script src="/client/js/global.js"></script>
+	<script src="./client/js/global.js"></script>
 </head>
 
 <body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="montrerToast('<?php echo $msg; ?>');chargerVoituresAJAX('cards','routes.php');">

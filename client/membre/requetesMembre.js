@@ -1,24 +1,19 @@
 
 let makeListeMembre =(xmlReponse) =>{
-listeMembres=[];
-msg = xmlReponse.getElementsByTagName('msg');
-if (msg[0] != undefined){
-    return xmlReponse.getElementsByTagName('msg')[0].firstChild.nodeValue
-}
-else {
+    listeMembres=[];
     liste = xmlReponse.getElementsByTagName('membre');
     for (let unMembre of liste){
-            listeMembres.push({
-                idm :unMembre.getElementsByTagName('idm')[0].firstChild.nodeValue,
-                nom :unMembre.getElementsByTagName('nom')[0].firstChild.nodeValue,
-                prenom: unMembre.getElementsByTagName('prenom')[0].firstChild.nodeValue,
-                courriel:unMembre.getElementsByTagName('courriel')[0].firstChild.nodeValue,
-                genre:unMembre.getElementsByTagName('genre')[0].firstChild.nodeValue,
-                daten:unMembre.getElementsByTagName('daten')[0].firstChild.nodeValue,
-                status:unMembre.getElementsByTagName('status')[0].firstChild.nodeValue
-            })
+        listeMembres.push({
+            idm :unMembre.getElementsByTagName('idm')[0].firstChild.nodeValue,
+            nom :unMembre.getElementsByTagName('nom')[0].firstChild.nodeValue,
+            prenom: unMembre.getElementsByTagName('prenom')[0].firstChild.nodeValue,
+            courriel:unMembre.getElementsByTagName('courriel')[0].firstChild.nodeValue,
+            genre:unMembre.getElementsByTagName('genre')[0].firstChild.nodeValue,
+            daten:unMembre.getElementsByTagName('daten')[0].firstChild.nodeValue,
+            status:unMembre.getElementsByTagName('status')[0].firstChild.nodeValue
+        })
     } 
-}
+
 return listeMembres;
 }
 
@@ -46,6 +41,10 @@ let chargerMembreActifsAJAX = () => {
         data : {"type":"membre","action":"lister_Actif"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlMembre) => {//alert(xmlMembre);
+            msg = xmlMembre.getElementsByTagName('msg');
+            if (msg[0] != undefined){
+                afficherTexte(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+            }
             liste = makeListeMembre(xmlMembre);
             lister(liste);
         },
@@ -62,6 +61,10 @@ let chargerMembreDesactiversAJAX = () => {
         data : {"type":"membre","action":"lister_desactiver"},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlMembre) => {//alert(xmlMembre);
+            msg = xmlMembre.getElementsByTagName('msg');
+            if (msg[0] != undefined){
+                afficherTexte(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+            }
             liste = makeListeMembre(xmlMembre);
             lister(liste);
         },
