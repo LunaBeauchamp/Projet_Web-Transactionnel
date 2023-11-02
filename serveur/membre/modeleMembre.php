@@ -22,9 +22,8 @@
             return self::$modelMembre;
         }
 
-        function genererDonneesXML($stmt, $root, $entite):SimpleXMLElement {
+        function genererDonneesXML($reponse, $root, $entite):SimpleXMLElement {
             $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?>'.$root); // Crée $xml -> <voitures>
-            $reponse = $stmt->get_result();
                 while($ligne = $reponse->fetch_object()){
                     $voiture = $xml->addChild($entite); // <voitures> <voiture>
                     foreach ($ligne as $colonne => $valeur) {
@@ -89,16 +88,16 @@
 
         function Mdl_ListerMembresActif(){
             global $connexion;
-            
             try{
-                $requete = "SELECT * FROM membres WHERE courriel IN (SELECT courriel FROM connexion WHERE status='A')";
+                $requete = "SELECT membres.*, connexion.status FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel WHERE status='A'";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
-                if($stmt->num_rows == 0){
+                $reponse = $stmt->get_result();
+                if($reponse->num_rows == 0){
                     $xml = $this->genererMessageXML("Aucun membre trouvé.");
                 }
                 else{
-                    $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
+                    $xml = $this->genererDonneesXML($reponse, '<membres/>', 'membre'); 
                 }
             } catch(Exception $e) {
                 $xml = $this->genererMessageXML("Probléme pour obtenir les membres");
@@ -112,14 +111,15 @@
             global $connexion;
             
             try{
-                $requete = "SELECT * FROM membres WHERE courriel IN (SELECT courriel FROM connexion WHERE status='D')";
+                $requete = "SELECT membres.*, connexion.status FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel WHERE status='D'";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
-                if($stmt->num_rows == 0){
+                $reponse = $stmt->get_result();
+                if($reponse->num_rows == 0){
                     $xml = $this->genererMessageXML("Aucun membre trouvé.");
                 }
                 else{
-                    $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
+                    $xml = $this->genererDonneesXML($reponse, '<membres/>', 'membre'); 
                 }
             } catch(Exception $e) {
                 $xml = $this->genererMessageXML("Probléme pour obtenir les membres");
@@ -135,7 +135,13 @@
                 $requete = "SELECT membres.*, connexion.status FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel";
                 $stmt = $connexion->prepare($requete);
                 $stmt->execute();
-                $xml = $this->genererDonneesXML($stmt, '<membres/>', 'membre'); 
+                $reponse = $stmt->get_result();
+                if($reponse->num_rows == 0){
+                    $xml = $this->genererMessageXML("Aucun membre trouvé.");
+                }
+                else{
+                    $xml = $this->genererDonneesXML($reponse, '<membres/>', 'membre'); 
+                }
             } catch(Exception $e) {
                 $xml = $this->genererMessageXML("Probléme pour obtenir les membres");
             }finally{

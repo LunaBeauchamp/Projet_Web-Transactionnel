@@ -1,9 +1,5 @@
 
-let afficherTexte = (msg)=>{
-    contenu = `<p>${msg}</p>`
-    document.getElementById('msg').innerHTML = "";
-    document.getElementById('msg').innerHTML = contenu;
-}
+
 
 let lister = (liste) =>{
     let contenu = '<table class="table table-striped table-bordered">';
@@ -63,8 +59,6 @@ let listerBouton = (liste) =>{
 
     for (let unMembre of liste){
         contenu+=remplirLigneBouton(unMembre);
-        
-    
     } 
     contenu +=    '</tbody>'
     contenu +=    '</table>'
@@ -78,7 +72,7 @@ function remplirLigneBouton(membre){
     rep +='<td class="idm">'+membre.idm+'</td>'
     rep +='<td class="nom">'+membre.nom+'</td>'
     rep +='<td class="prenom">'+membre.prenom+'</td>'
-    rep +='<td class="courriel">'+membre.courriel+'$</td>'
+    rep +='<td class="courriel">'+membre.courriel+'</td>'
     rep +='<td class="genre">'+membre.genre+'</td>'
     rep +='<td class="daten">'+membre.daten+'</td>'
     if (membre.status == "A"){

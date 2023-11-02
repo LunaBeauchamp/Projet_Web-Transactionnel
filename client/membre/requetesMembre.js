@@ -25,6 +25,10 @@ $.ajax({
     dataType : "xml", //text pour voir si bien formé même chose pour xml
     success : (xmlMembre) => {
         //(xmlMembre);
+        msg = xmlMembre.getElementsByTagName('msg');
+            if (msg[0] != undefined){
+                afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+            }
         liste = makeListeMembre(xmlMembre);
         listerBouton(liste);
     },
@@ -43,7 +47,7 @@ let chargerMembreActifsAJAX = () => {
         success : (xmlMembre) => {//alert(xmlMembre);
             msg = xmlMembre.getElementsByTagName('msg');
             if (msg[0] != undefined){
-                afficherTexte(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+                afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
             }
             liste = makeListeMembre(xmlMembre);
             lister(liste);
@@ -63,7 +67,7 @@ let chargerMembreDesactiversAJAX = () => {
         success : (xmlMembre) => {//alert(xmlMembre);
             msg = xmlMembre.getElementsByTagName('msg');
             if (msg[0] != undefined){
-                afficherTexte(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+                afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
             }
             liste = makeListeMembre(xmlMembre);
             lister(liste);
