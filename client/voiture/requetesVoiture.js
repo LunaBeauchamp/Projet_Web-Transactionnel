@@ -124,7 +124,8 @@ let ajouterVoituresAJAX = () => {
         contentType: false,
         
         success : (xmlVoiture) => {
-            alert(xmlVoiture)
+            // alert(xmlVoiture)
+            $('#enregModal').modal('hide');
             chargerVoituresAJAX('table','../../routes.php');
             montrerVue('enlever',xmlVoiture)
         },
