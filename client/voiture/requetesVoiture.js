@@ -44,20 +44,21 @@ $.ajax({
 }
 
 let modifierVoituresAJAX = (id,image) => {
-    id= parseInt(id);
-    let formFilm = new FormData(document.getElementById('formModif'));
-	formFilm.append('action','modifier');
-    formFilm.append('idVoiture',id);
-    formFilm.append('vieilleImage',image);
-    formFilm.append('type','voiture');
+    id = parseInt(id);
+    let formVoiture = new FormData(document.getElementById('formModif'));
+	formVoiture.append('action','modifier');
+    formVoiture.append('idVoiture',id);
+    formVoiture.append('vieilleImage',image);
+    formVoiture.append('type','voiture');
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data : formFilm,
-        contentType : false,
-		processData : false,
+        data : formVoiture,
+        processData: false,
+        contentType: false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlVoiture) => {//alert(xmlVoiture);
+        success : (xmlVoiture) => {
+            alert(xmlVoiture);
             montrerVue('enlever',xmlVoiture)
             chargerVoituresAJAX('table','../../routes.php');
         },
@@ -118,12 +119,12 @@ let ajouterVoituresAJAX = () => {
         type : "POST",
         url  : "../../routes.php",
         data : formVoiture,
-        async : false,
-        cache : false,
-        contentType : false,
-        processData : false,
         dataType : "xml",
+        processData: false,
+        contentType: false,
+        
         success : (xmlVoiture) => {
+            alert(xmlVoiture)
             chargerVoituresAJAX('table','../../routes.php');
             montrerVue('enlever',xmlVoiture)
         },

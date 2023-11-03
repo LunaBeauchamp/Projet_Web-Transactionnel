@@ -97,24 +97,24 @@ let modifierStatusMembreAJAX = (couriel, status) => {
     })
 }
 
-let ajouterMembreAJAX = () => {
-    let formMembre = new FormData(document.getElementById('formEnreg'));
-    formMembre.append('action','enregistrer');
-    formMembre.append('type','membre');
-    $.ajax({
-        type : "POST",
-        url  : "../../routes.php",
-        data : formMembre,
-        async : false,
-        cache : false,
-        contentType : false,
-        processData : false,
-        dataType : "xml",
-        success : (xmlMembre) => {
-        },
-        fail : (err) => {
-            console.log("Erreur : "+err)
-        }
-    })
+// let ajouterMembreAJAX = () => {
+//     let formMembre = new FormData(document.getElementById('formEnregMembre'));
+//     formMembre.append('action','enregistrer');
+//     formMembre.append('type','membre');
+//     $.ajax({
+//         type : "POST",
+//         url  : "../../routes.php",
+//         data : formMembre,
+//         async : false,
+//         cache : false,
+//         contentType : false,
+//         processData : false,
+//         dataType : "xml",
+//         success : (xmlMembre) => {
+//         },
+//         fail : (err) => {
+//             console.log("Erreur : "+err)
+//         }
+//     })
 
-}
+// }
