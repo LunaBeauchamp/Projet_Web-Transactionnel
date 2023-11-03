@@ -49,7 +49,7 @@ let modifierVoituresAJAX = (id,image) => {
 	formFilm.append('action','modifier');
     formFilm.append('idVoiture',id);
     formFilm.append('vieilleImage',image);
-    formVoiture.append('type','voiture');
+    formFilm.append('type','voiture');
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
