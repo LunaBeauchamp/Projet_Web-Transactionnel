@@ -20,7 +20,7 @@
                 exit();
             }
     
-            $select_query = "SELECT * FROM connexion WHERE courriel=? AND motdepasse=?";
+            $select_query = "SELECT membres.*, connexion.* FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel WHERE connexion.courriel=? AND connexion.motdepasse=?";
             $stmt = $connexion->prepare($select_query);
             $stmt->bind_param("ss", $courriel, $mdp);
             $stmt->execute();
@@ -29,7 +29,10 @@
             if ($reponse->num_rows > 0) {
                 $ligne = $reponse->fetch_object();
                 if ($ligne->role == 'M') {
+                    $_SESSION['prenom'] = $ligne->prenom;
+                    $_SESSION['nom'] = $ligne->nom;
                     $_SESSION['role'] = 'M';
+                    $_SESSION['courriel'] = $courriel;
                     header('Location: membre.php');
                     exit();
                 } else {

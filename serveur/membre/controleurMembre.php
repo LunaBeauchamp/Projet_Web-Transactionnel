@@ -43,9 +43,14 @@
     }
 
     function CtrM_Modifier_Status(){
-            $courriel = $_POST['courriel'];
-            $nouveauStatus = $_POST['status'];
-            return DaoMembre::getDaoMembre()->Mdl_ModifierStatusMembre($nouveauStatus, $courriel);
+        $courriel = $_POST['courriel'];
+        $nouveauStatus = $_POST['status'];
+        return DaoMembre::getDaoMembre()->Mdl_ModifierStatusMembre($nouveauStatus, $courriel);
+    }
+
+    function CtrM_Lister_Un(){
+        $courriel = $_POST['courriel'];
+        return DaoMembre::getDaoMembre()->Mdl_ListerUn($courriel);
     }
 
     function Ctr_Actions(){
@@ -65,6 +70,9 @@
                 break;
             case "modifier_status":
                 return $this->CtrM_Modifier_Status();
+                break;
+            case "lister_un":
+                return $this->CtrM_Lister_Un();
                 break;
         }
     }
