@@ -1,4 +1,4 @@
-
+let membreActif
 let makeListeMembre =(xmlReponse) =>{
     listeMembres=[];
     liste = xmlReponse.getElementsByTagName('membre');
@@ -118,3 +118,32 @@ let modifierStatusMembreAJAX = (couriel, status) => {
 //     })
 
 // }
+
+let chargerUnMembreAJAX = (courriel) => {
+    $.ajax({
+        type : "POST",
+        url  : "../../routes.php",
+        data : {"type":"membre","action":"lister_un","courriel":courriel},
+        dataType : "xml", //text pour voir si bien formé même chose pour xml
+        success : (xmlMembre) => {
+            //(xmlMembre);
+            msg = xmlMembre.getElementsByTagName('msg');
+                if (msg[0] != undefined){
+                    afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+                }
+            liste = makeListeMembre(xmlMembre);
+            for (let unMembre of liste){
+                membreActif ={
+                nom :unMembre.getElementsByTagName('nom')[0].firstChild.nodeValue,
+                prenom :unMembre.getElementsByTagName('prenom')[0].firstChild.nodeValue,
+                courriel :unMembre.getElementsByTagName('courriel')[0].firstChild.nodeValue,
+                genre :unMembre.getElementsByTagName('genre')[0].firstChild.nodeValue,
+                daten :unMembre.getElementsByTagName('daten')[0].firstChild.nodeValue,
+                }
+            } 
+        },
+        fail : (err) => {
+            console.log("Erreur : "+err)
+        }
+    })
+    }

@@ -171,5 +171,21 @@
                 return $xml->asXML();
             }
         }
+        function Mdl_ListerUn($courriel){
+            global $connexion;
+            try{
+                $requete = "SELECT *  FROM membres  WHERE courriel = ?";
+                $stmt = $connexion->prepare($requete);
+                $stmt->bind_param("s",$courriel);
+                $stmt->execute();
+                $reponse = $stmt->get_result();
+                $xml = $this->genererDonneesXML($reponse, '<membres/>', 'membre'); 
+            } catch(Exception $e) {
+                $xml = $this->genererMessageXML("Probléme pour obtenir les membres");
+            }finally{
+                Header('Content-type: text/xml');
+                return $xml->asXML();
+            }
+        }
     }
 ?>

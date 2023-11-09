@@ -84,3 +84,8 @@ function remplirLigneBouton(membre){
     rep +='</tr>'        
     return rep;
 }
+let remplirBarreNav = (couriel) =>{
+    chargerUnMembreAJAX(couriel);
+    document.getElementById('nomMembre').innerText=membreActif.nom;
+    document.getElementById('prenomMembre').innerText=membreActif.prenom;
+}
