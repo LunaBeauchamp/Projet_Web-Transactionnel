@@ -19,6 +19,7 @@
 	<title>EliteAutomobile</title>
 	<script src="../../client/utilitaires/jquery-3.6.3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 	<script src="../../client/voiture/requetesVoiture.js"></script>
 	<script src="../../client/voiture/vueVoiture.js"></script>
 	<script src="../../client/membre/vueMembre.js"></script>
@@ -61,7 +62,7 @@
 						</ul>
 					</li>
 
-                    <li>
+                    <li class="nav-item">
 						<div class="input-group search-bar">
 							<input type="search" id="chercher" class="form-control rounded search" placeholder="Rechercher..." aria-label="Search" aria-describedby="search-addon" />
 							<button type="button"  class="btn btn-outline-primary search" onclick="chercherVoituresAJAX()">Rechercher</button>
@@ -69,19 +70,19 @@
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="">Profil</a><!--Afficher le profil avec option de modification-->
+						<i class="fas fa-shopping-cart fa-2x" style="color: #988265;"></i>
+                        <p id="nbvoiture" class="bulle">5</p>
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="">Panier</a><!--Afficher le panier avec produits sélectionner plus option de payer-->
-                        <p id="nbvoiture"></p>
+						<a class="nav-link active" aria-current="page" href="">Profil</a><!--Afficher le profil avec option de modification-->
 					</li>
 
                     <li class="nav-item">
-						<p id="nomMembre" aria-current="page"><?php echo $_SESSION['nom']; ?></p><!--Afficher le nom dynamiquement-->
+						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?></p><!--Afficher le nom dynamiquement-->
 					</li>
                     <li class="nav-item">
-						<p id="prenomMembre" aria-current="page"><?php echo $_SESSION['prenom']; ?></p><!--Afficher le prénom dynamiquement-->
+						<p id="prenomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['prenom']; ?></p><!--Afficher le prénom dynamiquement-->
 					</li>
 				
 					<li class="nav-item">
