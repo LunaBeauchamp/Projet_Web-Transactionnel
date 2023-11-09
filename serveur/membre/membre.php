@@ -70,14 +70,14 @@
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="">Profil</a><!--Afficher le profil avec option de modification-->
-					</li>
-
-					<li class="nav-item">
 						<i class="fas fa-shopping-cart fa-2x" style="color: #988265;"></i>
                         <p id="nbvoiture" class="bulle"></p>
 					</li>
 
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="">Profil</a><!--Afficher le profil avec option de modification-->
+					</li>
+					
                     <li class="nav-item">
 						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?></p><!--Afficher le nom dynamiquement-->
 					</li>
