@@ -1,0 +1,46 @@
+#modifierMembre{
+    margin: 30px;
+    background-color: #3c3c44;
+    color: #988265;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.champ-desactiver{
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #988265;
+    border-color: #988265;
+    -moz-appearance: none;
+    background-color: #3c3c44;
+    background-clip: padding-box;
+    border-radius: var(--bs-border-radius);
+    border-style: solid;
+}
+.modifier{
+    color: #3c3c44; 
+    background-color: #988265; 
+    border-color: #988265;
+
+    padding: 0.5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: var(--bs-border-radius);
+
+}
+.modifier:hover{
+    color: #988265; 
+    background-color: #3c3c44; 
+    border-color: #3c3c44;
+}
+
+.modifier:active{
+    color: #988265; 
+    background-color: #3c3c44; 
+    border-color: #988265;
+}

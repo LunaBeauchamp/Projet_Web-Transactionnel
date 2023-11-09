@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="../../client/css/styleFooter.css">
 	<link rel="stylesheet" href="../../client/css/styleNav.css">
 	<link rel="stylesheet" href="../../client/css/styleTable.css">
+	<link rel="stylesheet" href="../../client/css/styleProfil.css">
 
 
 	<title>EliteAutomobile</title>
@@ -69,8 +70,8 @@
 						</div>
 					</li>
 
-					<li class="nav-item">
-						<i class="fas fa-shopping-cart fa-2x" style="color: #988265;"></i>
+					<li class="nav-item panier">
+						<i class="fas fa-shopping-cart fa-2x " style="color: #988265;"></i>
                         <p id="nbvoiture" class="bulle">5</p>
 					</li>
 

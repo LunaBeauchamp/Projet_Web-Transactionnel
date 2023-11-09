@@ -87,22 +87,23 @@ function remplirLigneBouton(membre){
 
 function afficherProfil(unMembre){
     let contenu = "";
-    contenu +=  `<form class="row g-3"  method="POST">`
+    contenu +=  `<div id="modifierMembre">`
+    contenu +=  `<form class="row g-3"  method="POST"  >`
 	contenu +=  `					<div class="col-md-12">`
 	contenu +=  `						<label for="nom" class="form-label">Nom</label>`
-	contenu +=  `						<input type="text" class="form-control " id="nom" name="nom" value="${unMembre.nom}" disabled>`
+	contenu +=  `						<input type="text" class="champ-desactiver " id="nom" name="nom" value="${unMembre.nom}" disabled>`
 	contenu +=  `					</div>`
 	contenu +=  `					<div class="col-md-12">`
 	contenu +=  `						<label for="prenom" class="form-label">Prénom</label>`
-	contenu +=  `						<input type="text" class="form-control " id="prenom" name="prenom" value="${unMembre.prenom}" disabled>`
+	contenu +=  `						<input type="text" class="champ-desactiver " id="prenom" name="prenom" value="${unMembre.prenom}" disabled>`
 	contenu +=  `					</div>`
 	contenu +=  `					<div class="col-md-12 uchangeable">`
 	contenu +=  `						<label for="courriel" class="form-label">Courriel</label>`
-	contenu +=  `						<input type="text" class="form-control " id="courriel" name="courriel" value="${unMembre.courriel}" disabled>`
+	contenu +=  `						<input type="text" class="champ-desactiver " id="courriel" name="courriel" value="${unMembre.courriel}" disabled>`
 	contenu +=  `					</div>`
     contenu +=  `                   <div class="default" class="col-md-12">`
 	contenu +=  `						<label for="genre" class="form-label">Genre</label>`
-	contenu +=  `						<input type="text" class="form-control " id="genre" name="genre" value="${unMembre.genre}" disabled>`
+	contenu +=  `						<input type="text" class="champ-desactiver " id="genre" name="genre" value="${unMembre.genre}" disabled>`
 	contenu +=  `					</div>`
     contenu +=  `                    <div class="modif"hidden>`
     contenu +=  `                        <div class="form-check">`
@@ -135,20 +136,20 @@ function afficherProfil(unMembre){
 
 	contenu +=  `					<div class="col-md-12">`
 	contenu +=  `						<label for="date" class="form-label">Date de naissance</label>`
-	contenu +=  `						<input type="date" class="form-control " id="date" name="date" value="${unMembre.daten}" disabled>`
+	contenu +=  `						<input type="date" class="champ-desactiver " id="date" name="date" value="${unMembre.daten}" disabled>`
 	contenu +=  `					</div>`
     contenu +=  `                   <div class="default" class="col-md-12">`
 	contenu +=  `						<label for="mdp" class="form-label">Mot de passe</label>`
-	contenu +=  `						<input type="text" class="form-control" name="mdp" value="${unMembre.mdp}" disabled>`
+	contenu +=  `						<input type="text" class="champ-desactiver" name="mdp" value="${unMembre.mdp}" disabled>`
 	contenu +=  `					</div>`
     contenu +=  `                    <div class="modif"hidden>`
 	contenu +=  `					<div class="col-md-12">`
 	contenu +=  `						<label for="mdp" class="form-label">Mot de passe</label>`
-	contenu +=  `						<input type="password" class="form-control " id="mdp" name="mdp">`
+	contenu +=  `						<input type="password" class="champ-desactiver " id="mdp" name="mdp">`
 	contenu +=  `					</div>`
 	contenu +=  `					<div class="col-md-12" >`
 	contenu +=  `						<label for="mdpConfirmer" class="form-label">Confirmation du mot de passe</label>`
-	contenu +=  `						<input type="password" class="form-control " id="mdpConfirmer" name="mdpConfirmer">`
+	contenu +=  `						<input type="password" class="champ-desactiver " id="mdpConfirmer" name="mdpConfirmer">`
 	contenu +=  `					</div>`
     contenu +=  `					<br />`
 	contenu +=  `					<div class="col-md-6">`
@@ -156,7 +157,8 @@ function afficherProfil(unMembre){
 	contenu +=  `					</div>`
     contenu +=  `                   </div>`
 	contenu +=  `				</form>`
-    contenu +=  `						<button class="btn btn-primary" onclick="">Modifier</button>`
+    contenu +=  `				<button class="modifier" onclick="">Modifier</button>`
+    contenu +=  `              </div>`
     document.getElementById('contenu').innerHTML = "";
     document.getElementById('contenu').innerHTML = contenu;
 }
