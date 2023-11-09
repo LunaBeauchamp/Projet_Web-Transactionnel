@@ -98,4 +98,17 @@ li.nav-item{
 li.nav-item p{
   margin: auto;
 }
+.bulle{
+  height: 22px;
+  width: 22px;
+  /* background-color: #988265; */
+  /* color: #3c3c44; */
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  top: 2px;
+  right: 784px;
+  background: red;
+  color: white;
+}
 
