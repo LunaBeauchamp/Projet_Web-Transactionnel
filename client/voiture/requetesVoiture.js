@@ -12,7 +12,6 @@ for (let uneVoiture of liste){
             prix:uneVoiture.getElementsByTagName('prix')[0].firstChild.nodeValue,
             quantite:uneVoiture.getElementsByTagName('quantite')[0].firstChild.nodeValue
         })
-        
     }
 } 
 }
@@ -21,9 +20,10 @@ let chargerVoituresAJAX = (mode, chemin) => {
 $.ajax({
     type : "POST",
     url  : chemin,
-    data : {"action":"lister"},
+    data : {"type":"voiture","action":"lister"},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
-    success : (xmlVoiture) => {//alert(xmlFilms);
+    success : (xmlVoiture) => {
+        //alert(xmlVoiture);
         makeListe(xmlVoiture);
         switch(mode){
             case "cards":
@@ -44,19 +44,21 @@ $.ajax({
 }
 
 let modifierVoituresAJAX = (id,image) => {
-    id= parseInt(id);
-    let formFilm = new FormData(document.getElementById('formModif'));
-	formFilm.append('action','modifier');
-    formFilm.append('idVoiture',id);
-    formFilm.append('vieilleImage',image);
+    id = parseInt(id);
+    let formVoiture = new FormData(document.getElementById('formModif'));
+	formVoiture.append('action','modifier');
+    formVoiture.append('idVoiture',id);
+    formVoiture.append('vieilleImage',image);
+    formVoiture.append('type','voiture');
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
-        data : formFilm,
-        contentType : false,
-		processData : false,
+        data : formVoiture,
+        processData: false,
+        contentType: false,
         dataType : "xml", //text pour voir si bien formé même chose pour xml
-        success : (xmlVoiture) => {//alert(xmlVoiture);
+        success : (xmlVoiture) => {
+            alert(xmlVoiture);
             montrerVue('enlever',xmlVoiture)
             chargerVoituresAJAX('table','../../routes.php');
         },
@@ -86,7 +88,7 @@ let supprimerVoituresAJAX = (id) => {
         $.ajax({
             type : "POST",
             url  : "../../routes.php",
-            data : {"action":"enlever",
+            data : {"type":"voiture","action":"enlever",
                     "idVoiture":id},
             dataType : "xml",
             success : (xmlVoiture) => {
@@ -112,16 +114,18 @@ let supprimerVoituresAJAX = (id) => {
 let ajouterVoituresAJAX = () => {
     let formVoiture = new FormData(document.getElementById('formEnreg'));
     formVoiture.append('action','enregistrer');
+    formVoiture.append('type','voiture');
     $.ajax({
         type : "POST",
         url  : "../../routes.php",
         data : formVoiture,
-        async : false,
-        cache : false,
-        contentType : false,
-        processData : false,
         dataType : "xml",
+        processData: false,
+        contentType: false,
+        
         success : (xmlVoiture) => {
+            // alert(xmlVoiture)
+            $('#enregModal').modal('hide');
             chargerVoituresAJAX('table','../../routes.php');
             montrerVue('enlever',xmlVoiture)
         },
@@ -136,7 +140,7 @@ function listerOneVoituresAJAX (id) {
 $.ajax({
     type : "POST",
     url  : "../../routes.php",
-    data : {"action":"lister_Voiture",
+    data : {"type":"voiture","action":"lister_Voiture",
             "idVoiture":id},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
     success : (xmlVoiture) => {//alert(xmlFilms);
@@ -164,7 +168,7 @@ let mot = document.getElementById("chercher").value
 $.ajax({
     type : "POST",
     url  : "../../routes.php",
-    data : {"action":"chercher_Voiture",
+    data : {"type":"voiture","action":"chercher_Voiture",
             "mot":mot},
     dataType : "xml", //text pour voir si bien formé même chose pour xml
     success : (xmlVoiture) => {

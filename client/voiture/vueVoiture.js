@@ -10,7 +10,7 @@ function montrerFormEnreg(){
              </div>
              <div class="modal-body">
                  <span id="msgErrEnreg"></span>
-                     <form class="row g-3" id="formEnreg" onSubmit="ajouterVoituresAJAX();" method="POST">
+                     <form class="row g-3" id="formEnreg" method="POST">
                      <div class="col-md-12">
                      <label for="nomVoiture" class="form-label">Nom</label>
                      <input type="text" class="form-control is-valid" id="nomVoiture" name="nomVoiture" required>
@@ -33,7 +33,7 @@ function montrerFormEnreg(){
                  </div>
                  <br />
                  <div class="col-md-6">
-                     <button class="btn btn-primary" type="submit">Enregistrer</button>
+                     <button class="btn btn-primary" type="button" onClick="ajouterVoituresAJAX();">Enregistrer</button>
                  </div>
                  <div class="col-md-6">
                      <button class="btn btn-danger" type="reset">Vider</button>
