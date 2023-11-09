@@ -61,7 +61,7 @@
 						</ul>
 					</li>
 
-                    <li>
+                    <li class="nav-item">
 						<div class="input-group search-bar">
 							<input type="search" id="chercher" class="form-control rounded search" placeholder="Rechercher..." aria-label="Search" aria-describedby="search-addon" />
 							<button type="button"  class="btn btn-outline-primary search" onclick="chercherVoituresAJAX()">Rechercher</button>
@@ -78,10 +78,10 @@
 					</li>
 
                     <li class="nav-item">
-						<p id="nomMembre" aria-current="page"><?php echo $_SESSION['nom']; ?></p><!--Afficher le nom dynamiquement-->
+						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?></p><!--Afficher le nom dynamiquement-->
 					</li>
                     <li class="nav-item">
-						<p id="prenomMembre" aria-current="page"><?php echo $_SESSION['prenom']; ?></p><!--Afficher le prénom dynamiquement-->
+						<p id="prenomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['prenom']; ?></p><!--Afficher le prénom dynamiquement-->
 					</li>
 				
 					<li class="nav-item">
