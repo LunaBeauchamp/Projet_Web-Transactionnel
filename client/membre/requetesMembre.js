@@ -126,12 +126,11 @@ let chargerUnMembreAJAX = (courriel) => {
         data : {"type":"membre","action":"lister_un","courriel":courriel},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlMembre) => {
-            //(xmlMembre);
             msg = xmlMembre.getElementsByTagName('msg');
                 if (msg[0] != undefined){
                     afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
                 }
-            liste = makeListeMembre(xmlMembre);
+            liste = xmlMembre.getElementsByTagName('membre');;
             for (let unMembre of liste){
                 membreActif ={
                 nom :unMembre.getElementsByTagName('nom')[0].firstChild.nodeValue,
@@ -139,8 +138,10 @@ let chargerUnMembreAJAX = (courriel) => {
                 courriel :unMembre.getElementsByTagName('courriel')[0].firstChild.nodeValue,
                 genre :unMembre.getElementsByTagName('genre')[0].firstChild.nodeValue,
                 daten :unMembre.getElementsByTagName('daten')[0].firstChild.nodeValue,
+                mdp :unMembre.getElementsByTagName('motdepasse')[0].firstChild.nodeValue,
                 }
             } 
+            afficherProfil(membreActif);
         },
         fail : (err) => {
             console.log("Erreur : "+err)

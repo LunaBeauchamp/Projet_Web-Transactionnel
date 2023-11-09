@@ -174,7 +174,7 @@
         function Mdl_ListerUn($courriel){
             global $connexion;
             try{
-                $requete = "SELECT *  FROM membres  WHERE courriel = ?";
+                $requete = "SELECT membres.*, connexion.motdepasse FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel WHERE membres.courriel = ?";
                 $stmt = $connexion->prepare($requete);
                 $stmt->bind_param("s",$courriel);
                 $stmt->execute();

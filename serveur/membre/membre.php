@@ -75,7 +75,7 @@
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="">Profil</a><!--Afficher le profil avec option de modification-->
+						<a class="nav-link active" aria-current="page" href="javascript:chargerUnMembreAJAX('<?php echo $_SESSION['courriel']; ?>')">Profil</a><!--Afficher le profil avec option de modification-->
 					</li>
 
                     <li class="nav-item">
