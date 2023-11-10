@@ -88,7 +88,7 @@ function remplirLigneBouton(membre){
 function afficherProfil(unMembre){
     let contenu = "";
     contenu +=  `           <div id="modifierMembre">`
-    contenu +=  `               <form class="row g-3"  method="POST" onSubmit="vérifierModification()" >`
+    contenu +=  `               <form class="row g-3"  method="POST" id="formModifMembre" >`
     contenu +=  `					<div class="col-md-12 uchangeable">`
 	contenu +=  `						<label for="courriel" class="form-label">Courriel</label>`
 	contenu +=  `						<input type="text" class="champ desactiver " id="courriel" name="courriel" value="${unMembre.courriel}" disabled>`
@@ -150,7 +150,7 @@ function afficherProfil(unMembre){
 	contenu +=  `					</div>`
     contenu +=  `					<br />`
 	contenu +=  `					<div class="col-md-6">`
-	contenu +=  `						<button class="modifier" type="submit">Enregistrer</button>`
+	contenu +=  `						<button class="modifier" onclick="modifierMembreAJAX('${unMembre.courriel}')">Enregistrer</button>`// type="submit"
 	contenu +=  `					</div>`
     contenu +=  `                   </div>`
 	contenu +=  `				</form>`
@@ -195,14 +195,4 @@ function afficherModifier(){
     for (div of divsModif){
         div.hidden = false; 
     }
-}
-
-function vérifierModification(){
-
-    mdp = document.getElementById("mdp").value;
-    if (!validerFormEnreg()&&this.length !== 0){
-        return false();
-    }
-    return true
-
 }

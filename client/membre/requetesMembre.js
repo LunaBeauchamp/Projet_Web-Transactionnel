@@ -126,6 +126,7 @@ let chargerUnMembreAJAX = (courriel) => {
         data : {"type":"membre","action":"lister_un","courriel":courriel},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlMembre) => {
+            //alert(xmlMembre)
             msg = xmlMembre.getElementsByTagName('msg');
                 if (msg[0] != undefined){
                     afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
@@ -147,4 +148,27 @@ let chargerUnMembreAJAX = (courriel) => {
             console.log("Erreur : "+err)
         }
     })
-    }
+}
+let modifierMembreAJAX = (courriel) => {
+
+    let formMembre = new FormData(document.getElementById('formModifMembre'));
+    formMembre.append('courriel',courriel);
+	formMembre.append('action','modifier');
+    formMembre.append('type','membre');
+
+    $.ajax({
+        type : "POST",
+        url  : "../../routes.php",
+        data : formMembre,
+        processData: false,
+        contentType: false,
+        dataType : "text", //text pour voir si bien formé même chose pour xml
+        success : (xmlMembre) => {
+            alert(xmlMembre);
+            afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+        },
+        fail : (err) => {
+           console.log("Erreur : "+err)
+        }
+    })
+}
