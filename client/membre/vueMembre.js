@@ -88,7 +88,11 @@ function remplirLigneBouton(membre){
 function afficherProfil(unMembre){
     let contenu = "";
     contenu +=  `           <div id="modifierMembre">`
-    contenu +=  `               <form class="row g-3"  method="POST"  >`
+    contenu +=  `               <form class="row g-3"  method="POST" onSubmit="vérifierModification()" >`
+    contenu +=  `					<div class="col-md-12 uchangeable">`
+	contenu +=  `						<label for="courriel" class="form-label">Courriel</label>`
+	contenu +=  `						<input type="text" class="champ desactiver " id="courriel" name="courriel" value="${unMembre.courriel}" disabled>`
+	contenu +=  `					</div>`
 	contenu +=  `					<div class="col-md-12">`
 	contenu +=  `						<label for="nom" class="form-label">Nom</label>`
 	contenu +=  `						<input type="text" class="champ desactiver changer" id="nom" name="nom" value="${unMembre.nom}" disabled>`
@@ -96,10 +100,6 @@ function afficherProfil(unMembre){
 	contenu +=  `					<div class="col-md-12">`
 	contenu +=  `						<label for="prenom" class="form-label">Prénom</label>`
 	contenu +=  `						<input type="text" class="champ desactiver  changer" id="prenom" name="prenom" value="${unMembre.prenom}" disabled>`
-	contenu +=  `					</div>`
-	contenu +=  `					<div class="col-md-12 uchangeable">`
-	contenu +=  `						<label for="courriel" class="form-label">Courriel</label>`
-	contenu +=  `						<input type="text" class="champ desactiver " id="courriel" name="courriel" value="${unMembre.courriel}" disabled>`
 	contenu +=  `					</div>`
     contenu +=  `                   <div class="default" class="col-md-12">`
 	contenu +=  `						<label for="genre" class="form-label">Genre</label>`
@@ -160,6 +160,7 @@ function afficherProfil(unMembre){
     document.getElementById('contenu').innerHTML = contenu;
 }
 function afficherModifier(){
+    //check le genre présélectionner
     genre = document.getElementById("genre").value;
     switch (genre){
         case "homme":
@@ -176,24 +177,32 @@ function afficherModifier(){
             break;
     }
 
-    inputs = document.getElementsByClassName("default")
-    for (input of inputs){
-        input.disabled=false; 
-    }
-
+    //activer les champ qui sont modifiable
     inputs = document.getElementsByClassName("changer")
     for (input of inputs){
         input.disabled=false; 
         input.classList.remove("desactiver");
         input.classList.add("activer");
     }
+
+    //cacher les section 
     inputs = document.getElementsByClassName("hide")
     for (input of inputs){
         input.hidden = true; 
     }
+
     divsModif = document.getElementsByClassName("modif")
     for (div of divsModif){
         div.hidden = false; 
     }
+}
+
+function vérifierModification(){
+
+    mdp = document.getElementById("mdp").value;
+    if (!validerFormEnreg()&&this.length !== 0){
+        return false();
+    }
+    return true
 
 }

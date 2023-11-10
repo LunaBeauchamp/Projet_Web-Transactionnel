@@ -2,7 +2,7 @@ let validerFormEnreg = () => {
     let etat = true;
     const mdp = document.getElementById('mdp').value;
     const mdpc = document.getElementById('mdpConfirmer').value;
-    const msgPass = document.getElementById('msgPass');
+    const msgPass = document.getElementById('msg');
     
     if (mdp !== mdpc) {
         etat = false;
