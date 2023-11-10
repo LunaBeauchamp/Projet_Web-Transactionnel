@@ -223,13 +223,9 @@
                 if ($identique){
                     try{
                         global $connexion;
-                        $msg="d";
                         $requete = "UPDATE connexion set motdepasse=? WHERE courriel=?";
-                        $msg="s";
                         $stmt = $connexion->prepare($requete);
-                        $msg="a";
                         $stmt->bind_param("ss",$mdpModif,$courriel);
-                        $msg="gfd";
                         $stmt->execute();
                         $msg="vidgfde";
                     } catch(Exception $e) {
@@ -238,15 +234,15 @@
                 }
                 try{
                     global $connexion;
-                    $msg = "c";
                     $requete = "UPDATE membres set nom=?, prenom=?, genre=?, daten=? WHERE courriel=?";
                     $stmt = $connexion->prepare($requete);
-                    $msg = "requete";
                     $msg = $nom.$prenom.$genre.$daten.$courriel;
                     $stmt->bind_param("sssss",$nom,$prenom,$genre,$daten,$courriel);
-                    $msg = "binded";
                     $stmt->execute();
                     $msg="Membre modifier";
+                    session_start();
+                    $_SESSION['prenom'] = $prenom;
+                    $_SESSION['nom'] = $nom;
                 } catch(Exception $e) {
                     $msg="Probléme pour modifier le membre";
                 }

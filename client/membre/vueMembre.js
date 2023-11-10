@@ -196,3 +196,4 @@ function afficherModifier(){
         div.hidden = false; 
     }
 }
+
