@@ -6,20 +6,29 @@
     padding: 20px;
 }
 
-.champ-desactiver{
+.champ{
     width: 100%;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #988265;
     border-color: #988265;
     -moz-appearance: none;
-    background-color: #3c3c44;
     background-clip: padding-box;
     border-radius: var(--bs-border-radius);
     border-style: solid;
 }
+
+.desactiver{
+    color: #988265;
+    background-color: #3c3c44;
+}
+
+.activer{
+    color: #3c3c44;
+    background-color: #988265;
+}
+
 .modifier{
     color: #3c3c44; 
     background-color: #988265; 

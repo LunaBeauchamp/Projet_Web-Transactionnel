@@ -15,7 +15,7 @@ let validerFormEnreg = () => {
     return etat;
 }
 
-let montrerToast = (msg) =>{
+let montrerToats = (msg) =>{
 	if(msg.length > 0){
 		let textToast = document.getElementById("textToast");
 		var toastElList = [].slice.call(document.querySelectorAll('.toast'))
