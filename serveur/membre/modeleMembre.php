@@ -214,6 +214,7 @@
                 if ($identique&&strcmp($mdpModif,$mdpConfirm)!=0){
                     $msg="Mot de passe non identique";
                     $identique = false;
+                    
                 }
                 if ($identique&&strcmp($membre->motdepasse,$mdpConfirm)==0){
                     $msg="Choisissez un nouveau mot de passe";
@@ -222,16 +223,19 @@
                 if ($identique){
                     try{
                         global $connexion;
-                        $requete = "UPDATE connexion SET motdepasse=? WHERE courriel=?";
-                        $stmt2 = $connexion->prepare($requete);
-                        $stmt->bind_param("s",$courriel);
+                        $msg="d";
+                        $requete = "UPDATE connexion set motdepasse=? WHERE courriel=?";
+                        $msg="s";
+                        $stmt = $connexion->prepare($requete);
+                        $msg="a";
+                        $stmt->bind_param("ss",$mdpModif,$courriel);
+                        $msg="gfd";
                         $stmt->execute();
-                        $reponse = $stmt->get_result();
+                        $msg="vidgfde";
                     } catch(Exception $e) {
                         $msg="Probléme pour modifier le mot de passe";
                     }
                 }
-                $msg = "fds";
                 try{
                     global $connexion;
                     $msg = "c";
