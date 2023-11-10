@@ -166,6 +166,7 @@ let modifierMembreAJAX = (courriel) => {
         success : (xmlMembre) => {
             alert(xmlMembre);
             afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+            updateNav(formMembre.get("nom"),formMembre.get("prenom"));
         },
         fail : (err) => {
            console.log("Erreur : "+err)

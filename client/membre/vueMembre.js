@@ -197,3 +197,7 @@ function afficherModifier(){
     }
 }
 
+function updateNav(nom, prenom){
+    document.getElementById("nomMembre").innerText = nom
+    document.getElementById("prenomMembre").innerText = prenom
+}
