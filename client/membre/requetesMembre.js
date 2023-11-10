@@ -164,7 +164,8 @@ let modifierMembreAJAX = (courriel) => {
         contentType: false,
         dataType : "text", //text pour voir si bien formé même chose pour xml
         success : (xmlMembre) => {
-            alert(xmlMembre);
+            //alert(xmlMembre);
+            //alert(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
             afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
             updateNav(formMembre.get("nom"),formMembre.get("prenom"));
         },

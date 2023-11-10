@@ -201,7 +201,7 @@
                     $reponse = $stmt->get_result();
                     $membre = $reponse->fetch_object();
                 } catch(Exception $e) {
-                    $msg="Probléme pour obtenir les membres";
+                    $msg=$msg."Probléme pour obtenir les membres";
                 }
                 $nom = $membreModif->getNom();
                 $prenom = $membreModif->getPrenom();
@@ -212,12 +212,12 @@
                     $identique = false;
                 }
                 if ($identique&&strcmp($mdpModif,$mdpConfirm)!=0){
-                    $msg="Mot de passe non identique";
+                    $msg=$msg."Mot de passe non identique";
                     $identique = false;
                     
                 }
                 if ($identique&&strcmp($membre->motdepasse,$mdpConfirm)==0){
-                    $msg="Choisissez un nouveau mot de passe";
+                    $msg=$msg."Choisissez un nouveau mot de passe";
                     $identique = false;
                 }
                 if ($identique){
@@ -227,19 +227,17 @@
                         $stmt = $connexion->prepare($requete);
                         $stmt->bind_param("ss",$mdpModif,$courriel);
                         $stmt->execute();
-                        $msg="vidgfde";
                     } catch(Exception $e) {
-                        $msg="Probléme pour modifier le mot de passe";
+                        $msg=$msg."Probléme pour modifier le mot de passe";
                     }
                 }
                 try{
                     global $connexion;
                     $requete = "UPDATE membres set nom=?, prenom=?, genre=?, daten=? WHERE courriel=?";
                     $stmt = $connexion->prepare($requete);
-                    $msg = $nom.$prenom.$genre.$daten.$courriel;
                     $stmt->bind_param("sssss",$nom,$prenom,$genre,$daten,$courriel);
                     $stmt->execute();
-                    $msg="Membre modifier";
+                    $msg=$msg."Membre modifier";
                     session_start();
                     $_SESSION['prenom'] = $prenom;
                     $_SESSION['nom'] = $nom;
@@ -248,7 +246,7 @@
                 }
             }
             catch(Exception $e){
-                $msg.=$e." :Probléme pour modifier";
+                $msg=$e." :Probléme pour modifier";
             }
             finally{
                 $xml=$this->genererMessageXML($msg);
