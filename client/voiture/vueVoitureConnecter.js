@@ -133,6 +133,9 @@ let ajouterPanier = (index) => {
     let voitureAAjouterPanier = listeVoitures[index];
     let itemsPanier = JSON.parse(localStorage.getItem('itemsPanier')) || [];
 
+    voitureAAjouterPanier.quantite = 1;
+    voitureAAjouterPanier.image = "../../serveur/pochettes/" + voitureAAjouterPanier.image;
+
     itemsPanier.push(voitureAAjouterPanier);
     localStorage.setItem('itemsPanier', JSON.stringify(itemsPanier));
     location.reload();

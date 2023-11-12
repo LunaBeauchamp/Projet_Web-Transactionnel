@@ -16,19 +16,16 @@
 	<link rel="stylesheet" href="../../client/css/styleNav.css">
 	<link rel="stylesheet" href="../../client/css/styleTable.css">
 	<link rel="stylesheet" href="../../client/css/styleCard.css">
+	<link rel="stylesheet" href="../../client/css/stylePanier.css">
 
 
 	<title>EliteAutomobile</title>
 	<script src="../../client/utilitaires/jquery-3.6.3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-	<script src="../../client/voiture/requetesVoiture.js"></script>
-	<script src="../../client/voiture/vueVoitureConnecter.js"></script>
-	<script src="../../client/membre/vueMembre.js"></script>
-	<script src="../../client/membre/requetesMembre.js"></script>
 </head>
 
-<body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX('cards','../../routes.php');">
+<body class="p-0 m-0 border-0 bd-example m-0 border-0">
 
 	<!-- Header -->
 	<header>
@@ -48,37 +45,15 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="">Accueil</a><!--Afficher les produits-->
+						<a class="nav-link active" aria-current="page" href="../membre/membre.php">Accueil</a>
 					</li>
-
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-							aria-expanded="false">
-							Lister par catégorie
-						</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="javascript:listerPar('id')">ID</a></li>
-							<li><a class="dropdown-item" href="javascript:listerPar('nom')">Nom</a></li>
-							<li><a class="dropdown-item" href="javascript:listerPar('prix')">Prix</a></li>
-							<li><a class="dropdown-item" href="javascript:listerPar('quantite')">Quantité</a></li>
-						</ul>
-					</li>
-
-                    <li class="nav-item">
-						<div class="input-group search-bar">
-							<input type="search" id="chercher" class="form-control rounded search" placeholder="Rechercher..." aria-label="Search" aria-describedby="search-addon" />
-							<button type="button"  class="btn btn-outline-primary search" onclick="chercherVoituresAJAX()">Rechercher</button>
-						</div>
-					</li>
-
 					
-
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="">Profil</a><!--Afficher le profil avec option de modification-->
+						<a class="nav-link active" aria-current="page" href="">Profil</a>
 					</li>
 
                     <li class="nav-item">
-						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?>, <?php echo $_SESSION['prenom']; ?></p><!--Afficher le nom et prenom dynamiquement-->
+						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?>, <?php echo $_SESSION['prenom']; ?></p>
 					</li>
                     
 				
@@ -86,12 +61,10 @@
 						<a class="nav-link" href="../../index.php">Déconnection</a>
 					</li>
 
-					<li class="nav-item" >
-						<a class="nav-link" href="../panier/page_panier.php">
-							<div class="cart-icon" id="panierSpanIcon">
-								<i class="fas fa-shopping-cart fa-2x"></i>
-							</div>
-						</a>
+					<li class="nav-item">
+						<div class="cart-icon" id="panierSpanIcon">
+							<i class="fas fa-shopping-cart fa-2x"></i>
+						</div>
 					</li>
 
 				</ul>
@@ -117,13 +90,9 @@
 		</div>
 	</div>
 
-	<!-- Cards -->
-	<div class="msg" id="msg">
-	</div>
-	<div class="formulaire" id="formulaire">
-	</div>
-	<div class="card-box" id="contenu">
-	</div>
+	<!-- Table -->
+	<div id="panierTable"></div>
+	<div id="prixTotal"></div>
 
 	<!-- Footer -->
 	<footer class="footer-16371">
@@ -169,6 +138,123 @@
 		itemsSpanPanierCount.classList.add("cart-badge");
 		itemsSpanPanierCountDiv.appendChild(itemsSpanPanierCount);
 	</script>
+	<script>
+		const panierTableDiv = document.getElementById('panierTable');
+		if (itemsPanier.length == 0) {
+			let h2VidePanier = document.createElement('h2');
+			h2VidePanier.textContent = "Le panier est vide."
+			panierTableDiv.appendChild(h2VidePanier);
+		} else {
+			const table = document.createElement('table');
+
+			const thead = table.createTHead();
+			const headerRow = thead.insertRow();
+			for (const key in itemsPanier[0]) {
+				const th = document.createElement('th');
+				th.textContent = key;
+				headerRow.appendChild(th);
+			}
+
+			const actionHeader = document.createElement('th');
+			actionHeader.textContent = 'Action';
+			headerRow.appendChild(actionHeader);
+
+			const tbody = table.createTBody();
+			itemsPanier.forEach((item, index) => {
+				const row = tbody.insertRow();
+				for (const key in item) {
+					const cell = row.insertCell();
+					if (key.toLowerCase() === 'image') {
+						const img = document.createElement('img');
+						img.src = item[key];
+						img.alt = 'Image';
+						img.width = 150;
+						img.height = 150;
+						cell.appendChild(img);
+					} else {
+						cell.textContent = item[key];
+					}
+				}
+
+				const actionCell = row.insertCell();
+				const button = document.createElement('button');
+				button.textContent = 'Supprimer';
+				button.style.backgroundColor = 'red';
+				button.style.color = 'white';
+
+				button.addEventListener('click', () => {
+					itemsPanier.splice(index, 1);
+					localStorage.setItem('itemsPanier', JSON.stringify(itemsPanier));
+					location.reload();
+				});
+
+				actionCell.appendChild(button);
+			});
+
+			panierTableDiv.appendChild(table);
+		}
+
+		const prixTotalDiv = document.getElementById('prixTotal');
+		const totalSansTaxeH4 = document.createElement('h4');
+		totalSansTaxeH4.textContent = 'Sous-total: ' + calculateSousTotalPrice(itemsPanier) + '$';
+		const tpsH4 = document.createElement('h4');
+		tpsH4.textContent = 'TPS: ' + calculateTPSPrice(itemsPanier) + '$';
+		const tvqH4 = document.createElement('h4');
+		tvqH4.textContent = 'TVQ: ' + calculateTVQPrice(itemsPanier) + '$';
+		const totalH2 = document.createElement('h2');
+		totalH2.textContent = 'Prix total: ' + calculateTotalPrice(itemsPanier) + '$';
+
+		const buttonPaypal = document.createElement('button');
+		buttonPaypal.textContent = "Payer (avec Paypal)";
+		buttonPaypal.style.backgroundColor = '#988265';
+		buttonPaypal.style.color = 'white';
+		prixTotalDiv.appendChild(totalSansTaxeH4);
+		prixTotalDiv.appendChild(tpsH4);
+		prixTotalDiv.appendChild(tvqH4);
+		prixTotalDiv.appendChild(totalH2);
+		prixTotalDiv.appendChild(buttonPaypal);
+
+		function calculateSousTotalPrice(items) {
+			let totalPrice = 0;
+			items.forEach(item => {
+				totalPrice += item.prix * item.quantite;
+			});
+			return totalPrice.toFixed(2);
+		}
+
+		function calculateTPSPrice(items) {
+			let totalPrice = 0;
+			items.forEach(item => {
+				totalPrice += item.prix * item.quantite;
+				totalPrice = totalPrice * (5/100);
+			});
+			return totalPrice.toFixed(2);
+		}
+
+		function calculateTVQPrice(items) {
+			let totalPrice = 0;
+			items.forEach(item => {
+				totalPrice += item.prix * item.quantite;
+				totalPrice = totalPrice * (10/100);
+			});
+			return totalPrice.toFixed(2);
+		}
+
+		function calculateTotalPrice(items) {
+			let totalPrice = 0;
+			items.forEach(item => {
+				totalPrice += item.prix * item.quantite;
+				let tps = totalPrice * (5/100);
+				let tvq = totalPrice * (10/100);
+				totalPrice = totalPrice + tps + tvq;
+			});
+			return totalPrice.toFixed(2);
+		}
+
+		
+	</script>
+
+
 </body>
 
 </html>
