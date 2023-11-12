@@ -115,7 +115,7 @@ let remplirCard = (uneVoiture)=> {
                  rep +=' <p>Commence a <span>'+uneVoiture.prix +'$</span></p>';
                  rep +=' </div>';
                  rep +=' <div class="product-achat">';
-                 rep +=' <a href="#" class="btn btn-primary">Acheter</a>';
+                 rep +=' <a href="/serveur/membre/page_connexion.php" class="btn btn-primary">Afficher plus de details</a>';
                  rep +=' </div>';
                  rep +=' </div>';
              
