@@ -10,10 +10,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 	<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 	<link rel="stylesheet" href="../../client/css/styleFooter.css">
 	<link rel="stylesheet" href="../../client/css/styleNav.css">
 	<link rel="stylesheet" href="../../client/css/styleTable.css">
+	<link rel="stylesheet" href="../../client/css/styleCard.css">
 	<link rel="stylesheet" href="../../client/css/styleProfil.css">
 
 
@@ -22,7 +24,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 	<script src="../../client/voiture/requetesVoiture.js"></script>
-	<script src="../../client/voiture/vueVoiture.js"></script>
+	<script src="../../client/voiture/vueVoitureConnecter.js"></script>
 	<script src="../../client/membre/vueMembre.js"></script>
 	<script src="../../client/membre/requetesMembre.js"></script>
 </head>
@@ -70,6 +72,7 @@
 						</div>
 					</li>
 
+					
 					<li class="nav-item panier">
 						<i class="fas fa-shopping-cart fa-2x " style="color: #988265;"></i>
                         <p id="nbvoiture" class="bulle">5</p>
@@ -80,14 +83,20 @@
 					</li>
 
                     <li class="nav-item">
-						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?></p><!--Afficher le nom dynamiquement-->
+						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?>, <?php echo $_SESSION['prenom']; ?></p><!--Afficher le nom et prenom dynamiquement-->
 					</li>
-                    <li class="nav-item">
-						<p id="prenomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['prenom']; ?></p><!--Afficher le prénom dynamiquement-->
-					</li>
+                    
 				
 					<li class="nav-item">
 						<a class="nav-link" href="../../index.php">Déconnection</a>
+					</li>
+
+					<li class="nav-item" >
+						<a class="nav-link" href="../panier/page_panier.php">
+							<div class="cart-icon" id="panierSpanIcon">
+								<i class="fas fa-shopping-cart fa-2x"></i>
+							</div>
+						</a>
 					</li>
 
 				</ul>
@@ -118,7 +127,7 @@
 	</div>
 	<div class="formulaire" id="formulaire">
 	</div>
-	<div  id="contenu">
+	<div class="card-box" id="contenu">
 	</div>
 
 	<!-- Footer -->
@@ -156,6 +165,15 @@
 			</div>
 		</div>
 	</footer>
+
+	<script>
+		let itemsPanier = JSON.parse(localStorage.getItem('itemsPanier')) || [];
+		let itemsSpanPanierCountDiv = document.getElementById("panierSpanIcon");
+		let itemsSpanPanierCount = document.createElement("span");
+		itemsSpanPanierCount.textContent = itemsPanier.length;
+		itemsSpanPanierCount.classList.add("cart-badge");
+		itemsSpanPanierCountDiv.appendChild(itemsSpanPanierCount);
+	</script>
 </body>
 
 </html>
