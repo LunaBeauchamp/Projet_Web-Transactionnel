@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="../../client/css/styleNav.css">
 	<link rel="stylesheet" href="../../client/css/styleTable.css">
 	<link rel="stylesheet" href="../../client/css/styleCard.css">
+	<link rel="stylesheet" href="../../client/css/styleProfil.css">
 
 
 	<title>EliteAutomobile</title>
@@ -72,9 +73,13 @@
 					</li>
 
 					
+					<li class="nav-item panier">
+						<i class="fas fa-shopping-cart fa-2x " style="color: #988265;"></i>
+                        <p id="nbvoiture" class="bulle">5</p>
+					</li>
 
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="">Profil</a><!--Afficher le profil avec option de modification-->
+						<a class="nav-link active" aria-current="page" href="javascript:chargerUnMembreAJAX('<?php echo $_SESSION['courriel']; ?>')">Profil</a><!--Afficher le profil avec option de modification-->
 					</li>
 
                     <li class="nav-item">

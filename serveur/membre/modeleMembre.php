@@ -174,7 +174,7 @@
         function Mdl_ListerUn($courriel){
             global $connexion;
             try{
-                $requete = "SELECT *  FROM membres  WHERE courriel = ?";
+                $requete = "SELECT membres.*, connexion.motdepasse FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel WHERE membres.courriel = ?";
                 $stmt = $connexion->prepare($requete);
                 $stmt->bind_param("s",$courriel);
                 $stmt->execute();
@@ -183,6 +183,73 @@
             } catch(Exception $e) {
                 $xml = $this->genererMessageXML("Probléme pour obtenir les membres");
             }finally{
+                Header('Content-type: text/xml');
+                return $xml->asXML();
+            }
+        }
+
+        function Mdl_ModifierMembre(Membre $membreModif, String $mdpModif , String $mdpConfirm){
+            try{
+                $msg = "";
+                $courriel = $membreModif->getCourriel();
+                try{
+                    global $connexion;
+                    $requete = "SELECT membres.*, connexion.motdepasse FROM connexion INNER JOIN membres ON connexion.courriel = membres.courriel WHERE membres.courriel = ?";
+                    $stmt = $connexion->prepare($requete);
+                    $stmt->bind_param("s",$courriel);
+                    $stmt->execute();
+                    $reponse = $stmt->get_result();
+                    $membre = $reponse->fetch_object();
+                } catch(Exception $e) {
+                    $msg=$msg."Probléme pour obtenir les membres";
+                }
+                $nom = $membreModif->getNom();
+                $prenom = $membreModif->getPrenom();
+                $genre = $membreModif->getGenre();
+                $daten = $membreModif->getDaten();
+                $identique = true;
+                if (empty($mdpModif)){
+                    $identique = false;
+                }
+                if ($identique&&strcmp($mdpModif,$mdpConfirm)!=0){
+                    $msg=$msg."Mot de passe non identique";
+                    $identique = false;
+                    
+                }
+                if ($identique&&strcmp($membre->motdepasse,$mdpConfirm)==0){
+                    $msg=$msg."Choisissez un nouveau mot de passe";
+                    $identique = false;
+                }
+                if ($identique){
+                    try{
+                        global $connexion;
+                        $requete = "UPDATE connexion set motdepasse=? WHERE courriel=?";
+                        $stmt = $connexion->prepare($requete);
+                        $stmt->bind_param("ss",$mdpModif,$courriel);
+                        $stmt->execute();
+                    } catch(Exception $e) {
+                        $msg=$msg."Probléme pour modifier le mot de passe";
+                    }
+                }
+                try{
+                    global $connexion;
+                    $requete = "UPDATE membres set nom=?, prenom=?, genre=?, daten=? WHERE courriel=?";
+                    $stmt = $connexion->prepare($requete);
+                    $stmt->bind_param("sssss",$nom,$prenom,$genre,$daten,$courriel);
+                    $stmt->execute();
+                    $msg=$msg."Membre modifier";
+                    session_start();
+                    $_SESSION['prenom'] = $prenom;
+                    $_SESSION['nom'] = $nom;
+                } catch(Exception $e) {
+                    $msg="Probléme pour modifier le membre";
+                }
+            }
+            catch(Exception $e){
+                $msg=$e." :Probléme pour modifier";
+            }
+            finally{
+                $xml=$this->genererMessageXML($msg);
                 Header('Content-type: text/xml');
                 return $xml->asXML();
             }

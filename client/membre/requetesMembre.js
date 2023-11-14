@@ -126,12 +126,12 @@ let chargerUnMembreAJAX = (courriel) => {
         data : {"type":"membre","action":"lister_un","courriel":courriel},
         dataType : "xml", //text pour voir si bien formé même chose pour xml
         success : (xmlMembre) => {
-            //(xmlMembre);
+            //alert(xmlMembre)
             msg = xmlMembre.getElementsByTagName('msg');
                 if (msg[0] != undefined){
                     afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
                 }
-            liste = makeListeMembre(xmlMembre);
+            liste = xmlMembre.getElementsByTagName('membre');;
             for (let unMembre of liste){
                 membreActif ={
                 nom :unMembre.getElementsByTagName('nom')[0].firstChild.nodeValue,
@@ -139,11 +139,38 @@ let chargerUnMembreAJAX = (courriel) => {
                 courriel :unMembre.getElementsByTagName('courriel')[0].firstChild.nodeValue,
                 genre :unMembre.getElementsByTagName('genre')[0].firstChild.nodeValue,
                 daten :unMembre.getElementsByTagName('daten')[0].firstChild.nodeValue,
+                mdp :unMembre.getElementsByTagName('motdepasse')[0].firstChild.nodeValue,
                 }
             } 
+            afficherProfil(membreActif);
         },
         fail : (err) => {
             console.log("Erreur : "+err)
         }
     })
-    }
+}
+let modifierMembreAJAX = (courriel) => {
+
+    let formMembre = new FormData(document.getElementById('formModifMembre'));
+    formMembre.append('courriel',courriel);
+	formMembre.append('action','modifier');
+    formMembre.append('type','membre');
+
+    $.ajax({
+        type : "POST",
+        url  : "../../routes.php",
+        data : formMembre,
+        processData: false,
+        contentType: false,
+        dataType : "text", //text pour voir si bien formé même chose pour xml
+        success : (xmlMembre) => {
+            //alert(xmlMembre);
+            //alert(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+            afficherMessage(xmlMembre.getElementsByTagName('msg')[0].firstChild.nodeValue);
+            updateNav(formMembre.get("nom"),formMembre.get("prenom"));
+        },
+        fail : (err) => {
+           console.log("Erreur : "+err)
+        }
+    })
+}
