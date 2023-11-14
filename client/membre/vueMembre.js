@@ -85,7 +85,7 @@ function remplirLigneBouton(membre){
     return rep;
 }
 
-function afficherProfil(unMembre){
+function remplirProfil(unMembre){
     let contenu = "";
     contenu +=  `           <div id="modifierMembre">`
     contenu +=  `               <form class="row g-3"  method="POST" id="formModifMembre" >`

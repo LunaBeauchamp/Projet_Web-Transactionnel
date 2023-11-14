@@ -29,7 +29,7 @@
 	<script src="../../client/membre/requetesMembre.js"></script>
 </head>
 
-<body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX('cards','../../routes.php');">
+<body class="p-0 m-0 border-0 bd-example m-0 border-0" onload="chargerVoituresAJAX('cards','../../routes.php'); updateNav('<?php echo $_SESSION['nom']; ?>','<?php echo $_SESSION['prenom']; ?>')">
 
 	<!-- Header -->
 	<header>
@@ -72,25 +72,6 @@
 						</div>
 					</li>
 
-					
-					<li class="nav-item panier">
-						<i class="fas fa-shopping-cart fa-2x " style="color: #988265;"></i>
-                        <p id="nbvoiture" class="bulle">5</p>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="javascript:chargerUnMembreAJAX('<?php echo $_SESSION['courriel']; ?>')">Profil</a><!--Afficher le profil avec option de modification-->
-					</li>
-
-                    <li class="nav-item">
-						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?>, <?php echo $_SESSION['prenom']; ?></p><!--Afficher le nom et prenom dynamiquement-->
-					</li>
-                    
-				
-					<li class="nav-item">
-						<a class="nav-link" href="../../index.php">Déconnection</a>
-					</li>
-
 					<li class="nav-item" >
 						<a class="nav-link" href="../panier/page_panier.php">
 							<div class="cart-icon" id="panierSpanIcon">
@@ -98,6 +79,22 @@
 							</div>
 						</a>
 					</li>
+
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="javascript:chargerUnMembreAJAX('<?php echo $_SESSION['courriel']; ?>')">Profil</a><!--Afficher le profil avec option de modification-->
+					</li>
+
+                    <li class="nav-item">
+						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?></p>
+					</li>
+                    <li class="nav-item">
+						<p id="prenomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['prenom']; ?></p>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="../../index.php">Déconnection</a>
+					</li>
+
 
 				</ul>
 
@@ -127,7 +124,7 @@
 	</div>
 	<div class="formulaire" id="formulaire">
 	</div>
-	<div class="card-box" id="contenu">
+	<div id="contenu">
 	</div>
 
 	<!-- Footer -->
@@ -173,6 +170,7 @@
 		itemsSpanPanierCount.textContent = itemsPanier.length;
 		itemsSpanPanierCount.classList.add("cart-badge");
 		itemsSpanPanierCountDiv.appendChild(itemsSpanPanierCount);
+		
 	</script>
 </body>
 

@@ -142,15 +142,13 @@ let ajouterPanier = (index) => {
 }
 
 let listerVoituresCards = () => {
-
-
-
-let contenu = "";
+    let contenu = ' <div class="card-box">';
 for (let index in listeVoitures) {
     if (listeVoitures[index].nodeName != "<voitures>") {
         contenu += remplirCard(listeVoitures[index], index);
     }
 }
+contenu +=' </div>';
 document.getElementById('contenu').innerHTML = contenu;
 }
 

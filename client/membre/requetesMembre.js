@@ -142,7 +142,7 @@ let chargerUnMembreAJAX = (courriel) => {
                 mdp :unMembre.getElementsByTagName('motdepasse')[0].firstChild.nodeValue,
                 }
             } 
-            afficherProfil(membreActif);
+            remplirProfil(membreActif);
         },
         fail : (err) => {
             console.log("Erreur : "+err)

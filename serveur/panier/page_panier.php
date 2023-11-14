@@ -17,12 +17,15 @@
 	<link rel="stylesheet" href="../../client/css/styleTable.css">
 	<link rel="stylesheet" href="../../client/css/styleCard.css">
 	<link rel="stylesheet" href="../../client/css/stylePanier.css">
+	<link rel="stylesheet" href="../../client/css/styleProfil.css">
 
 
 	<title>EliteAutomobile</title>
 	<script src="../../client/utilitaires/jquery-3.6.3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+	<script src="../../client/membre/vueMembre.js"></script>
+	<script src="../../client/membre/requetesMembre.js"></script>
 </head>
 
 <body class="p-0 m-0 border-0 bd-example m-0 border-0">
@@ -49,11 +52,14 @@
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="">Profil</a>
+					<a class="nav-link active" aria-current="page" href="javascript:afficherProfil('<?php echo $_SESSION['courriel']; ?>')">Profil</a>
 					</li>
 
                     <li class="nav-item">
-						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?>, <?php echo $_SESSION['prenom']; ?></p>
+						<p id="nomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['nom']; ?></p>
+					</li>
+                    <li class="nav-item">
+						<p id="prenomMembre" class="nav-link active" aria-current="page"><?php echo $_SESSION['prenom']; ?></p>
 					</li>
                     
 				
@@ -61,10 +67,12 @@
 						<a class="nav-link" href="../../index.php">Déconnection</a>
 					</li>
 
-					<li class="nav-item">
-						<div class="cart-icon" id="panierSpanIcon">
-							<i class="fas fa-shopping-cart fa-2x"></i>
-						</div>
+					<li class="nav-item" >
+						<a class="nav-link" href="javascript:afficherPanier()">
+							<div class="cart-icon" id="panierSpanIcon">
+								<i class="fas fa-shopping-cart fa-2x"></i>
+							</div>
+						</a>
 					</li>
 
 				</ul>
@@ -89,10 +97,13 @@
 			</div>
 		</div>
 	</div>
-
+	<div id="contenu">
+	</div>
 	<!-- Table -->
-	<div id="panierTable"></div>
-	<div id="prixTotal"></div>
+	<div id="contenuPanier">
+		<div id="panierTable"></div>
+		<div id="prixTotal"></div>
+	</div>
 
 	<!-- Footer -->
 	<footer class="footer-16371">
@@ -130,6 +141,18 @@
 		</div>
 	</footer>
 
+	<script>
+		function afficherPanier(){
+			let div = document.getElementById("contenuPanier");
+			div.hidden = false;
+			document.getElementById('contenu').innerHTML = "";
+		}
+		function afficherProfil(courriel){
+			let div = document.getElementById("contenuPanier");
+			div.hidden = true;
+			chargerUnMembreAJAX(courriel)
+		}
+	</script>
 	<script>
 		let itemsPanier = JSON.parse(localStorage.getItem('itemsPanier')) || [];
 		let itemsSpanPanierCountDiv = document.getElementById("panierSpanIcon");
