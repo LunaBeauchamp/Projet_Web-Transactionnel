@@ -25,7 +25,7 @@
         $mdp = $_POST['mdp'];
         $confirmer_mdp = $_POST['mdpConfirmer'];
 
-        $membre = new Membre($nom,$prenom,$courriel,$genre,$daten);
+        $membre = new Membre(0,$nom,$prenom,$courriel,$genre,$daten);
         $connection = new Connection($courriel,$mdp,"M","A");
         return DaoMembre::getDaoMembre()->Mdl_AjouterMembre($membre, $connection,$confirmer_mdp); 
     }
@@ -52,6 +52,18 @@
         $courriel = $_POST['courriel'];
         return DaoMembre::getDaoMembre()->Mdl_ListerUn($courriel);
     }
+    function CtrM_Modifier(){
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $courriel = $_POST['courriel'];
+        $genre = $_POST['genre'];
+        $daten = $_POST['date'];
+        $mdp = $_POST['mdp'];
+        $confirmer_mdp = $_POST['mdpConfirmer'];
+
+        $membre = new Membre(0,$nom,$prenom,$courriel,$genre,$daten);
+        return DaoMembre::getDaoMembre()->Mdl_ModifierMembre($membre, $mdp,$confirmer_mdp);
+    }
 
     function Ctr_Actions(){
         $action=$_POST['action'];
@@ -73,6 +85,9 @@
                 break;
             case "lister_un":
                 return $this->CtrM_Lister_Un();
+                break;
+            case "modifier":
+                return $this->CtrM_Modifier();
                 break;
         }
     }
