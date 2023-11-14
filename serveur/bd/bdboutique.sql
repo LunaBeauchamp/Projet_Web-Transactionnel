@@ -94,6 +94,22 @@ INSERT INTO `membres` (`idm`,`nom`, `prenom`, `courriel`, `genre`, `daten`) VALU
 (0,'Admin', 'Eliteautomobile', 'admin@eliteautomobile.com', 'nePasDire', '1999-09-09');
 
 --
+-- Déchargement des données de la table `payment_info`
+--
+
+CREATE TABLE `payment_info` (
+  `idp` int(11) NOT NULL ,
+  `item_number` varchar(255) NOT NULL,
+  `item_name` varchar(255) NOT NULL,
+  `payment_status` varchar(255) NOT NULL,
+  `amount` double(10,2) NOT NULL,
+  `currency` varchar(255) NOT NULL,
+  `txn_id` varchar(255) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
 -- Index pour les tables déchargées
 --
 
@@ -120,6 +136,12 @@ ALTER TABLE `membres`
   ADD KEY  `membres_courriel_FK` (`courriel`);
 
 --
+-- Index pour la table `payment_info`
+--
+ALTER TABLE `payment_info`
+  ADD PRIMARY KEY (`idp`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -134,6 +156,10 @@ ALTER TABLE `membres`
 --
 ALTER TABLE `inventaireVoiture`
   MODIFY `idVoiture` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+ALTER TABLE `payment_info`
+  MODIFY `idp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 --

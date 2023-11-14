@@ -103,6 +103,11 @@
 	<div id="contenuPanier">
 		<div id="panierTable"></div>
 		<div id="prixTotal"></div>
+		<div id="paypal-button-container"></div>
+    		<p id="result-message"></p>
+    		<!-- Replace the "test" client-id value with your client-id -->
+    		<script src="https://www.paypal.com/sdk/js?client-id=AfVd-ALVPf9ApwOk4iI-eOPKP27_2KvNBhRL-LXzK7LuZohhryHz7ac_ldGEt_68CdzQtjIhRJeBfoT5&components=buttons&enable-funding=&disable-funding=paylater,venmo,card" data-sdk-integration-source="integrationbuilder_sc"></script>
+    		<script src="app.js"></script>
 	</div>
 
 	<!-- Footer -->
