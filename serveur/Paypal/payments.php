@@ -16,9 +16,9 @@ $dbConfig = [
 // for your site.
 $paypalConfig = [
 	'email' => 'sb-0va43s28201726@business.example.com',
-	'return_url' => 'http://example.com/payment-successful.html',
-	'cancel_url' => 'http://example.com/payment-cancelled.html',
-	'notify_url' => 'http://localhost/Projet_Web-Transactionnel/serveur/Paypal/payments.php'
+	'return_url' => 'http://localhost/Projet_Web-Transactionnel/serveur/panier/page_panier.php',
+	'cancel_url' => 'http://localhost/Projet_Web-Transactionnel/serveur/panier/page_panier.php',
+	'notify_url' => 'http://localhost/Projet_Web-Transactionnel/serveur/Paypal/notify.php'
 ];
 
 $paypalUrl = $enableSandbox ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr';
@@ -53,7 +53,7 @@ if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
 	// and currency so that these aren't overridden by the form data.
 	$data['item_name'] = $itemName;
 	$data['amount'] = $itemAmount;
-	$data['currency_code'] = 'GBP';
+	$data['currency_code'] = 'CAD';
 
 	// Add any custom fields for the query string.
 	//$data['custom'] = USERID;
