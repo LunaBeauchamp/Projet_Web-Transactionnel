@@ -15,10 +15,10 @@ $dbConfig = [
 // PayPal settings. Change these to your account details and the relevant URLs
 // for your site.
 $paypalConfig = [
-	'email' => 'luna.beauchamp19@hotmail.com',
+	'email' => 'sb-0va43s28201726@business.example.com',
 	'return_url' => 'http://example.com/payment-successful.html',
 	'cancel_url' => 'http://example.com/payment-cancelled.html',
-	'notify_url' => 'http://example.com/payments.php'
+	'notify_url' => 'http://localhost/Projet_Web-Transactionnel/serveur/Paypal/payments.php'
 ];
 
 $paypalUrl = $enableSandbox ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr';
@@ -42,7 +42,7 @@ if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
 	}
 
 	// Set the PayPal account.
-	$data['business'] = $paypalConfig['luna.beauchamp19@hotmail.com'];
+	$data['business'] = $paypalConfig['email'];
 
 	// Set the PayPal return addresses.
 	$data['return'] = stripslashes($paypalConfig['return_url']);
