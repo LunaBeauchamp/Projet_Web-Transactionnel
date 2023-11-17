@@ -45,6 +45,10 @@
         $selection = $_POST['mot'];
         return DaoVoiture::getDaoVoiture()->MdlV_Chercher($selection); 
    }
+   function CtrV_Payer(){
+        $selection = json_decode($_POST['data']);
+        return DaoVoiture::getDaoVoiture()->MdlV_Payer($selection); 
+    }
 
     function Ctr_Actions(){
         $action=$_POST['action'];
@@ -66,6 +70,9 @@
                 break;
             case "lister_Voiture" :
                 return $this->CtrV_getOne(); 
+                break;
+            case "payer" :
+                return $this->CtrV_Payer(); 
                 break;
             default:
             return DaoVoiture::getDaoVoiture()->genererMessageXML("erreur default");

@@ -139,19 +139,14 @@
         }
         function MdlV_Chercher($selection){
             global $connexion;
-            $msg = "allo";
             try{
                 $requete = "SELECT * FROM inventaireVoiture WHERE nomVoiture LIKE '%".$selection."%'";
-                $msg = "création requête";
                 $stmt = $connexion->prepare($requete);
-                $msg = "préparation ";
                 $stmt->execute();
-                $msg = "éxecution";
                 $xml = $this->genererDonneesXML($stmt, '<voitures/>', 'voiture'); 
                 $msg = "génération";
             } catch(Exception $e) {
-                $xml = $this->genererMessageXML($msg);
-                // $xml = $this->genererMessageXML("Problème pour obtenir les données des voitures");
+                $xml = $this->genererMessageXML("Problème pour obtenir les données des voitures");
             }finally{
                 Header('Content-type: text/xml');
                 return $xml->asXML();
@@ -187,6 +182,35 @@
                     break;
                 }
                 }
+            }
+        }
+        function MdlV_Payer($selection){
+            global $connexion;
+            try{
+                foreach ($selection as $idv){
+                    //trouver la quantite de l'élément
+                    $idv = (int) $idv;
+                $requete = "SELECT quantite FROM inventaireVoiture where idVoiture = ?";
+                $stmt = $connexion->prepare($requete);
+                $stmt->bind_param("i", $idv);
+                $stmt->execute();
+                $reponse = $stmt->get_result();
+                //$xml = $this->genererDonneesXML($stmt, '<voitures/>', 'voiture'); 
+                $ligne = $reponse->fetch_object();
+                $quantite = $ligne->quantite -1;
+                //updater la base de donner
+                $requete = "UPDATE inventaireVoiture set quantite=? WHERE idVoiture = ?";
+                $stmt = $connexion->prepare($requete);
+                $stmt->bind_param("ii",$quantite, $idv);
+                $stmt->execute();
+                $reponse = $stmt->get_result();
+                $xml = $this->genererMessageXML("changement enregistrer");
+                }
+            } catch(Exception $e) {
+                $xml = $this->genererMessageXML("Problème pour obtenir les données des voitures");
+            }finally{
+                Header('Content-type: text/xml');
+                return $xml->asXML();
             }
         }
     }

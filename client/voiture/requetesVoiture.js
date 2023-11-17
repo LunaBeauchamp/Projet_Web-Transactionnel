@@ -180,3 +180,30 @@ $.ajax({
     }
 })
 }
+
+function payer (){
+    let itemsPanier = JSON.parse(localStorage.getItem('itemsPanier')) || [];
+    data = []
+    for (item of itemsPanier){
+        data.push(item.idVoiture);
+    }
+    if (itemsPanier != []){
+    console.log(itemsPanier)
+    //chercher liste panier (id, qte) et le vider;
+    $.ajax({
+        type : "POST",
+        url  : "../../routes.php",
+        data : {"type":"voiture","action":"payer","data": JSON.stringify(data)},
+        dataType : "text", //text pour voir si bien formé même chose pour xml
+        success : (xmlVoiture) => {
+            afficherFacture();
+            // itemsPanier = [];
+			// localStorage.setItem('itemsPanier', JSON.stringify(itemsPanier));
+            // location.reload()
+        },
+        fail : (err) => {
+            console.log("Erreur : "+err)
+        }
+    })
+}
+}

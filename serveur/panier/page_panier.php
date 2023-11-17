@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 	<script src="../../client/membre/vueMembre.js"></script>
 	<script src="../../client/membre/requetesMembre.js"></script>
+	<script src="../../client/voiture/vueVoiture.js"></script>
+	<script src="../../client/voiture/requetesVoiture.js"></script>
 </head>
 
 <body class="p-0 m-0 border-0 bd-example m-0 border-0">
@@ -228,9 +230,9 @@
 		totalH2.textContent = 'Prix total: ' + calculateTotalPrice(itemsPanier) + '$';
 
 		const buttonPaypal = document.createElement('button');
-		buttonPaypal.textContent = "Payer (avec Paypal)";
-		buttonPaypal.style.backgroundColor = '#988265';
-		buttonPaypal.style.color = 'white';
+		buttonPaypal.textContent = "Payer";
+		buttonPaypal.setAttribute("onclick","payer();");
+		buttonPaypal.setAttribute("class","payer");
 		prixTotalDiv.appendChild(totalSansTaxeH4);
 		prixTotalDiv.appendChild(tpsH4);
 		prixTotalDiv.appendChild(tvqH4);
