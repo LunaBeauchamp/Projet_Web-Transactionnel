@@ -240,3 +240,24 @@ switch(action){
         break;
 }
 }
+function afficherFacture(){
+
+    contenu ='<h1 class="merci">Merci pour votre achat</h1>'
+    contenu +='<hr class="ligne">'
+    let itemsPanier = JSON.parse(localStorage.getItem('itemsPanier')) || [];
+    for (item of itemsPanier){
+        contenu +='<p class="nom">'+item.nomVoiture+'</p>'
+        contenu +='<p class="prix">'+item.prix+'</p>'
+        contenu +='<hr class="ligne">'
+    }
+    let prix = document.getElementById("prixTotal");
+    contenu +='<h3 class="total">'+prix.innerText+'</h3>'
+	let div = document.getElementById("contenuPanier");
+    div.hidden=true;
+    document.getElementById('contenu').innerHTML = contenu;
+    itemsPanier = [];
+	localStorage.setItem('itemsPanier', JSON.stringify(itemsPanier));
+    let itemsSpanPanierCount = document.getElementById("nbItem");
+	itemsSpanPanierCount.textContent = '0';
+
+}

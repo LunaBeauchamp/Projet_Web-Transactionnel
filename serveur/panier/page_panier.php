@@ -161,6 +161,7 @@
 		let itemsSpanPanierCount = document.createElement("span");
 		itemsSpanPanierCount.textContent = itemsPanier.length;
 		itemsSpanPanierCount.classList.add("cart-badge");
+		itemsSpanPanierCount.setAttribute("id", "nbItem");
 		itemsSpanPanierCountDiv.appendChild(itemsSpanPanierCount);
 	</script>
 	<script>
@@ -228,6 +229,7 @@
 		tvqH4.textContent = 'TVQ: ' + calculateTVQPrice(itemsPanier) + '$';
 		const totalH2 = document.createElement('h2');
 		totalH2.textContent = 'Prix total: ' + calculateTotalPrice(itemsPanier) + '$';
+		totalH2.setAttribute("id","prixTotal");
 
 		const buttonPaypal = document.createElement('button');
 		buttonPaypal.textContent = "Payer";

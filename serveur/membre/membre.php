@@ -168,7 +168,8 @@
 		let itemsSpanPanierCountDiv = document.getElementById("panierSpanIcon");
 		let itemsSpanPanierCount = document.createElement("span");
 		itemsSpanPanierCount.textContent = itemsPanier.length;
-		itemsSpanPanierCount.classList.add("cart-badge");
+		itemsSpanPanierCount.classList.add("cart-badge ");
+		itemsSpanPanierCount.setAttribute("id", "nbItem");
 		itemsSpanPanierCountDiv.appendChild(itemsSpanPanierCount);
 		
 	</script>
